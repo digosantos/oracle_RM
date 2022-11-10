@@ -1,12 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:oracle_rm/features/characters_listing/domain/entities/character.dart';
 import 'package:oracle_rm/features/characters_listing/domain/repositories/repositories.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
 
-class MockCharactersRepository extends Mock implements CharactersRepository {}
+import 'get_all_characters_test.mocks.dart';
 
+@GenerateMocks([CharactersRepository])
 void main() {
   group('Get all characters use case', () {
     late MockCharactersRepository mockCharactersRepository;
