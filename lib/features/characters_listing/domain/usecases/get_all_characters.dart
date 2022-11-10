@@ -8,7 +8,7 @@ class GetAllCharacters {
 
   GetAllCharacters({required this.charactersRepository});
 
-  Future<Either<Failure, List<Character>>> execute() async {
+  Future<Either<AppError, List<Character>>> execute() async {
     return await charactersRepository.getAllCharacters();
   }
 }
