@@ -14,16 +14,22 @@ void main() {
     late MockCharactersRepository mockCharactersRepository;
     late GetAllCharacters getAllCharactersUseCase;
 
-    const character = Character(name: 'Digo', imageUrl: 'randomURL', specie: 'Human', episodesAmount: 0);
+    const character = Character(
+        name: 'Digo',
+        imageUrl: 'randomURL',
+        specie: 'Human',
+        episodesAmount: 0);
     final List<Character> characters = [character];
 
     setUpAll(() {
       mockCharactersRepository = MockCharactersRepository();
-      getAllCharactersUseCase = GetAllCharacters(charactersRepository: mockCharactersRepository);
+      getAllCharactersUseCase =
+          GetAllCharacters(charactersRepository: mockCharactersRepository);
     });
 
     test('should return list of characters from repository', () async {
-      when(mockCharactersRepository.getAllCharacters()).thenAnswer((_) async => Right(characters));
+      when(mockCharactersRepository.getAllCharacters())
+          .thenAnswer((_) async => Right(characters));
 
       final sut = await getAllCharactersUseCase.execute();
 
