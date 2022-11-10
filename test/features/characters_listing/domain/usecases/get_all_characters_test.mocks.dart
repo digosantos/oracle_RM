@@ -44,20 +44,20 @@ class MockCharactersRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i6.Character>>> getAllCharacters() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getAllCharacters,
-          [],
-        ),
-        returnValue:
-            _i4.Future<_i2.Either<_i5.Failure, List<_i6.Character>>>.value(
-                _FakeEither_0<_i5.Failure, List<_i6.Character>>(
-          this,
-          Invocation.method(
-            #getAllCharacters,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.Character>>>);
+  _i4.Future<_i2.Either<_i5.AppError, List<_i6.Character>>>
+      getAllCharacters() => (super.noSuchMethod(
+            Invocation.method(
+              #getAllCharacters,
+              [],
+            ),
+            returnValue:
+                _i4.Future<_i2.Either<_i5.AppError, List<_i6.Character>>>.value(
+                    _FakeEither_0<_i5.AppError, List<_i6.Character>>(
+              this,
+              Invocation.method(
+                #getAllCharacters,
+                [],
+              ),
+            )),
+          ) as _i4.Future<_i2.Either<_i5.AppError, List<_i6.Character>>>);
 }
