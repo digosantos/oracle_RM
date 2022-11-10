@@ -23,7 +23,7 @@ void main() {
     );
     final List<Character> characters = [character];
 
-    setUpAll(() {
+    setUp(() {
       mockCharactersRepository = MockCharactersRepository();
       getAllCharactersUseCase =
           GetAllCharacters(charactersRepository: mockCharactersRepository);
