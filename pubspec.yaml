@@ -15,6 +15,8 @@ dependencies:
   equatable: ^2.0.5
   # Functional programming
   dartz: ^0.10.1
+  # Files generator
+  build_runner: 2.3.2
 
 dev_dependencies:
   flutter_test:
