@@ -7,19 +7,14 @@ import 'package:oracle_rm/core/error/error.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
 
 import '../../../../core/characters/domain/repositories/repositories_mocks.dart';
+import '../../../../utils/utils.dart';
 
 void main() {
   group('Get all characters use case', () {
     late MockCharactersRepository mockCharactersRepository;
     late GetAllCharacters getAllCharactersUseCase;
 
-    const character = Character(
-      id: 999,
-      name: 'Digo',
-      imageUrl: 'randomURL',
-      specie: 'Human',
-      episodesAmount: 0,
-    );
+    const character = Faux.character;
     final List<Character> characters = [character];
 
     setUp(() {

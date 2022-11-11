@@ -5,18 +5,13 @@ import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
 
 import '../../../../core/characters/domain/repositories/repositories_mocks.dart';
+import '../../../../utils/utils.dart';
 
 void main() {
   group('Get character details', () {
     late MockCharactersRepository mockCharactersRepository;
     late GetCharacterDetails getCharacterDetailsUseCase;
-    const character = Character(
-      id: 999,
-      name: 'Digo',
-      imageUrl: 'imageUrl',
-      specie: 'Human',
-      episodesAmount: 0,
-    );
+    const character = Faux.character;
 
     setUp(() {
       mockCharactersRepository = MockCharactersRepository();
