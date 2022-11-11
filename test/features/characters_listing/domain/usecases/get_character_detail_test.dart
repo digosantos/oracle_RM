@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
+import 'package:oracle_rm/core/error/error.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
 
 import '../../../../core/characters/domain/repositories/repositories_mocks.dart';
@@ -15,18 +18,25 @@ void main() {
 
     setUp(() {
       mockCharactersRepository = MockCharactersRepository();
-      getCharacterDetailsUseCase =
-          GetCharacterDetails(charactersRepository: mockCharactersRepository);
+      getCharacterDetailsUseCase = GetCharacterDetails(charactersRepository: mockCharactersRepository);
     });
 
     test('should get character details', () async {
-      when(mockCharactersRepository.getCharacterDetails(id: character.id))
-          .thenAnswer((_) async => const Right(character));
+      when(mockCharactersRepository.getCharacterDetails(id: character.id)).thenAnswer((_) async => const Right(character));
 
-      final sut = await getCharacterDetailsUseCase(
-          RequestedCharacter(id: character.id));
+      final sut = await getCharacterDetailsUseCase(RequestedCharacter(id: character.id));
 
       expect(sut, const Right(character));
+      verify(mockCharactersRepository.getCharacterDetails(id: character.id));
+      verifyNoMoreInteractions(mockCharactersRepository);
+    });
+
+    test('should fail to get character details', () async {
+      when(mockCharactersRepository.getCharacterDetails(id: character.id)).thenAnswer((_) async => const Left(AppError(properties: [])));
+
+      final sut = await getCharacterDetailsUseCase(RequestedCharacter(id: character.id));
+
+      expect(sut, const Left(AppError(properties: [])));
       verify(mockCharactersRepository.getCharacterDetails(id: character.id));
       verifyNoMoreInteractions(mockCharactersRepository);
     });
