@@ -7,35 +7,29 @@ import 'package:oracle_rm/core/characters/domain/entities/character.dart';
 import '../../../../utils/fixtures/fixture_reader.dart';
 
 void main() {
-  const rick = CharacterModel(
-    id: 1,
-    name: 'Rick Sanchez',
-    imageUrl: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-    specie: 'Human',
-    episodesAmount: 5,
-  );
+  late CharacterModel rick;
 
-  const morty = CharacterModel(
-    id: 2,
-    name: 'Morty Smith',
-    imageUrl: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
-    specie: 'Human',
-    episodesAmount: 3,
-  );
-
-  const allCharacters = [rick, morty];
-
-  test('should be a subclass of Character entity', () {
-    expect(rick, isA<Character>());
+  setUp(() {
+    rick = const CharacterModel(
+      id: '1',
+      name: 'Rick Sanchez',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+      species: 'Human',
+      episodesAmount: 3,
+    );
   });
 
-  group('fromJson', () {
-    test('should return CharacterModel when JSON has valid data', () {
-      final Map<String, dynamic> allCharactersMap = jsonDecode(fixture(name: 'all_characters.json'));
+  group('CharacterModel', () {
+    test('should be a subclass of Character entity', () {
+      expect(rick, isA<Character>());
+    });
 
+    test('should successfully parse data from JSON', () {
+      final Map<String, dynamic> allCharactersMap = jsonDecode(
+        fixture(name: '/characters/character.json'),
+      );
       final sut = CharacterModel.fromJson(allCharactersMap);
-
-      expect(sut, allCharacters);
+      expect(sut, rick);
     });
   });
 }
