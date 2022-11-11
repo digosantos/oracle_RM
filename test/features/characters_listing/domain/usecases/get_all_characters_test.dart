@@ -1,15 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
 import 'package:oracle_rm/core/error/error.dart';
-import 'package:oracle_rm/features/characters_listing/domain/entities/character.dart';
-import 'package:oracle_rm/features/characters_listing/domain/repositories/repositories.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
 
-import 'get_all_characters_test.mocks.dart';
+import '../../../../core/characters/domain/repositories/repositories_mocks.dart';
 
-@GenerateMocks([CharactersRepository])
 void main() {
   group('Get all characters use case', () {
     late MockCharactersRepository mockCharactersRepository;
@@ -25,13 +22,11 @@ void main() {
 
     setUp(() {
       mockCharactersRepository = MockCharactersRepository();
-      getAllCharactersUseCase =
-          GetAllCharacters(charactersRepository: mockCharactersRepository);
+      getAllCharactersUseCase = GetAllCharacters(charactersRepository: mockCharactersRepository);
     });
 
     test('should return list of characters from repository', () async {
-      when(mockCharactersRepository.getAllCharacters())
-          .thenAnswer((_) async => Right(characters));
+      when(mockCharactersRepository.getAllCharacters()).thenAnswer((_) async => Right(characters));
 
       final sut = await getAllCharactersUseCase.execute();
 
@@ -42,8 +37,7 @@ void main() {
 
     test('should return AppError from repository', () async {
       const appError = AppError(properties: []);
-      when(mockCharactersRepository.getAllCharacters())
-          .thenAnswer((_) async => const Left(appError));
+      when(mockCharactersRepository.getAllCharacters()).thenAnswer((_) async => const Left(appError));
 
       final sut = await getAllCharactersUseCase.execute();
 

@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:oracle_rm/core/error/error.dart';
-import 'package:oracle_rm/features/characters_listing/domain/entities/character.dart';
-import 'package:oracle_rm/features/characters_listing/domain/repositories/characters_repository.dart';
+
+import '../../../../core/characters/domain/entities/entities.dart';
+import '../../../../core/characters/domain/repositories/repositories.dart';
 
 class GetAllCharacters {
   final CharactersRepository charactersRepository;
