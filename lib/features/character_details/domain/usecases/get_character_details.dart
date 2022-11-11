@@ -9,7 +9,8 @@ class GetCharacterDetails {
 
   GetCharacterDetails({required this.charactersRepository});
 
-  Future<Either<AppError, Character>> execute({required int characterId}) async {
+  Future<Either<AppError, Character>> execute(
+      {required int characterId}) async {
     return await charactersRepository.getCharacterDetails(id: characterId);
   }
 }
