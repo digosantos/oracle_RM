@@ -1,0 +1,53 @@
+{
+  "data": {
+    "characters": {
+      "info": {
+        "pages": 42,
+        "next": 2,
+        "prev": null
+      },
+      "results": [
+        {
+          "id": "1",
+          "name": "Rick Sanchez",
+          "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+          "species": "Human",
+          "episode": [
+            {
+              "id": "1"
+            },
+            {
+              "id": "2"
+            },
+            {
+              "id": "3"
+            },
+            {
+              "id": "4"
+            },
+            {
+              "id": "5"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Morty Smith",
+          "image": "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
+          "species": "Human",
+          "episode": [
+            {
+              "id": "1"
+            },
+            {
+              "id": "2"
+            },
+            {
+              "id": "3"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
