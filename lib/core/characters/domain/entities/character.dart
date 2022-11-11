@@ -1,12 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class Character extends Equatable {
+  final int id;
   final String name;
   final String imageUrl;
   final String specie;
   final int episodesAmount;
 
   const Character({
+    required this.id,
     required this.name,
     required this.imageUrl,
     required this.specie,
@@ -14,5 +16,5 @@ class Character extends Equatable {
   });
 
   @override
-  List<Object?> get props => [name, imageUrl, specie, episodesAmount];
+  List<Object?> get props => [id, name, imageUrl, specie, episodesAmount];
 }

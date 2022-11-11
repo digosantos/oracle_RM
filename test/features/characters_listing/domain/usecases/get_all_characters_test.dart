@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
+import 'package:oracle_rm/core/domain/usecases/usecase.dart';
 import 'package:oracle_rm/core/error/error.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
 
@@ -13,6 +14,7 @@ void main() {
     late GetAllCharacters getAllCharactersUseCase;
 
     const character = Character(
+      id: 999,
       name: 'Digo',
       imageUrl: 'randomURL',
       specie: 'Human',
@@ -28,7 +30,7 @@ void main() {
     test('should return list of characters from repository', () async {
       when(mockCharactersRepository.getAllCharacters()).thenAnswer((_) async => Right(characters));
 
-      final sut = await getAllCharactersUseCase();
+      final sut = await getAllCharactersUseCase(NoParams());
 
       expect(sut, Right(characters));
       verify(mockCharactersRepository.getAllCharacters()).called(1);
@@ -39,7 +41,7 @@ void main() {
       const appError = AppError(properties: []);
       when(mockCharactersRepository.getAllCharacters()).thenAnswer((_) async => const Left(appError));
 
-      final sut = await getAllCharactersUseCase();
+      final sut = await getAllCharactersUseCase(NoParams());
 
       expect(sut, const Left(appError));
       verify(mockCharactersRepository.getAllCharacters()).called(1);
