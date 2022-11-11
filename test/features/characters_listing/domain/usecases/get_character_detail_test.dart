@@ -15,13 +15,16 @@ void main() {
 
     setUp(() {
       mockCharactersRepository = MockCharactersRepository();
-      getCharacterDetailsUseCase = GetCharacterDetails(charactersRepository: mockCharactersRepository);
+      getCharacterDetailsUseCase =
+          GetCharacterDetails(charactersRepository: mockCharactersRepository);
     });
 
     test('should get character details', () async {
-      when(mockCharactersRepository.getCharacterDetails(id: character.id)).thenAnswer((_) async => const Right(character));
+      when(mockCharactersRepository.getCharacterDetails(id: character.id))
+          .thenAnswer((_) async => const Right(character));
 
-      final sut = await getCharacterDetailsUseCase(RequestedCharacter(id: character.id));
+      final sut = await getCharacterDetailsUseCase(
+          RequestedCharacter(id: character.id));
 
       expect(sut, const Right(character));
       verify(mockCharactersRepository.getCharacterDetails(id: character.id));
