@@ -22,15 +22,13 @@ void main() {
 
     setUp(() {
       mockCharactersRepository = MockCharactersRepository();
-      getAllCharactersUseCase =
-          GetAllCharacters(charactersRepository: mockCharactersRepository);
+      getAllCharactersUseCase = GetAllCharacters(charactersRepository: mockCharactersRepository);
     });
 
     test('should return list of characters from repository', () async {
-      when(mockCharactersRepository.getAllCharacters())
-          .thenAnswer((_) async => Right(characters));
+      when(mockCharactersRepository.getAllCharacters()).thenAnswer((_) async => Right(characters));
 
-      final sut = await getAllCharactersUseCase.execute();
+      final sut = await getAllCharactersUseCase();
 
       expect(sut, Right(characters));
       verify(mockCharactersRepository.getAllCharacters()).called(1);
@@ -39,10 +37,9 @@ void main() {
 
     test('should return AppError from repository', () async {
       const appError = AppError(properties: []);
-      when(mockCharactersRepository.getAllCharacters())
-          .thenAnswer((_) async => const Left(appError));
+      when(mockCharactersRepository.getAllCharacters()).thenAnswer((_) async => const Left(appError));
 
-      final sut = await getAllCharactersUseCase.execute();
+      final sut = await getAllCharactersUseCase();
 
       expect(sut, const Left(appError));
       verify(mockCharactersRepository.getAllCharacters()).called(1);
