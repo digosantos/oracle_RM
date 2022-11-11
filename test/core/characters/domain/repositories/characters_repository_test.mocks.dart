@@ -61,7 +61,7 @@ class MockCharactersRepository extends _i1.Mock
           ) as _i4.Future<_i2.Either<_i5.AppError, List<_i6.Character>>>);
   @override
   _i4.Future<_i2.Either<_i5.AppError, _i6.Character>> getCharacterDetails(
-          {required int? id}) =>
+          {required String? id}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getCharacterDetails,

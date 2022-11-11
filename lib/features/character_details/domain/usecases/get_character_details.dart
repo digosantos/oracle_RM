@@ -18,7 +18,7 @@ class GetCharacterDetails extends UseCase<Character, RequestedCharacter> {
 }
 
 class RequestedCharacter extends Equatable {
-  final int id;
+  final String id;
 
   const RequestedCharacter({required this.id});
 
