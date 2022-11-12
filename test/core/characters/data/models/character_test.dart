@@ -20,10 +20,10 @@ void main() {
     });
 
     test('should successfully parse data from JSON', () {
-      final Map<String, dynamic> allCharactersMap = jsonDecode(
+      final Map<String, dynamic> characterMap = jsonDecode(
         fixture(name: '/characters/character.json'),
       );
-      final sut = CharacterModel.fromJson(allCharactersMap);
+      final sut = CharacterModel.fromJson(characterMap);
       expect(sut, rick);
     });
   });
