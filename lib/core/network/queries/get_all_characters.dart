@@ -1,5 +1,5 @@
 class Queries {
-  static String getAllCharacters() => """
+  static String getCharacterDetails() => """
     query {
       character(\$id: String!) {
           id
