@@ -6,8 +6,10 @@ class BaseNetworkClient {
 
   BaseNetworkClient({required this.client});
 
-  Future<Map<String, dynamic>> query({required String document, Map<String, dynamic>? params}) async {
-    final options = QueryOptions(document: gql(document), variables: params ?? {});
+  Future<Map<String, dynamic>> query(
+      {required String document, Map<String, dynamic>? params}) async {
+    final options =
+        QueryOptions(document: gql(document), variables: params ?? {});
     final result = await client.query(options);
     if (result.hasException) throw exception.ServerException();
     return result.data!;

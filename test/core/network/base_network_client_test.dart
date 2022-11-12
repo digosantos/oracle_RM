@@ -27,7 +27,8 @@ void main() {
         data: {},
       );
 
-      when(mockGraphQLClient.query(queryOptions)).thenAnswer((_) async => queryResult);
+      when(mockGraphQLClient.query(queryOptions))
+          .thenAnswer((_) async => queryResult);
 
       final sut = await baseNetworkClient.query(document: query);
 
