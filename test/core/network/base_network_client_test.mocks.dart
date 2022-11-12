@@ -5,10 +5,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
+import 'package:graphql/client.dart' as _i4;
 import 'package:graphql/src/cache/cache.dart' as _i3;
 import 'package:graphql/src/core/core.dart' as _i2;
-import 'package:graphql/src/graphql_client.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:oracle_rm/core/network/base_network_client.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -349,4 +350,39 @@ class MockGraphQLClient extends _i1.Mock implements _i4.GraphQLClient {
         [],
         {#refetchQueries: refetchQueries},
       )) as _i5.Future<List<_i2.QueryResult<Object?>?>>?);
+}
+
+/// A class which mocks [BaseNetworkClient].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockBaseNetworkClient extends _i1.Mock implements _i6.BaseNetworkClient {
+  MockBaseNetworkClient() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.GraphQLClient get client => (super.noSuchMethod(
+        Invocation.getter(#client),
+        returnValue: _FakeGraphQLClient_4(
+          this,
+          Invocation.getter(#client),
+        ),
+      ) as _i4.GraphQLClient);
+  @override
+  _i5.Future<Map<String, dynamic>> query({
+    required String? document,
+    Map<String, dynamic>? params,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #query,
+          [],
+          {
+            #document: document,
+            #params: params,
+          },
+        ),
+        returnValue:
+            _i5.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i5.Future<Map<String, dynamic>>);
 }

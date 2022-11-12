@@ -6,7 +6,7 @@ import 'package:oracle_rm/core/network/base_network_client.dart';
 
 import 'base_network_client_test.mocks.dart';
 
-@GenerateMocks([GraphQLClient])
+@GenerateMocks([GraphQLClient, BaseNetworkClient])
 void main() {
   late MockGraphQLClient mockGraphQLClient;
   late BaseNetworkClient baseNetworkClient;
