@@ -17,4 +17,15 @@ class Faux {
     species: 'Human',
     episodesAmount: 3,
   );
+
+  static const allCharactersModelList = [
+    characterModel,
+    CharacterModel(
+      id: '2',
+      name: 'Morty Smith',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
+      species: 'Human',
+      episodesAmount: 5,
+    ),
+  ];
 }
