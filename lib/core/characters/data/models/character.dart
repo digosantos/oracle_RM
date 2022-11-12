@@ -16,14 +16,12 @@ class CharacterModel extends Character {
         );
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) {
-    final character = json['data']['character'];
-
     return CharacterModel(
-      id: character['id'],
-      name: character['name'],
-      imageUrl: character['image'],
-      species: character['species'],
-      episodesAmount: (character['episode'] as List).length,
+      id: json['id'],
+      name: json['name'],
+      imageUrl: json['image'],
+      species: json['species'],
+      episodesAmount: (json['episode'] as List).length,
     );
   }
 }

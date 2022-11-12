@@ -12,4 +12,14 @@ class Queries {
       }
     }
    """;
+
+  static String getAllCharacters() => """
+  query {
+    characters {
+      results {
+        id
+      }
+    }
+  }
+  """;
 }
