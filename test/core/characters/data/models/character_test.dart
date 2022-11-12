@@ -4,19 +4,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:oracle_rm/core/characters/data/models/models.dart';
 import 'package:oracle_rm/core/characters/domain/entities/character.dart';
 
+import '../../../../utils/faux.dart';
 import '../../../../utils/fixtures/fixture_reader.dart';
 
 void main() {
   late CharacterModel rick;
 
   setUp(() {
-    rick = const CharacterModel(
-      id: '1',
-      name: 'Rick Sanchez',
-      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-      species: 'Human',
-      episodesAmount: 3,
-    );
+    rick = Faux.characterModel;
   });
 
   group('CharacterModel', () {
