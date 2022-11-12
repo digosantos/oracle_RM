@@ -18,6 +18,9 @@ dependencies:
   # Files generator
   build_runner: 2.3.2
 
+  # GraphQL Client
+  graphql: 5.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
