@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:oracle_rm/core/characters/data/datasources/characters_remote_datasource.dart';
-import 'package:oracle_rm/core/network/queries/get_all_characters.dart';
+import 'package:oracle_rm/core/network/queries/queries.dart';
 
 import '../../../../utils/fixtures/fixture_reader.dart';
 import '../../../../utils/utils.dart';
