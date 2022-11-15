@@ -21,6 +21,9 @@ dependencies:
   # GraphQL Client
   graphql: 5.1.1
 
+  # UI state management
+  flutter_bloc: 8.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
