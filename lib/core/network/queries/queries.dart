@@ -1,4 +1,25 @@
 class Queries {
+  static String getAllCharacters() => """
+  query {
+    characters {
+      info {
+        pages
+        next
+        prev
+      }
+      results {
+        id
+        name
+        image
+        species
+        episode {
+          id
+        }
+      }
+    }
+  }
+  """;
+
   static String getCharacterDetails() => """
     query {
       character(\$id: String!) {
@@ -21,25 +42,4 @@ class Queries {
       }
     }
    """;
-
-  static String getAllCharacters() => """
-  query {
-    characters {
-      info {
-        pages
-        next
-        prev
-      }
-      results {
-        id
-        name
-        image
-        species
-        episode {
-          id
-        }
-      }
-    }
-  }
-  """;
 }
