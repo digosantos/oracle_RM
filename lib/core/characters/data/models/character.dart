@@ -6,13 +6,13 @@ class CharacterModel extends Character {
     required String name,
     required String imageUrl,
     required String species,
-    required int episodesAmount,
+    required List<String> episodesIds,
   }) : super(
           id: id,
           name: name,
           imageUrl: imageUrl,
           species: species,
-          episodesAmount: episodesAmount,
+          episodesIds: episodesIds,
         );
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) {
@@ -21,7 +21,7 @@ class CharacterModel extends Character {
       name: json['name'],
       imageUrl: json['image'],
       species: json['species'],
-      episodesAmount: (json['episode'] as List).length,
+      episodesIds: List<String>.from(json['episode'].map((episode) => episode['id'])),
     );
   }
 }

@@ -7,7 +7,7 @@ class Faux {
     name: 'Digo',
     imageUrl: 'imageUrl',
     species: 'Human',
-    episodesAmount: 0,
+    episodesIds: ['1'],
   );
 
   static const characterModel = CharacterModel(
@@ -15,7 +15,7 @@ class Faux {
     name: 'Rick Sanchez',
     imageUrl: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
     species: 'Human',
-    episodesAmount: 3,
+    episodesIds: ['1', '2', '3'],
   );
 
   static const allCharactersModelList = [
@@ -25,7 +25,7 @@ class Faux {
       name: 'Morty Smith',
       imageUrl: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
       species: 'Human',
-      episodesAmount: 5,
+      episodesIds: ['1', '2', '3', '4', '5'],
     ),
   ];
 }
