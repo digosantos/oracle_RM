@@ -15,7 +15,9 @@ void init() {
   /// ---------------------
 
   /// Bloc:
-  sl.registerFactory(() => CharactersListingBloc(getAllCharactersUseCase: sl()));
+  sl.registerFactory(
+    () => CharactersListingBloc(getAllCharactersUseCase: sl()),
+  );
 
   /// Use Cases:
   sl.registerLazySingleton(() => GetAllCharacters(charactersRepository: sl()));
