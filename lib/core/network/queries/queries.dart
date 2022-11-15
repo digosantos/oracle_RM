@@ -1,23 +1,23 @@
 class Queries {
   static String getAllCharacters() => """
-  query {
-    characters {
-      info {
-        pages
-        next
-        prev
-      }
-      results {
-        id
-        name
-        image
-        species
-        episode {
+    query {
+      characters {
+        info {
+          pages
+          next
+          prev
+        }
+        results {
           id
+          name
+          image
+          species
+          episode {
+            id
+          }
         }
       }
     }
-  }
   """;
 
   static String getCharacterDetails() => """
@@ -41,5 +41,5 @@ class Queries {
         air_date
       }
     }
-   """;
+  """;
 }
