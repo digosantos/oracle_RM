@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:oracle_rm/core/injection_container.dart' as di;
 
 void main() {
+  di.init();
   runApp(const RickAndMortyOracleApp());
 }
 
