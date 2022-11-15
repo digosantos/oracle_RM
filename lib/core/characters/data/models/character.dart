@@ -21,8 +21,9 @@ class CharacterModel extends Character {
       name: json['name'],
       imageUrl: json['image'],
       species: json['species'],
-      episodesIds:
-          List<String>.from(json['episode'].map((episode) => episode['id'])),
+      episodesIds: List<String>.from(
+        json['episode'].map((episode) => episode['id']),
+      ),
     );
   }
 }
