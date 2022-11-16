@@ -23,7 +23,7 @@ void main() {
       final Map<String, dynamic> characterMap = jsonDecode(
         fixture(name: '/characters/character.json'),
       );
-      final sut = CharacterModel.fromJson(characterMap['data']['character']);
+      final sut = CharacterModel.fromJson(characterMap['character']);
       expect(sut, rick);
     });
   });
