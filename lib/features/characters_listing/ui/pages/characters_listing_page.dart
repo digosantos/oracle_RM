@@ -22,8 +22,8 @@ class CharactersListingPage extends StatelessWidget {
         builder: (context, state) {
           if (state is CharactersListLoadedState) {
             return Center(
-                child: Text(
-                    'Amount of characters: ${state.charactersList.length}'));
+              child: Text('Amount of characters: ${state.charactersList.length}'),
+            );
           }
           return const Center(child: CircularProgressIndicator());
         },
