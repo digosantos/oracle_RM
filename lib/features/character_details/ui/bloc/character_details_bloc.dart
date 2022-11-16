@@ -7,15 +7,18 @@ import 'package:oracle_rm/features/character_details/ui/bloc/character_details_e
 import '../../../../core/characters/domain/entities/entities.dart';
 import '../../../characters_listing/domain/usecases/usecases.dart';
 
-class CharacterDetailsBloc extends Bloc<CharacterDetailsEvent, CharacterDetailsState> {
+class CharacterDetailsBloc
+    extends Bloc<CharacterDetailsEvent, CharacterDetailsState> {
   final UseCase<Character, RequestedCharacter> getCharacterDetailsUseCase;
 
-  CharacterDetailsBloc({required this.getCharacterDetailsUseCase}) : super(InitialState()) {
+  CharacterDetailsBloc({required this.getCharacterDetailsUseCase})
+      : super(InitialState()) {
     on<GetCharacterDetailsEvent>(_loadCharacterDetails);
   }
 
   /// Callbacks
-  void _loadCharacterDetails(GetCharacterDetailsEvent event, Emitter emit) async {
+  void _loadCharacterDetails(
+      GetCharacterDetailsEvent event, Emitter emit) async {
     emit(LoadingState());
     final response = await getCharacterDetailsUseCase(event.requestedCharacter);
     emit(response.fold(
