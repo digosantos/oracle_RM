@@ -23,7 +23,8 @@ void init() {
   );
 
   /// Use Cases:
-  sl.registerLazySingleton<UseCase<List<Character>, NoParams>>(() => GetAllCharacters(charactersRepository: sl()));
+  sl.registerLazySingleton<UseCase<List<Character>, NoParams>>(
+      () => GetAllCharacters(charactersRepository: sl()));
 
   /// Repositories:
   sl.registerLazySingleton<CharactersRepository>(
@@ -40,7 +41,8 @@ void init() {
   /// ---------------------
 
   /// Network:
-  sl.registerLazySingleton<BaseNetworkClient>(() => BaseNetworkClient(client: sl()));
+  sl.registerLazySingleton<BaseNetworkClient>(
+      () => BaseNetworkClient(client: sl()));
 
   /// External:
   sl.registerLazySingleton<GraphQLClient>(
