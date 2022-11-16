@@ -7,6 +7,9 @@ import 'package:oracle_rm/core/network/network.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
 import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 
+import 'characters/domain/entities/entities.dart';
+import 'domain/usecases/usecase.dart';
+
 final sl = GetIt.instance;
 
 void init() {
@@ -20,7 +23,7 @@ void init() {
   );
 
   /// Use Cases:
-  sl.registerLazySingleton(() => GetAllCharacters(charactersRepository: sl()));
+  sl.registerLazySingleton<UseCase<List<Character>, NoParams>>(() => GetAllCharacters(charactersRepository: sl()));
 
   /// Repositories:
   sl.registerLazySingleton<CharactersRepository>(
@@ -37,8 +40,13 @@ void init() {
   /// ---------------------
 
   /// Network:
-  sl.registerLazySingleton(() => BaseNetworkClient(client: sl()));
+  sl.registerLazySingleton<BaseNetworkClient>(() => BaseNetworkClient(client: sl()));
 
   /// External:
-  sl.registerLazySingleton(() => GraphQLClient(link: sl(), cache: sl()));
+  sl.registerLazySingleton<GraphQLClient>(
+    () => GraphQLClient(
+      link: HttpLink('https://rickandmortyapi.com/graphql/'),
+      cache: GraphQLCache(),
+    ),
+  );
 }
