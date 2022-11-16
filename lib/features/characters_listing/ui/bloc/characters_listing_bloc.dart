@@ -5,12 +5,10 @@ import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 
 import '../../../../core/characters/domain/entities/entities.dart';
 
-class CharactersListingBloc
-    extends Bloc<CharactersListingEvent, CharactersListingState> {
+class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListingState> {
   final UseCase<List<Character>, NoParams> getAllCharactersUseCase;
 
-  CharactersListingBloc({required this.getAllCharactersUseCase})
-      : super(CharactersListInitialState()) {
+  CharactersListingBloc({required this.getAllCharactersUseCase}) : super(CharactersListInitialState()) {
     on<GetAllCharactersEvent>(_loadCharacters);
   }
 
@@ -19,10 +17,8 @@ class CharactersListingBloc
     emit(CharactersListLoadingState());
     final response = await getAllCharactersUseCase(NoParams());
     emit(response.fold(
-      (failure) => CharactersListErrorState(
-          failure: AppError(properties: failure.properties)),
-      (charactersList) =>
-          CharactersListLoadedState(charactersList: charactersList),
+      (failure) => CharactersListErrorState(failure: AppError(properties: failure.properties)),
+      (charactersList) => CharactersListLoadedState(charactersList: charactersList),
     ));
   }
 }
