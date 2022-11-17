@@ -52,19 +52,28 @@ class MockCharactersRemoteDataSource extends _i1.Mock
             _i4.Future<List<_i2.CharacterModel>>.value(<_i2.CharacterModel>[]),
       ) as _i4.Future<List<_i2.CharacterModel>>);
   @override
-  _i4.Future<_i2.CharacterModel> getCharacterDetails({required String? id}) =>
+  _i4.Future<_i2.CharacterModel> getCharacterDetails({
+    required String? id,
+    required List<String>? episodesIds,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #getCharacterDetails,
           [],
-          {#id: id},
+          {
+            #id: id,
+            #episodesIds: episodesIds,
+          },
         ),
         returnValue: _i4.Future<_i2.CharacterModel>.value(_FakeCharacterModel_0(
           this,
           Invocation.method(
             #getCharacterDetails,
             [],
-            {#id: id},
+            {
+              #id: id,
+              #episodesIds: episodesIds,
+            },
           ),
         )),
       ) as _i4.Future<_i2.CharacterModel>);

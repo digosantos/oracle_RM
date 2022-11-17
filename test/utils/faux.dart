@@ -28,4 +28,6 @@ class Faux {
       episodesIds: ['1', '2', '3', '4', '5'],
     ),
   ];
+
+  static const episodesIds = ['1', '2', '3'];
 }

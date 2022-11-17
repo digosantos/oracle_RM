@@ -26,7 +26,8 @@ void main() {
 
   group('GetCharacterDetailsEvent', () {
     const Character character = Faux.character;
-    final RequestedCharacter requestedCharacter = RequestedCharacter(id: character.id);
+    const episodesIds = Faux.episodesIds;
+    final RequestedCharacterParam requestedCharacter = RequestedCharacterParam(id: character.id, episodesIds: episodesIds);
 
     test('should emit [LoadingState, DetailsLoadedState] when data is successfully retrieved', () async {
       when(mockGetCharacterDetailsUseCase(any)).thenAnswer((_) async => const Right(character));

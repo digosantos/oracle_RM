@@ -65,7 +65,7 @@ class MockGetCharacterDetails extends _i1.Mock
       ) as _i2.CharactersRepository);
   @override
   _i5.Future<_i3.Either<_i6.AppError, _i7.Character>> call(
-          _i4.RequestedCharacter? params) =>
+          _i4.RequestedCharacterParam? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,

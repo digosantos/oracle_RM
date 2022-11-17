@@ -14,8 +14,7 @@ void main() {
 
   setUp(() {
     mockCharactersRemoteDataSource = MockCharactersRemoteDataSource();
-    charactersRepositoryImpl = CharactersRepositoryImpl(
-        charactersRemoteDataSource: mockCharactersRemoteDataSource);
+    charactersRepositoryImpl = CharactersRepositoryImpl(charactersRemoteDataSource: mockCharactersRemoteDataSource);
   });
 
   group('Get all characters repository implementation', () {
@@ -23,8 +22,7 @@ void main() {
     final List<Character> charactersList = charactersModelList;
 
     test('should return a list with all characters', () async {
-      when(mockCharactersRemoteDataSource.getAllCharacters())
-          .thenAnswer((_) async => charactersModelList);
+      when(mockCharactersRemoteDataSource.getAllCharacters()).thenAnswer((_) async => charactersModelList);
 
       final sut = await charactersRepositoryImpl.getAllCharacters();
 
@@ -32,8 +30,7 @@ void main() {
     });
 
     test('should return AppError', () async {
-      when(mockCharactersRemoteDataSource.getAllCharacters())
-          .thenThrow(ServerException());
+      when(mockCharactersRemoteDataSource.getAllCharacters()).thenThrow(ServerException());
 
       final sut = await charactersRepositoryImpl.getAllCharacters();
 
@@ -44,24 +41,32 @@ void main() {
   group('Get character details repository implementation', () {
     const characterModel = Faux.characterModel;
     const Character character = characterModel;
+    const episodesIds = Faux.episodesIds;
 
     test('should return character with its details', () async {
       when(mockCharactersRemoteDataSource.getCharacterDetails(
-              id: characterModel.id))
-          .thenAnswer((_) async => characterModel);
+        id: characterModel.id,
+        episodesIds: episodesIds,
+      )).thenAnswer((_) async => characterModel);
 
       final sut = await charactersRepositoryImpl.getCharacterDetails(
-          id: characterModel.id);
+        id: characterModel.id,
+        episodesIds: episodesIds,
+      );
 
       expect(sut, const Right(character));
     });
 
     test('should return AppError', () async {
-      when(mockCharactersRemoteDataSource.getCharacterDetails(id: character.id))
-          .thenThrow(ServerException());
+      when(mockCharactersRemoteDataSource.getCharacterDetails(
+        id: character.id,
+        episodesIds: episodesIds,
+      )).thenThrow(ServerException());
 
-      final sut =
-          await charactersRepositoryImpl.getCharacterDetails(id: character.id);
+      final sut = await charactersRepositoryImpl.getCharacterDetails(
+        id: character.id,
+        episodesIds: episodesIds,
+      );
 
       expect(sut, const Left(AppError(properties: [])));
     });

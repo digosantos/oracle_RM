@@ -12,34 +12,32 @@ void main() {
     late MockCharactersRepository mockCharactersRepository;
     late GetCharacterDetails getCharacterDetailsUseCase;
     const character = Faux.character;
+    const episodesIds = Faux.episodesIds;
 
     setUp(() {
       mockCharactersRepository = MockCharactersRepository();
-      getCharacterDetailsUseCase =
-          GetCharacterDetails(charactersRepository: mockCharactersRepository);
+      getCharacterDetailsUseCase = GetCharacterDetails(charactersRepository: mockCharactersRepository);
     });
 
     test('should get character details', () async {
-      when(mockCharactersRepository.getCharacterDetails(id: character.id))
+      when(mockCharactersRepository.getCharacterDetails(id: character.id, episodesIds: episodesIds))
           .thenAnswer((_) async => const Right(character));
 
-      final sut = await getCharacterDetailsUseCase(
-          RequestedCharacter(id: character.id));
+      final sut = await getCharacterDetailsUseCase(RequestedCharacterParam(id: character.id, episodesIds: episodesIds));
 
       expect(sut, const Right(character));
-      verify(mockCharactersRepository.getCharacterDetails(id: character.id));
+      verify(mockCharactersRepository.getCharacterDetails(id: character.id, episodesIds: episodesIds));
       verifyNoMoreInteractions(mockCharactersRepository);
     });
 
     test('should fail to get character details', () async {
-      when(mockCharactersRepository.getCharacterDetails(id: character.id))
+      when(mockCharactersRepository.getCharacterDetails(id: character.id, episodesIds: episodesIds))
           .thenAnswer((_) async => const Left(AppError(properties: [])));
 
-      final sut = await getCharacterDetailsUseCase(
-          RequestedCharacter(id: character.id));
+      final sut = await getCharacterDetailsUseCase(RequestedCharacterParam(id: character.id, episodesIds: episodesIds));
 
       expect(sut, const Left(AppError(properties: [])));
-      verify(mockCharactersRepository.getCharacterDetails(id: character.id));
+      verify(mockCharactersRepository.getCharacterDetails(id: character.id, episodesIds: episodesIds));
       verifyNoMoreInteractions(mockCharactersRepository);
     });
   });
