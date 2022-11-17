@@ -15,8 +15,7 @@ class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
   @override
   Future<List<CharacterModel>> getAllCharacters() async {
     final result = await client.query(document: Queries.getAllCharacters());
-    return List<CharacterModel>.from(
-        result['characters']['results'].map((json) {
+    return List<CharacterModel>.from(result['characters']['results'].map((json) {
       return CharacterModel.fromJson(json);
     }));
   }
@@ -25,7 +24,7 @@ class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
   Future<CharacterModel> getCharacterDetails({required String id}) async {
     final result = await client.query(
       document: Queries.getCharacterDetails(),
-      params: {'id': id},
+      params: {'id': id, 'episodesIds': []},
     );
     return CharacterModel.fromJson(result['character']);
   }

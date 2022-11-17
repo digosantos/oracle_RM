@@ -21,8 +21,8 @@ class Queries {
   """;
 
   static String getCharacterDetails() => """
-    query {
-      character(\$id: String!) {
+    query CharacterDetails(\$id: ID!, \$episodesIds: [ID!]!) {
+      character(id: \$id) {
           id
           name
           image
@@ -36,7 +36,7 @@ class Queries {
           }
           created
       }
-      episodesByIds(\$ids: [String!]!) {
+      episodesByIds(ids: \$episodesIds) {
         name
         air_date
       }
