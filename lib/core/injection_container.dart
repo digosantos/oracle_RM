@@ -36,7 +36,7 @@ void init() {
   );
 
   /// Use Cases:
-  sl.registerLazySingleton<UseCase<Character, RequestedCharacter>>(() => GetCharacterDetails(charactersRepository: sl()));
+  sl.registerLazySingleton<UseCase<Character, RequestedCharacterParam>>(() => GetCharacterDetails(charactersRepository: sl()));
 
   /// ---------------------
   /// Core

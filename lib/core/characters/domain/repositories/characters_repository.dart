@@ -5,5 +5,8 @@ import '../entities/entities.dart';
 
 abstract class CharactersRepository {
   Future<Either<AppError, List<Character>>> getAllCharacters();
-  Future<Either<AppError, Character>> getCharacterDetails({required String id});
+  Future<Either<AppError, Character>> getCharacterDetails({
+    required String id,
+    required List<String> episodesIds,
+  });
 }

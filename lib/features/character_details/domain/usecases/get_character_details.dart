@@ -6,22 +6,26 @@ import '../../../../core/characters/domain/entities/entities.dart';
 import '../../../../core/characters/domain/repositories/repositories.dart';
 import '../../../../core/error/error.dart';
 
-class GetCharacterDetails extends UseCase<Character, RequestedCharacter> {
+class GetCharacterDetails extends UseCase<Character, RequestedCharacterParam> {
   final CharactersRepository charactersRepository;
 
   GetCharacterDetails({required this.charactersRepository});
 
   @override
-  Future<Either<AppError, Character>> call(RequestedCharacter params) async {
-    return await charactersRepository.getCharacterDetails(id: params.id);
+  Future<Either<AppError, Character>> call(RequestedCharacterParam params) async {
+    return await charactersRepository.getCharacterDetails(
+      id: params.id,
+      episodesIds: params.episodesIds,
+    );
   }
 }
 
-class RequestedCharacter extends Equatable {
+class RequestedCharacterParam extends Equatable {
   final String id;
+  final List<String> episodesIds;
 
-  const RequestedCharacter({required this.id});
+  const RequestedCharacterParam({required this.id, required this.episodesIds});
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, episodesIds];
 }

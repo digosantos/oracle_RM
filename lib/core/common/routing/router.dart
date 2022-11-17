@@ -21,7 +21,7 @@ class AppRouter {
           path: Routes.characterDetails.routeName,
           builder: (context, state) {
             return CharacterDetailsPage(
-              requestedCharacter: state.extra as RequestedCharacter,
+              requestedCharacter: state.extra as RequestedCharacterParam,
             );
           },
         ),
