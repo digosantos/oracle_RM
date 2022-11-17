@@ -3,6 +3,7 @@ import 'package:graphql/client.dart';
 import 'package:oracle_rm/core/characters/data/datasources/datasources.dart';
 import 'package:oracle_rm/core/characters/data/repositories/characters_repository_impl.dart';
 import 'package:oracle_rm/core/characters/domain/repositories/characters_repository.dart';
+import 'package:oracle_rm/core/common/ui/text_styles.dart';
 import 'package:oracle_rm/core/network/network.dart';
 import 'package:oracle_rm/features/character_details/ui/bloc/bloc.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
@@ -24,8 +25,7 @@ void init() {
   );
 
   /// Use Cases:
-  sl.registerLazySingleton<UseCase<List<Character>, NoParams>>(
-      () => GetAllCharacters(charactersRepository: sl()));
+  sl.registerLazySingleton<UseCase<List<Character>, NoParams>>(() => GetAllCharacters(charactersRepository: sl()));
 
   /// ---------------------
   /// Character Details
@@ -37,16 +37,14 @@ void init() {
   );
 
   /// Use Cases:
-  sl.registerLazySingleton<UseCase<CharacterDetails, RequestedCharacterParam>>(
-      () => GetCharacterDetails(charactersRepository: sl()));
+  sl.registerLazySingleton<UseCase<CharacterDetails, RequestedCharacterParam>>(() => GetCharacterDetails(charactersRepository: sl()));
 
   /// ---------------------
   /// Core
   /// ---------------------
 
   /// Network:
-  sl.registerLazySingleton<BaseNetworkClient>(
-      () => BaseNetworkClient(client: sl()));
+  sl.registerLazySingleton<BaseNetworkClient>(() => BaseNetworkClient(client: sl()));
 
   /// External:
   sl.registerLazySingleton<GraphQLClient>(
@@ -55,6 +53,9 @@ void init() {
       cache: GraphQLCache(),
     ),
   );
+
+  /// Styles:
+  sl.registerLazySingleton<TextStyles>(() => TextStyles());
 
   /// ---------------------
   /// Core (Characters)
