@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:oracle_rm/core/common/routing/router.dart';
 import 'package:oracle_rm/core/injection_container.dart' as di;
-
-import './features/characters_listing/ui/pages/pages.dart';
 
 void main() {
   di.init();
-  runApp(const RickAndMortyOracleApp());
+  runApp(RickAndMortyOracleApp());
 }
 
 class RickAndMortyOracleApp extends StatelessWidget {
-  const RickAndMortyOracleApp({super.key});
+  RickAndMortyOracleApp({super.key});
+
+  final AppRouter _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'R&M Oracle',
-      home: CharactersListingPage(),
+      routerConfig: _appRouter.buildRouter(),
     );
   }
 }
