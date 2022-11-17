@@ -22,10 +22,10 @@ void main() {
 
   group('Get character details', () {
     test('should return CharacterModel on successful query', () async {
-      final characterModelId = Faux.characterModel.id;
+      final characterModelId = Faux.characterDetailsModel.id;
       const episodesIds = Faux.episodesIds;
       final Map<String, dynamic> characterMap = jsonDecode(
-        fixture(name: '/characters/character.json'),
+        fixture(name: '/characters/character_details.json'),
       );
 
       when(mockClient.query(document: Queries.getCharacterDetails(), params: {'id': characterModelId, 'episodesIds': episodesIds}))
@@ -33,7 +33,7 @@ void main() {
 
       final sut = await charactersRemoteDataSource.getCharacterDetails(id: characterModelId, episodesIds: episodesIds);
 
-      expect(sut, Faux.characterModel);
+      expect(sut, Faux.characterDetailsModel);
     });
   });
 

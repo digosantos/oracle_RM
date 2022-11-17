@@ -9,7 +9,7 @@ abstract class CharacterDetailsEvent extends Equatable {
 }
 
 class GetCharacterDetailsEvent extends CharacterDetailsEvent {
-  final RequestedCharacter requestedCharacter;
+  final RequestedCharacterParam requestedCharacter;
 
   const GetCharacterDetailsEvent({required this.requestedCharacter});
 

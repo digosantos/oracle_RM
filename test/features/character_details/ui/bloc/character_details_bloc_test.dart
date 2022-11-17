@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
 import 'package:oracle_rm/core/error/error.dart';
 import 'package:oracle_rm/features/character_details/ui/bloc/bloc.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
@@ -25,16 +24,16 @@ void main() {
   });
 
   group('GetCharacterDetailsEvent', () {
-    const Character character = Faux.character;
+    const characterDetails = Faux.characterDetails;
     const episodesIds = Faux.episodesIds;
-    final RequestedCharacterParam requestedCharacter = RequestedCharacterParam(id: character.id, episodesIds: episodesIds);
+    final RequestedCharacterParam requestedCharacter = RequestedCharacterParam(id: characterDetails.id, episodesIds: episodesIds);
 
     test('should emit [LoadingState, DetailsLoadedState] when data is successfully retrieved', () async {
-      when(mockGetCharacterDetailsUseCase(any)).thenAnswer((_) async => const Right(character));
+      when(mockGetCharacterDetailsUseCase(any)).thenAnswer((_) async => const Right(characterDetails));
 
       final expectedStates = [
         LoadingState(),
-        DetailsLoadedState(characterDetails: character),
+        DetailsLoadedState(characterDetails: characterDetails),
       ];
 
       characterDetailsBloc.add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));

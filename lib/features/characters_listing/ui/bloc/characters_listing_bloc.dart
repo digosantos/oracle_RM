@@ -10,6 +10,7 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
 
   CharactersListingBloc({required this.getAllCharactersUseCase}) : super(CharactersListInitialState()) {
     on<GetAllCharactersEvent>(_loadCharacters);
+    on<CharacterCardTappedEvent>(_redirectToCharacterDetails);
   }
 
   /// Callbacks
@@ -22,5 +23,9 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
       ),
       (charactersList) => CharactersListLoadedState(charactersList: charactersList),
     ));
+  }
+
+  void _redirectToCharacterDetails(CharacterCardTappedEvent event, Emitter emit) {
+    emit(RedirectToCharacterDetailsState(character: event.character));
   }
 }

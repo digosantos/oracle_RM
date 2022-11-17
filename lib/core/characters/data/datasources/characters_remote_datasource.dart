@@ -1,4 +1,3 @@
-import 'package:oracle_rm/core/characters/data/models/character.dart';
 import 'package:oracle_rm/core/network/base_network_client.dart';
 import 'package:oracle_rm/core/network/queries/queries.dart';
 

@@ -12,12 +12,12 @@ class InitialState extends CharacterDetailsState {}
 class LoadingState extends CharacterDetailsState {}
 
 class DetailsLoadedState extends CharacterDetailsState {
-  final Character character;
+  final CharacterDetails characterDetails;
 
-  DetailsLoadedState({required this.character});
+  DetailsLoadedState({required this.characterDetails});
 
   @override
-  List<Object?> get props => [character];
+  List<Object?> get props => [characterDetails];
 }
 
 class ErrorState extends CharacterDetailsState {

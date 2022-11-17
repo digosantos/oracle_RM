@@ -64,20 +64,21 @@ class MockGetCharacterDetails extends _i1.Mock
         ),
       ) as _i2.CharactersRepository);
   @override
-  _i5.Future<_i3.Either<_i6.AppError, _i7.Character>> call(
+  _i5.Future<_i3.Either<_i6.AppError, _i7.CharacterDetails>> call(
           _i4.RequestedCharacterParam? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [params],
         ),
-        returnValue: _i5.Future<_i3.Either<_i6.AppError, _i7.Character>>.value(
-            _FakeEither_1<_i6.AppError, _i7.Character>(
+        returnValue:
+            _i5.Future<_i3.Either<_i6.AppError, _i7.CharacterDetails>>.value(
+                _FakeEither_1<_i6.AppError, _i7.CharacterDetails>(
           this,
           Invocation.method(
             #call,
             [params],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.AppError, _i7.Character>>);
+      ) as _i5.Future<_i3.Either<_i6.AppError, _i7.CharacterDetails>>);
 }

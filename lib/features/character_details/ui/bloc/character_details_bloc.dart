@@ -7,7 +7,7 @@ import '../../../../core/characters/domain/entities/entities.dart';
 import '../../../characters_listing/domain/usecases/usecases.dart';
 
 class CharacterDetailsBloc extends Bloc<CharacterDetailsEvent, CharacterDetailsState> {
-  final UseCase<Character, RequestedCharacter> getCharacterDetailsUseCase;
+  final UseCase<CharacterDetails, RequestedCharacterParam> getCharacterDetailsUseCase;
 
   CharacterDetailsBloc({required this.getCharacterDetailsUseCase}) : super(InitialState()) {
     on<GetCharacterDetailsEvent>(_loadCharacterDetails);
@@ -21,7 +21,7 @@ class CharacterDetailsBloc extends Bloc<CharacterDetailsEvent, CharacterDetailsS
       (failure) => ErrorState(
         failure: AppError(properties: failure.properties),
       ),
-      (character) => DetailsLoadedState(character: character),
+      (characterDetails) => DetailsLoadedState(characterDetails: characterDetails),
     ));
   }
 }

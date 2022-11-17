@@ -39,18 +39,18 @@ void main() {
   });
 
   group('Get character details repository implementation', () {
-    const characterModel = Faux.characterModel;
-    const Character character = characterModel;
+    const characterDetailsModel = Faux.characterDetailsModel;
+    const Character character = characterDetailsModel;
     const episodesIds = Faux.episodesIds;
 
     test('should return character with its details', () async {
       when(mockCharactersRemoteDataSource.getCharacterDetails(
-        id: characterModel.id,
+        id: characterDetailsModel.id,
         episodesIds: episodesIds,
-      )).thenAnswer((_) async => characterModel);
+      )).thenAnswer((_) async => characterDetailsModel);
 
       final sut = await charactersRepositoryImpl.getCharacterDetails(
-        id: characterModel.id,
+        id: characterDetailsModel.id,
         episodesIds: episodesIds,
       );
 

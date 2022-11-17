@@ -8,7 +8,8 @@ import 'dart:async' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:oracle_rm/core/characters/data/datasources/characters_remote_datasource.dart'
     as _i3;
-import 'package:oracle_rm/core/characters/data/models/character.dart' as _i2;
+import 'package:oracle_rm/core/characters/data/models/character.dart' as _i5;
+import 'package:oracle_rm/core/characters/data/models/models.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -21,9 +22,9 @@ import 'package:oracle_rm/core/characters/data/models/character.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeCharacterModel_0 extends _i1.SmartFake
-    implements _i2.CharacterModel {
-  _FakeCharacterModel_0(
+class _FakeCharacterDetailsModel_0 extends _i1.SmartFake
+    implements _i2.CharacterDetailsModel {
+  _FakeCharacterDetailsModel_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -42,17 +43,17 @@ class MockCharactersRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<List<_i2.CharacterModel>> getAllCharacters() =>
+  _i4.Future<List<_i5.CharacterModel>> getAllCharacters() =>
       (super.noSuchMethod(
         Invocation.method(
           #getAllCharacters,
           [],
         ),
         returnValue:
-            _i4.Future<List<_i2.CharacterModel>>.value(<_i2.CharacterModel>[]),
-      ) as _i4.Future<List<_i2.CharacterModel>>);
+            _i4.Future<List<_i5.CharacterModel>>.value(<_i5.CharacterModel>[]),
+      ) as _i4.Future<List<_i5.CharacterModel>>);
   @override
-  _i4.Future<_i2.CharacterModel> getCharacterDetails({
+  _i4.Future<_i2.CharacterDetailsModel> getCharacterDetails({
     required String? id,
     required List<String>? episodesIds,
   }) =>
@@ -65,7 +66,8 @@ class MockCharactersRemoteDataSource extends _i1.Mock
             #episodesIds: episodesIds,
           },
         ),
-        returnValue: _i4.Future<_i2.CharacterModel>.value(_FakeCharacterModel_0(
+        returnValue: _i4.Future<_i2.CharacterDetailsModel>.value(
+            _FakeCharacterDetailsModel_0(
           this,
           Invocation.method(
             #getCharacterDetails,
@@ -76,5 +78,5 @@ class MockCharactersRemoteDataSource extends _i1.Mock
             },
           ),
         )),
-      ) as _i4.Future<_i2.CharacterModel>);
+      ) as _i4.Future<_i2.CharacterDetailsModel>);
 }

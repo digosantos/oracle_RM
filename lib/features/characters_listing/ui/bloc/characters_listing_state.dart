@@ -28,3 +28,12 @@ class CharactersListErrorState extends CharactersListingState {
   @override
   List<Object?> get props => [failure];
 }
+
+class RedirectToCharacterDetailsState extends CharactersListingState {
+  final Character character;
+
+  RedirectToCharacterDetailsState({required this.character});
+
+  @override
+  List<Object?> get props => [character];
+}

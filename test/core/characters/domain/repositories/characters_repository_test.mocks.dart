@@ -60,7 +60,8 @@ class MockCharactersRepository extends _i1.Mock
             )),
           ) as _i4.Future<_i2.Either<_i5.AppError, List<_i6.Character>>>);
   @override
-  _i4.Future<_i2.Either<_i5.AppError, _i6.Character>> getCharacterDetails({
+  _i4.Future<
+      _i2.Either<_i5.AppError, _i6.CharacterDetails>> getCharacterDetails({
     required String? id,
     required List<String>? episodesIds,
   }) =>
@@ -73,8 +74,9 @@ class MockCharactersRepository extends _i1.Mock
             #episodesIds: episodesIds,
           },
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.AppError, _i6.Character>>.value(
-            _FakeEither_0<_i5.AppError, _i6.Character>(
+        returnValue:
+            _i4.Future<_i2.Either<_i5.AppError, _i6.CharacterDetails>>.value(
+                _FakeEither_0<_i5.AppError, _i6.CharacterDetails>(
           this,
           Invocation.method(
             #getCharacterDetails,
@@ -85,5 +87,5 @@ class MockCharactersRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.AppError, _i6.Character>>);
+      ) as _i4.Future<_i2.Either<_i5.AppError, _i6.CharacterDetails>>);
 }
