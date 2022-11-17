@@ -16,7 +16,8 @@ void main() {
 
   setUpAll(() {
     mockGetCharacterDetailsUseCase = MockGetCharacterDetails();
-    characterDetailsBloc = CharacterDetailsBloc(getCharacterDetailsUseCase: mockGetCharacterDetailsUseCase);
+    characterDetailsBloc = CharacterDetailsBloc(
+        getCharacterDetailsUseCase: mockGetCharacterDetailsUseCase);
   });
 
   test('verify initial state is InitialState', () {
@@ -26,31 +27,39 @@ void main() {
   group('GetCharacterDetailsEvent', () {
     const characterDetails = Faux.characterDetails;
     const episodesIds = Faux.episodesIds;
-    final RequestedCharacterParam requestedCharacter = RequestedCharacterParam(id: characterDetails.id, episodesIds: episodesIds);
+    final RequestedCharacterParam requestedCharacter = RequestedCharacterParam(
+        id: characterDetails.id, episodesIds: episodesIds);
 
-    test('should emit [LoadingState, DetailsLoadedState] when data is successfully retrieved', () async {
-      when(mockGetCharacterDetailsUseCase(any)).thenAnswer((_) async => const Right(characterDetails));
+    test(
+        'should emit [LoadingState, DetailsLoadedState] when data is successfully retrieved',
+        () async {
+      when(mockGetCharacterDetailsUseCase(any))
+          .thenAnswer((_) async => const Right(characterDetails));
 
       final expectedStates = [
         LoadingState(),
         DetailsLoadedState(characterDetails: characterDetails),
       ];
 
-      characterDetailsBloc.add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));
+      characterDetailsBloc.add(
+          GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));
 
       expect(characterDetailsBloc.stream, emitsInOrder(expectedStates));
     });
 
-    test('should emit [LoadingState, ErrorState] when fails to retrieve data', () {
+    test('should emit [LoadingState, ErrorState] when fails to retrieve data',
+        () {
       const appError = AppError(properties: []);
-      when(mockGetCharacterDetailsUseCase(any)).thenAnswer((_) async => const Left(appError));
+      when(mockGetCharacterDetailsUseCase(any))
+          .thenAnswer((_) async => const Left(appError));
 
       final expectedStates = [
         LoadingState(),
         ErrorState(failure: appError),
       ];
 
-      characterDetailsBloc.add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));
+      characterDetailsBloc.add(
+          GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));
 
       expect(characterDetailsBloc.stream, emitsInOrder(expectedStates));
     });

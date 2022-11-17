@@ -5,10 +5,12 @@ import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 
 import '../../../../core/characters/domain/entities/entities.dart';
 
-class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListingState> {
+class CharactersListingBloc
+    extends Bloc<CharactersListingEvent, CharactersListingState> {
   final UseCase<List<Character>, NoParams> getAllCharactersUseCase;
 
-  CharactersListingBloc({required this.getAllCharactersUseCase}) : super(CharactersListInitialState()) {
+  CharactersListingBloc({required this.getAllCharactersUseCase})
+      : super(CharactersListInitialState()) {
     on<GetAllCharactersEvent>(_loadCharacters);
     on<CharacterCardTappedEvent>(_redirectToCharacterDetails);
   }
@@ -21,11 +23,13 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
       (failure) => CharactersListErrorState(
         failure: AppError(properties: failure.properties),
       ),
-      (charactersList) => CharactersListLoadedState(charactersList: charactersList),
+      (charactersList) =>
+          CharactersListLoadedState(charactersList: charactersList),
     ));
   }
 
-  void _redirectToCharacterDetails(CharacterCardTappedEvent event, Emitter emit) {
+  void _redirectToCharacterDetails(
+      CharacterCardTappedEvent event, Emitter emit) {
     emit(RedirectToCharacterDetailsState(character: event.character));
   }
 }

@@ -10,8 +10,10 @@ class CharacterDetailsPage extends StatelessWidget {
 
   final characterDetailsBloc = sl<CharacterDetailsBloc>();
 
-  CharacterDetailsPage({Key? key, required this.requestedCharacter}) : super(key: key) {
-    characterDetailsBloc.add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));
+  CharacterDetailsPage({Key? key, required this.requestedCharacter})
+      : super(key: key) {
+    characterDetailsBloc
+        .add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));
   }
 
   @override

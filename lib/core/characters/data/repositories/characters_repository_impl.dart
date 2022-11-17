@@ -13,7 +13,8 @@ class CharactersRepositoryImpl implements CharactersRepository {
   @override
   Future<Either<AppError, List<Character>>> getAllCharacters() async {
     try {
-      final charactersList = await charactersRemoteDataSource.getAllCharacters();
+      final charactersList =
+          await charactersRemoteDataSource.getAllCharacters();
       return Right(charactersList);
     } on ServerException {
       return const Left(AppError(properties: []));
@@ -21,9 +22,11 @@ class CharactersRepositoryImpl implements CharactersRepository {
   }
 
   @override
-  Future<Either<AppError, CharacterDetails>> getCharacterDetails({required String id, required List<String> episodesIds}) async {
+  Future<Either<AppError, CharacterDetails>> getCharacterDetails(
+      {required String id, required List<String> episodesIds}) async {
     try {
-      final characterDetails = await charactersRemoteDataSource.getCharacterDetails(id: id, episodesIds: episodesIds);
+      final characterDetails = await charactersRemoteDataSource
+          .getCharacterDetails(id: id, episodesIds: episodesIds);
       return Right(characterDetails);
     } on ServerException {
       return const Left(AppError(properties: []));

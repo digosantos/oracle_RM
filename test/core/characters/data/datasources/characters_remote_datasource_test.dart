@@ -17,7 +17,8 @@ void main() {
 
   setUp(() {
     mockClient = MockBaseNetworkClient();
-    charactersRemoteDataSource = CharactersRemoteDataSourceImpl(client: mockClient);
+    charactersRemoteDataSource =
+        CharactersRemoteDataSourceImpl(client: mockClient);
   });
 
   group('Get character details', () {
@@ -28,10 +29,13 @@ void main() {
         fixture(name: '/characters/character_details.json'),
       );
 
-      when(mockClient.query(document: Queries.getCharacterDetails(), params: {'id': characterModelId, 'episodesIds': episodesIds}))
+      when(mockClient.query(
+              document: Queries.getCharacterDetails(),
+              params: {'id': characterModelId, 'episodesIds': episodesIds}))
           .thenAnswer((_) async => characterMap);
 
-      final sut = await charactersRemoteDataSource.getCharacterDetails(id: characterModelId, episodesIds: episodesIds);
+      final sut = await charactersRemoteDataSource.getCharacterDetails(
+          id: characterModelId, episodesIds: episodesIds);
 
       expect(sut, Faux.characterDetailsModel);
     });
@@ -43,7 +47,8 @@ void main() {
         fixture(name: '/characters/all_characters.json'),
       );
 
-      when(mockClient.query(document: Queries.getAllCharacters())).thenAnswer((_) async => allCharactersMap);
+      when(mockClient.query(document: Queries.getAllCharacters()))
+          .thenAnswer((_) async => allCharactersMap);
 
       final sut = await charactersRemoteDataSource.getAllCharacters();
 

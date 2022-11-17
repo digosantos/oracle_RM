@@ -14,7 +14,8 @@ void main() {
 
   setUp(() {
     mockCharactersRemoteDataSource = MockCharactersRemoteDataSource();
-    charactersRepositoryImpl = CharactersRepositoryImpl(charactersRemoteDataSource: mockCharactersRemoteDataSource);
+    charactersRepositoryImpl = CharactersRepositoryImpl(
+        charactersRemoteDataSource: mockCharactersRemoteDataSource);
   });
 
   group('Get all characters repository implementation', () {
@@ -22,7 +23,8 @@ void main() {
     final List<Character> charactersList = charactersModelList;
 
     test('should return a list with all characters', () async {
-      when(mockCharactersRemoteDataSource.getAllCharacters()).thenAnswer((_) async => charactersModelList);
+      when(mockCharactersRemoteDataSource.getAllCharacters())
+          .thenAnswer((_) async => charactersModelList);
 
       final sut = await charactersRepositoryImpl.getAllCharacters();
 
@@ -30,7 +32,8 @@ void main() {
     });
 
     test('should return AppError', () async {
-      when(mockCharactersRemoteDataSource.getAllCharacters()).thenThrow(ServerException());
+      when(mockCharactersRemoteDataSource.getAllCharacters())
+          .thenThrow(ServerException());
 
       final sut = await charactersRepositoryImpl.getAllCharacters();
 

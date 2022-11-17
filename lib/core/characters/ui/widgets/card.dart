@@ -10,7 +10,9 @@ class CharacterCard extends StatelessWidget {
   final Character character;
   final CardDelegate cardDelegate;
 
-  const CharacterCard({Key? key, required this.character, required this.cardDelegate}) : super(key: key);
+  const CharacterCard(
+      {Key? key, required this.character, required this.cardDelegate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
