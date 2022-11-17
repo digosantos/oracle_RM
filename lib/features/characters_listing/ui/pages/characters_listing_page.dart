@@ -23,7 +23,13 @@ class CharactersListingPage extends StatelessWidget with CardDelegate {
       appBar: AppBar(
         title: const Text('R&M Oracle'),
         backgroundColor: Colors.purple,
-        elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            iconSize: 28,
+            onPressed: () {},
+          ),
+        ],
       ),
       body: BlocConsumer<CharactersListingBloc, CharactersListingState>(
         bloc: charactersListBloc,

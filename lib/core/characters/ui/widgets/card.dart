@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/ui/text_styles.dart';
+import '../../../injection_container.dart';
 import '../../domain/entities/entities.dart';
 
 abstract class CardDelegate {
@@ -10,9 +12,13 @@ class CharacterCard extends StatelessWidget {
   final Character character;
   final CardDelegate cardDelegate;
 
-  const CharacterCard(
-      {Key? key, required this.character, required this.cardDelegate})
-      : super(key: key);
+  TextStyle get subtitle18 => sl<TextStyles>().subtitle18;
+
+  const CharacterCard({
+    Key? key,
+    required this.character,
+    required this.cardDelegate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,21 +59,13 @@ class CharacterCard extends StatelessWidget {
               Text(
                 'Espécie: ${character.species}',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
+                style: subtitle18,
               ),
               const SizedBox(height: 12),
               Text(
                 'Total de Episódios: ${character.episodesIds.length.toString()}',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
+                style: subtitle18,
               ),
               const SizedBox(height: 42),
               ElevatedButton.icon(
