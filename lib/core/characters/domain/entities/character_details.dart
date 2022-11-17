@@ -4,8 +4,8 @@ import '../../../episodes/domain/entities/entities.dart';
 
 class CharacterDetails extends Character {
   final String status;
-  final Origin origin;
-  final Location location;
+  final String origin;
+  final String location;
   final String createdAt;
   final List<Episode> episodes;
 

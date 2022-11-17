@@ -2,9 +2,11 @@ import 'package:oracle_rm/core/characters/data/models/character.dart';
 import 'package:oracle_rm/core/network/base_network_client.dart';
 import 'package:oracle_rm/core/network/queries/queries.dart';
 
+import '../models/models.dart';
+
 abstract class CharactersRemoteDataSource {
   Future<List<CharacterModel>> getAllCharacters();
-  Future<CharacterModel> getCharacterDetails({required String id, required List<String> episodesIds});
+  Future<CharacterDetailsModel> getCharacterDetails({required String id, required List<String> episodesIds});
 }
 
 class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
@@ -21,11 +23,11 @@ class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
   }
 
   @override
-  Future<CharacterModel> getCharacterDetails({required String id, required List<String> episodesIds}) async {
+  Future<CharacterDetailsModel> getCharacterDetails({required String id, required List<String> episodesIds}) async {
     final result = await client.query(
       document: Queries.getCharacterDetails(),
       params: {'id': id, 'episodesIds': episodesIds},
     );
-    return CharacterModel.fromJson(result['character']);
+    return CharacterDetailsModel.fromJson(result);
   }
 }

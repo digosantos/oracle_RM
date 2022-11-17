@@ -37,6 +37,7 @@ class Queries {
           created
       }
       episodesByIds(ids: \$episodesIds) {
+        id
         name
         air_date
       }

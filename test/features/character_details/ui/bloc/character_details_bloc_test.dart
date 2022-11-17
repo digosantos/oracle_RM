@@ -34,7 +34,7 @@ void main() {
 
       final expectedStates = [
         LoadingState(),
-        DetailsLoadedState(character: character),
+        DetailsLoadedState(characterDetails: character),
       ];
 
       characterDetailsBloc.add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));

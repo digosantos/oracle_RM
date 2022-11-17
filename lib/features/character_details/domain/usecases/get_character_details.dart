@@ -6,13 +6,13 @@ import '../../../../core/characters/domain/entities/entities.dart';
 import '../../../../core/characters/domain/repositories/repositories.dart';
 import '../../../../core/error/error.dart';
 
-class GetCharacterDetails extends UseCase<Character, RequestedCharacterParam> {
+class GetCharacterDetails extends UseCase<CharacterDetails, RequestedCharacterParam> {
   final CharactersRepository charactersRepository;
 
   GetCharacterDetails({required this.charactersRepository});
 
   @override
-  Future<Either<AppError, Character>> call(RequestedCharacterParam params) async {
+  Future<Either<AppError, CharacterDetails>> call(RequestedCharacterParam params) async {
     return await charactersRepository.getCharacterDetails(
       id: params.id,
       episodesIds: params.episodesIds,
