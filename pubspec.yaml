@@ -27,6 +27,9 @@ dependencies:
   # Service Locator
   get_it: 7.2.0
 
+  # App routing
+  go_router: 5.1.9
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
