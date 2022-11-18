@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:oracle_rm/core/error/error.dart';
 import 'package:oracle_rm/core/favorites/domain/usecases/usecases.dart';
 
+import '../../../../utils/faux.dart';
 import '../repositories/favorites_repository_test.mocks.dart';
 
 void main() {
@@ -16,7 +17,7 @@ void main() {
   });
 
   group('Remove favorite use case', () {
-    const characterId = '1';
+    final characterId = Faux.character.id;
 
     test('should successfully remove favorite ID from local storage', () async {
       when(mockFavoritesRepository.remove(characterId: characterId)).thenAnswer((_) async => const Right(true));

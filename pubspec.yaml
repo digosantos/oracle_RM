@@ -12,14 +12,17 @@ dependencies:
   flutter:
     sdk: flutter
   # Object properties equality comparison
-  equatable: ^2.0.5
+  equatable: 2.0.5
   # Functional programming
-  dartz: ^0.10.1
+  dartz: 0.10.1
   # Files generator
   build_runner: 2.3.2
 
   # GraphQL Client
   graphql: 5.1.1
+
+  # Local Storage
+  shared_preferences: 2.0.15
 
   # UI state management
   flutter_bloc: 8.1.1
@@ -33,7 +36,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: 2.0.0
   mockito: 5.3.2
 
 flutter:
