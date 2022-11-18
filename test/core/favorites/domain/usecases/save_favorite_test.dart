@@ -18,7 +18,7 @@ void main() {
   group('Save favorite use case', () {
     const characterId = '1';
 
-    test('successfully persist character ID locally', () async {
+    test('should successfully persist character ID locally', () async {
       when(mockFavoritesRepository.save()).thenAnswer((_) async => const Right(true));
 
       final sut = await saveFavoriteUseCase(characterId);
@@ -28,7 +28,7 @@ void main() {
       verifyNoMoreInteractions(mockFavoritesRepository);
     });
 
-    test('fails to persist character ID locally', () async {
+    test('should fail to persist character ID locally', () async {
       when(mockFavoritesRepository.save()).thenAnswer((_) async => const Left(AppError(properties: [])));
 
       final sut = await saveFavoriteUseCase(characterId);

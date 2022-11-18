@@ -56,4 +56,19 @@ class MockFavoritesRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.AppError, bool>>);
+  @override
+  _i4.Future<_i2.Either<_i5.AppError, bool>> remove() => (super.noSuchMethod(
+        Invocation.method(
+          #remove,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.AppError, bool>>.value(
+            _FakeEither_0<_i5.AppError, bool>(
+          this,
+          Invocation.method(
+            #remove,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.AppError, bool>>);
 }
