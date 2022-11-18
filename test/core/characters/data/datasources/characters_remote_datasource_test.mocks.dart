@@ -8,7 +8,6 @@ import 'dart:async' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:oracle_rm/core/characters/data/datasources/characters_remote_datasource.dart'
     as _i3;
-import 'package:oracle_rm/core/characters/data/models/character.dart' as _i5;
 import 'package:oracle_rm/core/characters/data/models/models.dart' as _i2;
 
 // ignore_for_file: type=lint
@@ -43,15 +42,15 @@ class MockCharactersRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<List<_i5.CharacterModel>> getAllCharacters() =>
+  _i4.Future<List<_i2.CharacterModel>> getAllCharacters() =>
       (super.noSuchMethod(
         Invocation.method(
           #getAllCharacters,
           [],
         ),
         returnValue:
-            _i4.Future<List<_i5.CharacterModel>>.value(<_i5.CharacterModel>[]),
-      ) as _i4.Future<List<_i5.CharacterModel>>);
+            _i4.Future<List<_i2.CharacterModel>>.value(<_i2.CharacterModel>[]),
+      ) as _i4.Future<List<_i2.CharacterModel>>);
   @override
   _i4.Future<_i2.CharacterDetailsModel> getCharacterDetails({
     required String? id,
