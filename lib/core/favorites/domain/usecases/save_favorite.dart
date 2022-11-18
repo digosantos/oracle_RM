@@ -11,6 +11,6 @@ class SaveFavorite extends UseCase<bool, String> {
 
   @override
   Future<Either<AppError, bool>> call(String params) async {
-    return await favoritesRepository.save();
+    return await favoritesRepository.save(characterId: params);
   }
 }

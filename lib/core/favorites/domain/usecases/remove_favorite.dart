@@ -10,6 +10,6 @@ class RemoveFavorite extends UseCase<bool, String> {
 
   @override
   Future<Either<AppError, bool>> call(String params) async {
-    return await favoritesRepository.remove();
+    return await favoritesRepository.remove(characterId: params);
   }
 }

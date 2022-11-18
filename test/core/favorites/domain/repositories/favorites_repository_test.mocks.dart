@@ -42,10 +42,13 @@ class MockFavoritesRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.AppError, bool>> save() => (super.noSuchMethod(
+  _i4.Future<_i2.Either<_i5.AppError, bool>> save(
+          {required String? characterId}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #save,
           [],
+          {#characterId: characterId},
         ),
         returnValue: _i4.Future<_i2.Either<_i5.AppError, bool>>.value(
             _FakeEither_0<_i5.AppError, bool>(
@@ -53,14 +56,18 @@ class MockFavoritesRepository extends _i1.Mock
           Invocation.method(
             #save,
             [],
+            {#characterId: characterId},
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.AppError, bool>>);
   @override
-  _i4.Future<_i2.Either<_i5.AppError, bool>> remove() => (super.noSuchMethod(
+  _i4.Future<_i2.Either<_i5.AppError, bool>> remove(
+          {required String? characterId}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #remove,
           [],
+          {#characterId: characterId},
         ),
         returnValue: _i4.Future<_i2.Either<_i5.AppError, bool>>.value(
             _FakeEither_0<_i5.AppError, bool>(
@@ -68,6 +75,7 @@ class MockFavoritesRepository extends _i1.Mock
           Invocation.method(
             #remove,
             [],
+            {#characterId: characterId},
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.AppError, bool>>);

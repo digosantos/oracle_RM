@@ -19,22 +19,22 @@ void main() {
     const characterId = '1';
 
     test('should successfully persist character ID locally', () async {
-      when(mockFavoritesRepository.save()).thenAnswer((_) async => const Right(true));
+      when(mockFavoritesRepository.save(characterId: characterId)).thenAnswer((_) async => const Right(true));
 
       final sut = await saveFavoriteUseCase(characterId);
 
       expect(sut, const Right(true));
-      verify(mockFavoritesRepository.save()).called(1);
+      verify(mockFavoritesRepository.save(characterId: characterId)).called(1);
       verifyNoMoreInteractions(mockFavoritesRepository);
     });
 
     test('should fail to persist character ID locally', () async {
-      when(mockFavoritesRepository.save()).thenAnswer((_) async => const Left(AppError(properties: [])));
+      when(mockFavoritesRepository.save(characterId: characterId)).thenAnswer((_) async => const Left(AppError(properties: [])));
 
       final sut = await saveFavoriteUseCase(characterId);
 
       expect(sut, const Left(AppError(properties: [])));
-      verify(mockFavoritesRepository.save()).called(1);
+      verify(mockFavoritesRepository.save(characterId: characterId)).called(1);
       verifyNoMoreInteractions(mockFavoritesRepository);
     });
   });
