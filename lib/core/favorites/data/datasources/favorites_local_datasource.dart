@@ -17,8 +17,7 @@ class FavoritesLocalDataSourceImpl implements FavoritesLocalDataSource {
   }
 
   @override
-  Future<bool> save({required String characterId}) {
-    // TODO: implement save
-    throw UnimplementedError();
+  Future<bool> save({required String characterId}) async {
+    return await sharedPreferences.setStringList('favorites', [characterId]);
   }
 }
