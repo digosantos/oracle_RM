@@ -32,8 +32,7 @@ class Faux {
     episodes: episodes,
   );
 
-  static const episodeModel =
-      EpisodeModel(name: 'Pilot', airDate: 'December 2, 2013');
+  static const episodeModel = EpisodeModel(name: 'Pilot', airDate: 'December 2, 2013');
 
   static const episodesModels = [
     episodeModel,
@@ -74,4 +73,6 @@ class Faux {
   ];
 
   static const episodesIds = ['1', '2', '3'];
+
+  static const favoritesKey = 'favorites';
 }
