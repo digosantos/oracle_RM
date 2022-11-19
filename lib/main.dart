@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:oracle_rm/core/common/routing/router.dart';
 import 'package:oracle_rm/core/injection_container.dart' as di;
 
-void main() {
-  di.init();
+Future<void> main() async {
+  await di.init();
   runApp(RickAndMortyOracleApp());
 }
 
