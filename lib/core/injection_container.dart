@@ -4,17 +4,23 @@ import 'package:oracle_rm/core/characters/data/datasources/datasources.dart';
 import 'package:oracle_rm/core/characters/data/repositories/characters_repository_impl.dart';
 import 'package:oracle_rm/core/characters/domain/repositories/characters_repository.dart';
 import 'package:oracle_rm/core/common/ui/text_styles.dart';
+import 'package:oracle_rm/core/favorites/data/datasources/datasources.dart';
+import 'package:oracle_rm/core/favorites/data/repositories/favorites_repository_impl.dart';
+import 'package:oracle_rm/core/favorites/domain/repositories/favorites_repository.dart';
+import 'package:oracle_rm/core/favorites/domain/usecases/save_favorite.dart';
 import 'package:oracle_rm/core/network/network.dart';
 import 'package:oracle_rm/features/character_details/ui/bloc/bloc.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
 import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'characters/domain/entities/entities.dart';
 import 'domain/usecases/usecase.dart';
+import 'favorites/domain/usecases/usecases.dart';
 
 final sl = GetIt.instance;
 
-void init() {
+Future<void> init() async {
   /// ---------------------
   /// Characters Listing
   /// ---------------------
@@ -54,6 +60,9 @@ void init() {
     ),
   );
 
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => sharedPreferences);
+
   /// Styles:
   sl.registerLazySingleton<TextStyles>(() => TextStyles());
 
@@ -69,5 +78,28 @@ void init() {
   /// Data sources:
   sl.registerLazySingleton<CharactersRemoteDataSource>(
     () => CharactersRemoteDataSourceImpl(client: sl()),
+  );
+
+  /// ---------------------
+  /// Core (Favorites)
+  /// ---------------------
+
+  /// Use Cases:
+  sl.registerLazySingleton<UseCase<bool, String>>(
+    () => SaveFavorite(favoritesRepository: sl()),
+  );
+
+  sl.registerLazySingleton<UseCase<bool, String>>(
+    () => RemoveFavorite(favoritesRepository: sl()),
+  );
+
+  /// Repositories:
+  sl.registerLazySingleton<FavoritesRepository>(
+    () => FavoritesRepositoryImpl(favoritesLocalDataSource: sl()),
+  );
+
+  /// Data sources:
+  sl.registerLazySingleton<FavoritesLocalDataSource>(
+    () => FavoritesLocalDataSourceImpl(sharedPreferences: sl()),
   );
 }
