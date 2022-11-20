@@ -89,9 +89,7 @@ Future<void> init() async {
     () => SaveFavorite(favoritesRepository: sl()),
   );
 
-  sl.registerLazySingleton<UseCase<bool, String>>(
-    () => RemoveFavorite(favoritesRepository: sl()),
-  );
+  sl.registerLazySingleton(() => RemoveFavorite(favoritesRepository: sl()));
 
   /// Repositories:
   sl.registerLazySingleton<FavoritesRepository>(
