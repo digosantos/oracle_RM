@@ -7,7 +7,6 @@ import 'package:oracle_rm/core/common/ui/text_styles.dart';
 import 'package:oracle_rm/core/favorites/data/datasources/datasources.dart';
 import 'package:oracle_rm/core/favorites/data/repositories/favorites_repository_impl.dart';
 import 'package:oracle_rm/core/favorites/domain/repositories/favorites_repository.dart';
-import 'package:oracle_rm/core/favorites/domain/usecases/save_favorite.dart';
 import 'package:oracle_rm/core/network/network.dart';
 import 'package:oracle_rm/features/character_details/ui/bloc/bloc.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
