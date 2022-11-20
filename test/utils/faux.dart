@@ -75,4 +75,6 @@ class Faux {
   static const episodesIds = ['1', '2', '3'];
 
   static const favoritesKey = 'favorites';
+  static const emptyFavorites = [];
+  static const favorites = ['999', '2'];
 }
