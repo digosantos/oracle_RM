@@ -11,9 +11,10 @@ class FavoritesLocalDataSourceImpl implements FavoritesLocalDataSource {
   FavoritesLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<bool> remove({required String characterId}) {
-    // TODO: implement remove
-    throw UnimplementedError();
+  Future<bool> remove({required String characterId}) async {
+    final favorites = sharedPreferences.getStringList('favorites');
+    favorites!.remove(characterId);
+    return await sharedPreferences.setStringList('favorites', favorites);
   }
 
   @override
