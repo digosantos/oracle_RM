@@ -13,14 +13,16 @@ void main() {
 
   setUp(() {
     mockFavoritesRepository = MockFavoritesRepository();
-    saveFavoriteUseCase = SaveFavorite(favoritesRepository: mockFavoritesRepository);
+    saveFavoriteUseCase =
+        SaveFavorite(favoritesRepository: mockFavoritesRepository);
   });
 
   group('Save favorite use case', () {
     final characterId = Faux.character.id;
 
     test('should successfully persist character ID locally', () async {
-      when(mockFavoritesRepository.save(characterId: characterId)).thenAnswer((_) async => const Right(true));
+      when(mockFavoritesRepository.save(characterId: characterId))
+          .thenAnswer((_) async => const Right(true));
 
       final sut = await saveFavoriteUseCase(characterId);
 
@@ -30,7 +32,8 @@ void main() {
     });
 
     test('should fail to persist character ID locally', () async {
-      when(mockFavoritesRepository.save(characterId: characterId)).thenAnswer((_) async => const Left(AppError(properties: [])));
+      when(mockFavoritesRepository.save(characterId: characterId))
+          .thenAnswer((_) async => const Left(AppError(properties: [])));
 
       final sut = await saveFavoriteUseCase(characterId);
 

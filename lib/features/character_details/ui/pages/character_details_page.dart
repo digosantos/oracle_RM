@@ -12,8 +12,10 @@ class CharacterDetailsPage extends StatelessWidget {
   final characterDetailsBloc = sl<CharacterDetailsBloc>();
   TextStyle get subtitle18 => sl<TextStyles>().subtitle18;
 
-  CharacterDetailsPage({Key? key, required this.requestedCharacter}) : super(key: key) {
-    characterDetailsBloc.add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));
+  CharacterDetailsPage({Key? key, required this.requestedCharacter})
+      : super(key: key) {
+    characterDetailsBloc
+        .add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));
   }
 
   @override
