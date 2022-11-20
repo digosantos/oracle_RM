@@ -1,7 +1,7 @@
 class Queries {
   static String getAllCharacters() => """
-    query {
-      characters {
+    query CharactersAtPage(\$page: Int) {
+      characters(page: \$page) {
         info {
           pages
           next
