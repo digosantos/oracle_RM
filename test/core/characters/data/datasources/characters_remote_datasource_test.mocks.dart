@@ -42,11 +42,13 @@ class MockCharactersRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<List<_i2.CharacterModel>> getAllCharacters() =>
+  _i4.Future<List<_i2.CharacterModel>> getAllCharacters(
+          {required int? pageNumber}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getAllCharacters,
           [],
+          {#pageNumber: pageNumber},
         ),
         returnValue:
             _i4.Future<List<_i2.CharacterModel>>.value(<_i2.CharacterModel>[]),

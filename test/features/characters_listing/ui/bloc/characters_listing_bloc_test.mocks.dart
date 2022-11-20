@@ -10,7 +10,6 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:oracle_rm/core/characters/domain/entities/entities.dart' as _i7;
 import 'package:oracle_rm/core/characters/domain/repositories/repositories.dart'
     as _i2;
-import 'package:oracle_rm/core/domain/usecases/usecase.dart' as _i8;
 import 'package:oracle_rm/core/error/error.dart' as _i6;
 import 'package:oracle_rm/features/characters_listing/domain/usecases/get_all_characters.dart'
     as _i4;
@@ -64,8 +63,7 @@ class MockGetAllCharacters extends _i1.Mock implements _i4.GetAllCharacters {
         ),
       ) as _i2.CharactersRepository);
   @override
-  _i5.Future<_i3.Either<_i6.AppError, List<_i7.Character>>> call(
-          _i8.NoParams? params) =>
+  _i5.Future<_i3.Either<_i6.AppError, List<_i7.Character>>> call(int? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
