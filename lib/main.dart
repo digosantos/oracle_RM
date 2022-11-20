@@ -3,6 +3,7 @@ import 'package:oracle_rm/core/common/routing/router.dart';
 import 'package:oracle_rm/core/injection_container.dart' as di;
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   runApp(RickAndMortyOracleApp());
 }
