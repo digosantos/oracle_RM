@@ -42,6 +42,22 @@ class MockFavoritesRepository extends _i1.Mock
   }
 
   @override
+  _i4.Future<_i2.Either<_i5.AppError, List<String>>> getAll() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAll,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.AppError, List<String>>>.value(
+            _FakeEither_0<_i5.AppError, List<String>>(
+          this,
+          Invocation.method(
+            #getAll,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.AppError, List<String>>>);
+  @override
   _i4.Future<_i2.Either<_i5.AppError, bool>> save(
           {required String? characterId}) =>
       (super.noSuchMethod(

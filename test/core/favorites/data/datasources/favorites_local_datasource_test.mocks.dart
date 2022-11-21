@@ -30,6 +30,14 @@ class MockFavoritesLocalDataSource extends _i1.Mock
   }
 
   @override
+  List<String> getAll() => (super.noSuchMethod(
+        Invocation.method(
+          #getAll,
+          [],
+        ),
+        returnValue: <String>[],
+      ) as List<String>);
+  @override
   _i3.Future<bool> save({required String? characterId}) => (super.noSuchMethod(
         Invocation.method(
           #save,
