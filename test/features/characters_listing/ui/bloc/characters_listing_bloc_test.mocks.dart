@@ -63,20 +63,21 @@ class MockGetAllCharacters extends _i1.Mock implements _i4.GetAllCharacters {
         ),
       ) as _i2.CharactersRepository);
   @override
-  _i5.Future<_i3.Either<_i6.AppError, List<_i7.Character>>> call(int? params) =>
+  _i5.Future<_i3.Either<_i6.AppError, _i7.CharactersResponse>> call(
+          int? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [params],
         ),
         returnValue:
-            _i5.Future<_i3.Either<_i6.AppError, List<_i7.Character>>>.value(
-                _FakeEither_1<_i6.AppError, List<_i7.Character>>(
+            _i5.Future<_i3.Either<_i6.AppError, _i7.CharactersResponse>>.value(
+                _FakeEither_1<_i6.AppError, _i7.CharactersResponse>(
           this,
           Invocation.method(
             #call,
             [params],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.AppError, List<_i7.Character>>>);
+      ) as _i5.Future<_i3.Either<_i6.AppError, _i7.CharactersResponse>>);
 }

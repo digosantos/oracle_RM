@@ -13,9 +13,8 @@ void main() {
     late MockCharactersRepository mockCharactersRepository;
     late GetAllCharacters getAllCharactersUseCase;
 
-    const character = Faux.character;
     const page = 1;
-    final List<Character> characters = [character];
+    const CharactersResponse charactersResponse = Faux.charactersResponse;
 
     setUp(() {
       mockCharactersRepository = MockCharactersRepository();
@@ -23,11 +22,11 @@ void main() {
     });
 
     test('should return list of characters from repository', () async {
-      when(mockCharactersRepository.getAllCharacters(pageNumber: page)).thenAnswer((_) async => Right(characters));
+      when(mockCharactersRepository.getAllCharacters(pageNumber: page)).thenAnswer((_) async => const Right(charactersResponse));
 
       final sut = await getAllCharactersUseCase(page);
 
-      expect(sut, Right(characters));
+      expect(sut, const Right(charactersResponse));
       verify(mockCharactersRepository.getAllCharacters(pageNumber: page)).called(1);
       verifyNoMoreInteractions(mockCharactersRepository);
     });

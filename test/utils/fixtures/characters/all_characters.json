@@ -22,29 +22,6 @@
               "id": "3"
             }
           ]
-        },
-        {
-          "id": "2",
-          "name": "Morty Smith",
-          "image": "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-          "species": "Human",
-          "episode": [
-            {
-              "id": "1"
-            },
-            {
-              "id": "2"
-            },
-            {
-              "id": "3"
-            },
-            {
-              "id": "4"
-            },
-            {
-              "id": "5"
-            }
-          ]
         }
       ]
     }

@@ -21,9 +21,20 @@ import 'package:oracle_rm/core/characters/data/models/models.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeCharacterDetailsModel_0 extends _i1.SmartFake
+class _FakeCharactersResponseModel_0 extends _i1.SmartFake
+    implements _i2.CharactersResponseModel {
+  _FakeCharactersResponseModel_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCharacterDetailsModel_1 extends _i1.SmartFake
     implements _i2.CharacterDetailsModel {
-  _FakeCharacterDetailsModel_0(
+  _FakeCharacterDetailsModel_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -42,7 +53,7 @@ class MockCharactersRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<List<_i2.CharacterModel>> getAllCharacters(
+  _i4.Future<_i2.CharactersResponseModel> getAllCharacters(
           {required int? pageNumber}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -50,9 +61,16 @@ class MockCharactersRemoteDataSource extends _i1.Mock
           [],
           {#pageNumber: pageNumber},
         ),
-        returnValue:
-            _i4.Future<List<_i2.CharacterModel>>.value(<_i2.CharacterModel>[]),
-      ) as _i4.Future<List<_i2.CharacterModel>>);
+        returnValue: _i4.Future<_i2.CharactersResponseModel>.value(
+            _FakeCharactersResponseModel_0(
+          this,
+          Invocation.method(
+            #getAllCharacters,
+            [],
+            {#pageNumber: pageNumber},
+          ),
+        )),
+      ) as _i4.Future<_i2.CharactersResponseModel>);
   @override
   _i4.Future<_i2.CharacterDetailsModel> getCharacterDetails({
     required String? id,
@@ -68,7 +86,7 @@ class MockCharactersRemoteDataSource extends _i1.Mock
           },
         ),
         returnValue: _i4.Future<_i2.CharacterDetailsModel>.value(
-            _FakeCharacterDetailsModel_0(
+            _FakeCharacterDetailsModel_1(
           this,
           Invocation.method(
             #getCharacterDetails,

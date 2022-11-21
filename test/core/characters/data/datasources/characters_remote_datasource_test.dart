@@ -38,9 +38,9 @@ void main() {
   });
 
   group('Get all characters', () {
-    const page = 1;
+    const page = 0;
 
-    test('should return list of CharacterModel on successful query', () async {
+    test('should return CharactersResponseModel on successful query', () async {
       final Map<String, dynamic> allCharactersMap = jsonDecode(
         fixture(name: '/characters/all_characters.json'),
       );
@@ -52,7 +52,7 @@ void main() {
 
       final sut = await charactersRemoteDataSource.getAllCharacters(pageNumber: page);
 
-      expect(sut, Faux.allCharactersModelList);
+      expect(sut, Faux.charactersResponseModel);
     });
   });
 }

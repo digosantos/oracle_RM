@@ -12,6 +12,16 @@ class Faux {
     episodesIds: ['1'],
   );
 
+  static const charactersResponse = CharactersResponse(
+    nextPage: 1,
+    charactersList: [Faux.character],
+  );
+
+  static const charactersResponseModel = CharactersResponseModel(
+    nextPage: 2,
+    characterModelList: [Faux.characterModel],
+  );
+
   static const episode = Episode(name: 'Pilot', airDate: 'December 2, 2013');
   static const episodes = [
     episode,
@@ -32,8 +42,7 @@ class Faux {
     episodes: episodes,
   );
 
-  static const episodeModel =
-      EpisodeModel(name: 'Pilot', airDate: 'December 2, 2013');
+  static const episodeModel = EpisodeModel(name: 'Pilot', airDate: 'December 2, 2013');
 
   static const episodesModels = [
     episodeModel,
