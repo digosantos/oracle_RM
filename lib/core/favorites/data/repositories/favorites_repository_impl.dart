@@ -10,10 +10,18 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   FavoritesRepositoryImpl({required this.favoritesLocalDataSource});
 
   @override
+  Future<Either<AppError, List<String>>> getAll() async {
+    try {
+      return Right(favoritesLocalDataSource.getAll());
+    } on AppError {
+      return const Left(AppError(properties: []));
+    }
+  }
+
+  @override
   Future<Either<AppError, bool>> remove({required String characterId}) async {
     try {
-      return Right(
-          await favoritesLocalDataSource.remove(characterId: characterId));
+      return Right(await favoritesLocalDataSource.remove(characterId: characterId));
     } on AppError {
       return const Left(AppError(properties: []));
     }
@@ -22,8 +30,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   @override
   Future<Either<AppError, bool>> save({required String characterId}) async {
     try {
-      return Right(
-          await favoritesLocalDataSource.save(characterId: characterId));
+      return Right(await favoritesLocalDataSource.save(characterId: characterId));
     } on AppError {
       return const Left(AppError(properties: []));
     }

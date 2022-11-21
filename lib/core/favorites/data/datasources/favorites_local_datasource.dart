@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class FavoritesLocalDataSource {
+  List<String> getAll();
   Future<bool> save({required String characterId});
   Future<bool> remove({required String characterId});
 }
@@ -9,6 +10,11 @@ class FavoritesLocalDataSourceImpl implements FavoritesLocalDataSource {
   final SharedPreferences sharedPreferences;
 
   FavoritesLocalDataSourceImpl({required this.sharedPreferences});
+
+  @override
+  List<String> getAll() {
+    return sharedPreferences.getStringList('favorites') ?? [];
+  }
 
   @override
   Future<bool> remove({required String characterId}) async {
