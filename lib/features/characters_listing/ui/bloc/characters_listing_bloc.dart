@@ -34,8 +34,9 @@ class CharactersListingBloc
         failure: AppError(properties: failure.properties),
       ),
       (charactersResponse) {
-        if (charactersResponse.nextPage != null)
+        if (charactersResponse.nextPage != null) {
           page = charactersResponse.nextPage!;
+        }
         charactersList.addAll(charactersResponse.charactersList);
         return CharactersListLoadedState(charactersList: charactersList);
       },
