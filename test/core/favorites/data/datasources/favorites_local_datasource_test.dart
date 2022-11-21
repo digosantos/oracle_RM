@@ -20,34 +20,40 @@ void main() {
     test('should save characterId', () async {
       await setupPreferences(Faux.favoritesKey, []);
       sharedPreferences = await SharedPreferences.getInstance();
-      favoritesLocalDataSourceImpl =
-          FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
-      final sut =
-          await favoritesLocalDataSourceImpl.save(characterId: characterId);
+      favoritesLocalDataSourceImpl = FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
+      final sut = await favoritesLocalDataSourceImpl.save(characterId: characterId);
 
       expect(sut, true);
-      expect(sharedPreferences.getStringList(Faux.favoritesKey),
-          [Faux.character.id]);
+      expect(sharedPreferences.getStringList(Faux.favoritesKey), [Faux.character.id]);
     });
 
     test('should remove characterId', () async {
       await setupPreferences(Faux.favoritesKey, ['999', '2']);
       sharedPreferences = await SharedPreferences.getInstance();
-      favoritesLocalDataSourceImpl =
-          FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
+      favoritesLocalDataSourceImpl = FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
 
-      final sut =
-          await favoritesLocalDataSourceImpl.remove(characterId: characterId);
+      final sut = await favoritesLocalDataSourceImpl.remove(characterId: characterId);
 
       expect(sut, true);
       expect(sharedPreferences.getStringList(Faux.favoritesKey), ['2']);
+    });
+
+    test('should get a list of favorites', () async {
+      const List<String> favoriteIdsList = ['999', '2'];
+
+      await setupPreferences(Faux.favoritesKey, favoriteIdsList);
+      sharedPreferences = await SharedPreferences.getInstance();
+      favoritesLocalDataSourceImpl = FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
+
+      final sut = favoritesLocalDataSourceImpl.getAll();
+
+      expect(sut, favoriteIdsList);
     });
   });
 }
 
 Future setupPreferences(String key, List<String> value) async {
-  SharedPreferences.setMockInitialValues(
-      <String, Object>{'flutter.$key': value});
+  SharedPreferences.setMockInitialValues(<String, Object>{'flutter.$key': value});
   final preferences = await SharedPreferences.getInstance();
   await preferences.setStringList(key, value);
 }
