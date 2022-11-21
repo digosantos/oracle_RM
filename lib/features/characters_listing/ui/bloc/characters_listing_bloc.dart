@@ -6,33 +6,36 @@ import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 import '../../../../core/characters/domain/entities/entities.dart';
 
 class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListingState> {
-  final UseCase<List<Character>, int> getAllCharactersUseCase;
+  final UseCase<CharactersResponse, int> getAllCharactersUseCase;
 
   int page = 0;
   List<int> loadedPages = [];
+  List<Character> charactersList = [];
 
   CharactersListingBloc({required this.getAllCharactersUseCase}) : super(CharactersListInitialState()) {
     on<GetAllCharactersEvent>(_loadCharacters);
     on<CharacterCardTappedEvent>(_redirectToCharacterDetails);
   }
 
-  void _updatePage() {
-    page++;
-    loadedPages.add(page);
-  }
-
   /// Callbacks
   void _loadCharacters(GetAllCharactersEvent event, Emitter emit) async {
-    _updatePage();
+    page++;
+
+    if (loadedPages.contains(page)) return;
 
     emit(CharactersListLoadingState());
+    loadedPages.add(page);
 
     final response = await getAllCharactersUseCase(page);
     emit(response.fold(
       (failure) => CharactersListErrorState(
         failure: AppError(properties: failure.properties),
       ),
-      (charactersList) => CharactersListLoadedState(charactersList: charactersList),
+      (charactersResponse) {
+        if (charactersResponse.nextPage != null) page = charactersResponse.nextPage!;
+        charactersList.addAll(charactersResponse.charactersList);
+        return CharactersListLoadedState(charactersList: charactersList);
+      },
     ));
   }
 

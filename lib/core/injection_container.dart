@@ -30,7 +30,9 @@ Future<void> init() async {
   );
 
   /// Use Cases:
-  sl.registerLazySingleton<UseCase<List<Character>, int>>(() => GetAllCharacters(charactersRepository: sl()));
+  sl.registerLazySingleton<UseCase<CharactersResponse, int>>(
+    () => GetAllCharacters(charactersRepository: sl()),
+  );
 
   /// ---------------------
   /// Character Details

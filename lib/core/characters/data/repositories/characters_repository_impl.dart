@@ -11,10 +11,10 @@ class CharactersRepositoryImpl implements CharactersRepository {
   CharactersRepositoryImpl({required this.charactersRemoteDataSource});
 
   @override
-  Future<Either<AppError, List<Character>>> getAllCharacters({required int pageNumber}) async {
+  Future<Either<AppError, CharactersResponse>> getAllCharacters({required int pageNumber}) async {
     try {
-      final charactersList = await charactersRemoteDataSource.getAllCharacters(pageNumber: pageNumber);
-      return Right(charactersList);
+      final charactersResponse = await charactersRemoteDataSource.getAllCharacters(pageNumber: pageNumber);
+      return Right(charactersResponse);
     } on ServerException {
       return const Left(AppError(properties: []));
     }

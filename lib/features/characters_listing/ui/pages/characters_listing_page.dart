@@ -9,11 +9,30 @@ import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 import '../../../../core/common/routing/routing.dart';
 import '../../../../core/injection_container.dart';
 
-class CharactersListingPage extends StatelessWidget with CardDelegate {
+class CharactersListingPage extends StatefulWidget {
   final charactersListBloc = sl<CharactersListingBloc>();
 
   CharactersListingPage({Key? key}) : super(key: key) {
     charactersListBloc.add(GetAllCharactersEvent());
+  }
+
+  @override
+  State<CharactersListingPage> createState() => _CharactersListingPageState();
+}
+
+class _CharactersListingPageState extends State<CharactersListingPage> with CardDelegate {
+  final _scrollController = ScrollController(initialScrollOffset: 0);
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController.addListener(() {
+      if (_scrollController.offset == _scrollController.position.maxScrollExtent) {
+        // TODO: improve UX not to return to first element
+        widget.charactersListBloc.add(GetAllCharactersEvent());
+      }
+    });
   }
 
   @override
@@ -32,7 +51,7 @@ class CharactersListingPage extends StatelessWidget with CardDelegate {
         ],
       ),
       body: BlocConsumer<CharactersListingBloc, CharactersListingState>(
-        bloc: charactersListBloc,
+        bloc: widget.charactersListBloc,
         listener: (context, state) {
           if (state is RedirectToCharacterDetailsState) {
             context.push(
@@ -49,6 +68,7 @@ class CharactersListingPage extends StatelessWidget with CardDelegate {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 36),
               child: ListView.builder(
+                controller: _scrollController,
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: state.charactersList.length,
@@ -61,6 +81,7 @@ class CharactersListingPage extends StatelessWidget with CardDelegate {
               ),
             );
           }
+
           return const Center(child: CircularProgressIndicator());
         },
       ),
@@ -69,6 +90,6 @@ class CharactersListingPage extends StatelessWidget with CardDelegate {
 
   @override
   void onPressed({required Character character}) {
-    charactersListBloc.add(CharacterCardTappedEvent(character: character));
+    widget.charactersListBloc.add(CharacterCardTappedEvent(character: character));
   }
 }
