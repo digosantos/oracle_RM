@@ -13,14 +13,16 @@ void main() {
 
   setUp(() {
     mockFavoritesRepository = MockFavoritesRepository();
-    getFavoritesUseCase = GetFavoritesUseCase(favoritesRepository: mockFavoritesRepository);
+    getFavoritesUseCase =
+        GetFavoritesUseCase(favoritesRepository: mockFavoritesRepository);
   });
 
   group('Get favorites use case', () {
     final favoritesIdsList = ['999', '2'];
 
     test('should successfully retrieve favorites locally', () async {
-      when(mockFavoritesRepository.getAll()).thenAnswer((_) async => Right(favoritesIdsList));
+      when(mockFavoritesRepository.getAll())
+          .thenAnswer((_) async => Right(favoritesIdsList));
 
       final sut = await getFavoritesUseCase(NoParams());
 
@@ -30,7 +32,8 @@ void main() {
     });
 
     test('should fail to retrieve favorites locally', () async {
-      when(mockFavoritesRepository.getAll()).thenAnswer((_) async => const Left(AppError(properties: [])));
+      when(mockFavoritesRepository.getAll())
+          .thenAnswer((_) async => const Left(AppError(properties: [])));
 
       final sut = await getFavoritesUseCase(NoParams());
 
