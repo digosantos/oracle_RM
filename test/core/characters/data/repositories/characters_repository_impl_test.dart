@@ -14,7 +14,8 @@ void main() {
 
   setUp(() {
     mockCharactersRemoteDataSource = MockCharactersRemoteDataSource();
-    charactersRepositoryImpl = CharactersRepositoryImpl(charactersRemoteDataSource: mockCharactersRemoteDataSource);
+    charactersRepositoryImpl = CharactersRepositoryImpl(
+        charactersRemoteDataSource: mockCharactersRemoteDataSource);
   });
 
   group('Get all characters repository implementation', () {
@@ -23,17 +24,21 @@ void main() {
     const page = 1;
 
     test('should return CharactersResponse', () async {
-      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page)).thenAnswer((_) async => charactersResponseModel);
+      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page))
+          .thenAnswer((_) async => charactersResponseModel);
 
-      final sut = await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
+      final sut =
+          await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
 
       expect(sut, const Right(charactersResponse));
     });
 
     test('should return AppError', () async {
-      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page)).thenThrow(ServerException());
+      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page))
+          .thenThrow(ServerException());
 
-      final sut = await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
+      final sut =
+          await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
 
       expect(sut, const Left(AppError(properties: [])));
     });

@@ -20,7 +20,8 @@ class CharactersListingPage extends StatefulWidget {
   State<CharactersListingPage> createState() => _CharactersListingPageState();
 }
 
-class _CharactersListingPageState extends State<CharactersListingPage> with CardDelegate {
+class _CharactersListingPageState extends State<CharactersListingPage>
+    with CardDelegate {
   final _scrollController = ScrollController(initialScrollOffset: 0);
 
   @override
@@ -28,7 +29,8 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
     super.initState();
 
     _scrollController.addListener(() {
-      if (_scrollController.offset == _scrollController.position.maxScrollExtent) {
+      if (_scrollController.offset ==
+          _scrollController.position.maxScrollExtent) {
         // TODO: improve UX not to return to first element
         widget.charactersListBloc.add(GetAllCharactersEvent());
       }
@@ -90,6 +92,7 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
 
   @override
   void onPressed({required Character character}) {
-    widget.charactersListBloc.add(CharacterCardTappedEvent(character: character));
+    widget.charactersListBloc
+        .add(CharacterCardTappedEvent(character: character));
   }
 }

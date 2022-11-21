@@ -5,7 +5,8 @@ import '../models/models.dart';
 
 abstract class CharactersRemoteDataSource {
   Future<CharactersResponseModel> getAllCharacters({required int pageNumber});
-  Future<CharacterDetailsModel> getCharacterDetails({required String id, required List<String> episodesIds});
+  Future<CharacterDetailsModel> getCharacterDetails(
+      {required String id, required List<String> episodesIds});
 }
 
 class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
@@ -14,7 +15,8 @@ class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
   CharactersRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<CharactersResponseModel> getAllCharacters({required int pageNumber}) async {
+  Future<CharactersResponseModel> getAllCharacters(
+      {required int pageNumber}) async {
     final result = await client.query(
       document: Queries.getAllCharacters(),
       params: {'page': pageNumber},
@@ -23,7 +25,8 @@ class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
   }
 
   @override
-  Future<CharacterDetailsModel> getCharacterDetails({required String id, required List<String> episodesIds}) async {
+  Future<CharacterDetailsModel> getCharacterDetails(
+      {required String id, required List<String> episodesIds}) async {
     final result = await client.query(
       document: Queries.getCharacterDetails(),
       params: {'id': id, 'episodesIds': episodesIds},

@@ -42,7 +42,8 @@ class Faux {
     episodes: episodes,
   );
 
-  static const episodeModel = EpisodeModel(name: 'Pilot', airDate: 'December 2, 2013');
+  static const episodeModel =
+      EpisodeModel(name: 'Pilot', airDate: 'December 2, 2013');
 
   static const episodesModels = [
     episodeModel,

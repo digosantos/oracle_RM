@@ -44,14 +44,16 @@ Future<void> init() async {
   );
 
   /// Use Cases:
-  sl.registerLazySingleton<UseCase<CharacterDetails, RequestedCharacterParam>>(() => GetCharacterDetails(charactersRepository: sl()));
+  sl.registerLazySingleton<UseCase<CharacterDetails, RequestedCharacterParam>>(
+      () => GetCharacterDetails(charactersRepository: sl()));
 
   /// ---------------------
   /// Core
   /// ---------------------
 
   /// Network:
-  sl.registerLazySingleton<BaseNetworkClient>(() => BaseNetworkClient(client: sl()));
+  sl.registerLazySingleton<BaseNetworkClient>(
+      () => BaseNetworkClient(client: sl()));
 
   /// External:
   sl.registerLazySingleton<GraphQLClient>(

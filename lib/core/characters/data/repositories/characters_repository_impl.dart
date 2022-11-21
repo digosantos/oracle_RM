@@ -11,9 +11,11 @@ class CharactersRepositoryImpl implements CharactersRepository {
   CharactersRepositoryImpl({required this.charactersRemoteDataSource});
 
   @override
-  Future<Either<AppError, CharactersResponse>> getAllCharacters({required int pageNumber}) async {
+  Future<Either<AppError, CharactersResponse>> getAllCharacters(
+      {required int pageNumber}) async {
     try {
-      final charactersResponse = await charactersRemoteDataSource.getAllCharacters(pageNumber: pageNumber);
+      final charactersResponse = await charactersRemoteDataSource
+          .getAllCharacters(pageNumber: pageNumber);
       return Right(charactersResponse);
     } on ServerException {
       return const Left(AppError(properties: []));
@@ -21,9 +23,11 @@ class CharactersRepositoryImpl implements CharactersRepository {
   }
 
   @override
-  Future<Either<AppError, CharacterDetails>> getCharacterDetails({required String id, required List<String> episodesIds}) async {
+  Future<Either<AppError, CharacterDetails>> getCharacterDetails(
+      {required String id, required List<String> episodesIds}) async {
     try {
-      final characterDetails = await charactersRemoteDataSource.getCharacterDetails(id: id, episodesIds: episodesIds);
+      final characterDetails = await charactersRemoteDataSource
+          .getCharacterDetails(id: id, episodesIds: episodesIds);
       return Right(characterDetails);
     } on ServerException {
       return const Left(AppError(properties: []));
