@@ -52,6 +52,16 @@ class CharacterCard extends StatelessWidget {
                   child: Image.network(
                     character.imageUrl,
                     fit: BoxFit.fill,
+                    height: 300,
+                    width: 300,
+                    loadingBuilder: (_, image, loadingProgress) {
+                      if (loadingProgress == null) return image;
+                      return const SizedBox(
+                        height: 300,
+                        width: 300,
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    },
                   ),
                 ),
               ),

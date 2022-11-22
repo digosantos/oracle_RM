@@ -5,46 +5,39 @@ import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 
 import '../../../../core/characters/domain/entities/entities.dart';
 
-class CharactersListingBloc
-    extends Bloc<CharactersListingEvent, CharactersListingState> {
+class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListingState> {
   final UseCase<CharactersResponse, int> getAllCharactersUseCase;
 
-  int page = 0;
-  List<int> loadedPages = [];
+  int? page = 1;
   List<Character> charactersList = [];
 
-  CharactersListingBloc({required this.getAllCharactersUseCase})
-      : super(CharactersListInitialState()) {
+  CharactersListingBloc({required this.getAllCharactersUseCase}) : super(CharactersListInitialState()) {
     on<GetAllCharactersEvent>(_loadCharacters);
     on<CharacterCardTappedEvent>(_redirectToCharacterDetails);
   }
 
   /// Callbacks
   void _loadCharacters(GetAllCharactersEvent event, Emitter emit) async {
-    page++;
+    if (page == null) return;
 
-    if (loadedPages.contains(page)) return;
-
-    emit(CharactersListLoadingState());
-    loadedPages.add(page);
-
-    final response = await getAllCharactersUseCase(page);
+    final response = await getAllCharactersUseCase(page!);
     emit(response.fold(
       (failure) => CharactersListErrorState(
         failure: AppError(properties: failure.properties),
       ),
       (charactersResponse) {
-        if (charactersResponse.nextPage != null) {
-          page = charactersResponse.nextPage!;
-        }
-        charactersList.addAll(charactersResponse.charactersList);
-        return CharactersListLoadedState(charactersList: charactersList);
+        page = charactersResponse.nextPage;
+
+        charactersList = List.of(charactersList)..addAll(charactersResponse.charactersList);
+
+        final listLength = (charactersResponse.nextPage != null) ? charactersList.length + 1 : charactersList.length;
+
+        return CharactersListLoadedState(charactersList: charactersList, listLength: listLength);
       },
     ));
   }
 
-  void _redirectToCharacterDetails(
-      CharacterCardTappedEvent event, Emitter emit) {
+  void _redirectToCharacterDetails(CharacterCardTappedEvent event, Emitter emit) {
     emit(RedirectToCharacterDetailsState(character: event.character));
   }
 }

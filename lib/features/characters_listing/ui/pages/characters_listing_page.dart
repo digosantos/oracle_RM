@@ -10,29 +10,26 @@ import '../../../../core/common/routing/routing.dart';
 import '../../../../core/injection_container.dart';
 
 class CharactersListingPage extends StatefulWidget {
-  final charactersListBloc = sl<CharactersListingBloc>();
-
-  CharactersListingPage({Key? key}) : super(key: key) {
-    charactersListBloc.add(GetAllCharactersEvent());
-  }
+  const CharactersListingPage({Key? key}) : super(key: key);
 
   @override
   State<CharactersListingPage> createState() => _CharactersListingPageState();
 }
 
-class _CharactersListingPageState extends State<CharactersListingPage>
-    with CardDelegate {
-  final _scrollController = ScrollController(initialScrollOffset: 0);
+class _CharactersListingPageState extends State<CharactersListingPage> with CardDelegate {
+  final charactersListBloc = sl<CharactersListingBloc>();
+  final PageStorageKey _pageStorageKey = const PageStorageKey('pageStorageKey');
+  final _scrollController = ScrollController(initialScrollOffset: 0, keepScrollOffset: true);
 
   @override
   void initState() {
     super.initState();
+    charactersListBloc.add(GetAllCharactersEvent());
 
     _scrollController.addListener(() {
-      if (_scrollController.offset ==
-          _scrollController.position.maxScrollExtent) {
+      if (_scrollController.offset == _scrollController.position.maxScrollExtent) {
         // TODO: improve UX not to return to first element
-        widget.charactersListBloc.add(GetAllCharactersEvent());
+        charactersListBloc.add(GetAllCharactersEvent());
       }
     });
   }
@@ -53,7 +50,10 @@ class _CharactersListingPageState extends State<CharactersListingPage>
         ],
       ),
       body: BlocConsumer<CharactersListingBloc, CharactersListingState>(
-        bloc: widget.charactersListBloc,
+        bloc: charactersListBloc,
+        buildWhen: (_, state) {
+          return state is! RedirectToCharacterDetailsState;
+        },
         listener: (context, state) {
           if (state is RedirectToCharacterDetailsState) {
             context.push(
@@ -70,11 +70,19 @@ class _CharactersListingPageState extends State<CharactersListingPage>
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 36),
               child: ListView.builder(
+                key: _pageStorageKey,
                 controller: _scrollController,
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: state.charactersList.length,
+                itemCount: state.listLength,
                 itemBuilder: (context, index) {
+                  if (index == state.charactersList.length) {
+                    return const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24),
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  }
+
                   return CharacterCard(
                     character: state.charactersList[index],
                     cardDelegate: this,
@@ -92,7 +100,6 @@ class _CharactersListingPageState extends State<CharactersListingPage>
 
   @override
   void onPressed({required Character character}) {
-    widget.charactersListBloc
-        .add(CharacterCardTappedEvent(character: character));
+    charactersListBloc.add(CharacterCardTappedEvent(character: character));
   }
 }
