@@ -6,39 +6,44 @@ import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
 import 'package:oracle_rm/core/error/error.dart';
 
 import '../../../../utils/faux.dart';
+import '../../../favorites/data/datasources/favorites_local_datasource_test.mocks.dart';
 import '../datasources/characters_remote_datasource_test.mocks.dart';
 
 void main() {
   late MockCharactersRemoteDataSource mockCharactersRemoteDataSource;
+  late MockFavoritesLocalDataSource mockFavoritesLocalDataSource;
   late CharactersRepositoryImpl charactersRepositoryImpl;
 
   setUp(() {
     mockCharactersRemoteDataSource = MockCharactersRemoteDataSource();
+    mockFavoritesLocalDataSource = MockFavoritesLocalDataSource();
     charactersRepositoryImpl = CharactersRepositoryImpl(
-        charactersRemoteDataSource: mockCharactersRemoteDataSource);
+      charactersRemoteDataSource: mockCharactersRemoteDataSource,
+      favoritesLocalDataSource: mockFavoritesLocalDataSource,
+    );
   });
 
   group('Get all characters repository implementation', () {
-    const charactersResponseModel = Faux.charactersResponseModel;
-    const CharactersResponse charactersResponse = charactersResponseModel;
+    const FavoriteCharactersResponse favoriteCharactersResponse = FavoriteCharactersResponse(
+      nextPage: 2,
+      charactersList: [Faux.favoriteCharacter],
+    );
     const page = 1;
 
-    test('should return CharactersResponse', () async {
-      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page))
-          .thenAnswer((_) async => charactersResponseModel);
+    test('should return FavoriteCharactersResponse', () async {
+      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page)).thenAnswer((_) async => Faux.charactersResponseModel);
+      when(mockFavoritesLocalDataSource.getAll()).thenAnswer((_) => ['999']);
 
-      final sut =
-          await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
+      final sut = await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
 
-      expect(sut, const Right(charactersResponse));
+      expect(sut, const Right(favoriteCharactersResponse));
     });
 
     test('should return AppError', () async {
-      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page))
-          .thenThrow(ServerException());
+      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page)).thenThrow(ServerException());
+      when(mockFavoritesLocalDataSource.getAll()).thenAnswer((_) => []);
 
-      final sut =
-          await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
+      final sut = await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
 
       expect(sut, const Left(AppError(properties: [])));
     });

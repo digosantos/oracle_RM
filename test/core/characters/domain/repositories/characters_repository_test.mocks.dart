@@ -43,25 +43,26 @@ class MockCharactersRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.AppError, _i6.CharactersResponse>> getAllCharacters(
-          {required int? pageNumber}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getAllCharacters,
-          [],
-          {#pageNumber: pageNumber},
-        ),
-        returnValue:
-            _i4.Future<_i2.Either<_i5.AppError, _i6.CharactersResponse>>.value(
-                _FakeEither_0<_i5.AppError, _i6.CharactersResponse>(
-          this,
-          Invocation.method(
-            #getAllCharacters,
-            [],
-            {#pageNumber: pageNumber},
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.AppError, _i6.CharactersResponse>>);
+  _i4.Future<_i2.Either<_i5.AppError, _i6.FavoriteCharactersResponse>>
+      getAllCharacters({required int? pageNumber}) => (super.noSuchMethod(
+            Invocation.method(
+              #getAllCharacters,
+              [],
+              {#pageNumber: pageNumber},
+            ),
+            returnValue: _i4.Future<
+                    _i2.Either<_i5.AppError,
+                        _i6.FavoriteCharactersResponse>>.value(
+                _FakeEither_0<_i5.AppError, _i6.FavoriteCharactersResponse>(
+              this,
+              Invocation.method(
+                #getAllCharacters,
+                [],
+                {#pageNumber: pageNumber},
+              ),
+            )),
+          ) as _i4.Future<
+              _i2.Either<_i5.AppError, _i6.FavoriteCharactersResponse>>);
   @override
   _i4.Future<
       _i2.Either<_i5.AppError, _i6.CharacterDetails>> getCharacterDetails({
