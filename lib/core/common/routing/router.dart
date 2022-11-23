@@ -11,11 +11,11 @@ class AppRouter {
       routes: [
         GoRoute(
           path: Routes.root.routeName,
-          builder: (context, state) => CharactersListingPage(),
+          builder: (context, state) => const CharactersListingPage(),
         ),
         GoRoute(
           path: Routes.charactersListing.routeName,
-          builder: (context, state) => CharactersListingPage(),
+          builder: (context, state) => const CharactersListingPage(),
         ),
         GoRoute(
           path: Routes.characterDetails.routeName,
