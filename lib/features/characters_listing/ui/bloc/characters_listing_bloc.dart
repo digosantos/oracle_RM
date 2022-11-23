@@ -5,13 +5,15 @@ import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 
 import '../../../../core/characters/domain/entities/entities.dart';
 
-class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListingState> {
+class CharactersListingBloc
+    extends Bloc<CharactersListingEvent, CharactersListingState> {
   final UseCase<CharactersResponse, int> getAllCharactersUseCase;
 
   int? page = 1;
   List<Character> charactersList = [];
 
-  CharactersListingBloc({required this.getAllCharactersUseCase}) : super(CharactersListInitialState()) {
+  CharactersListingBloc({required this.getAllCharactersUseCase})
+      : super(CharactersListInitialState()) {
     on<GetAllCharactersEvent>(_loadCharacters);
     on<CharacterCardTappedEvent>(_redirectToCharacterDetails);
   }
@@ -28,16 +30,21 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
       (charactersResponse) {
         page = charactersResponse.nextPage;
 
-        charactersList = List.of(charactersList)..addAll(charactersResponse.charactersList);
+        charactersList = List.of(charactersList)
+          ..addAll(charactersResponse.charactersList);
 
-        final listLength = (charactersResponse.nextPage != null) ? charactersList.length + 1 : charactersList.length;
+        final listLength = (charactersResponse.nextPage != null)
+            ? charactersList.length + 1
+            : charactersList.length;
 
-        return CharactersListLoadedState(charactersList: charactersList, listLength: listLength);
+        return CharactersListLoadedState(
+            charactersList: charactersList, listLength: listLength);
       },
     ));
   }
 
-  void _redirectToCharacterDetails(CharacterCardTappedEvent event, Emitter emit) {
+  void _redirectToCharacterDetails(
+      CharacterCardTappedEvent event, Emitter emit) {
     emit(RedirectToCharacterDetailsState(character: event.character));
   }
 }

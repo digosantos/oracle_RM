@@ -15,7 +15,8 @@ class CharactersListLoadedState extends CharactersListingState {
   final List<Character> charactersList;
   final int listLength;
 
-  CharactersListLoadedState({required this.charactersList, required this.listLength});
+  CharactersListLoadedState(
+      {required this.charactersList, required this.listLength});
 
   @override
   List<Object?> get props => [charactersList, listLength];

@@ -16,10 +16,12 @@ class CharactersListingPage extends StatefulWidget {
   State<CharactersListingPage> createState() => _CharactersListingPageState();
 }
 
-class _CharactersListingPageState extends State<CharactersListingPage> with CardDelegate {
+class _CharactersListingPageState extends State<CharactersListingPage>
+    with CardDelegate {
   final charactersListBloc = sl<CharactersListingBloc>();
   final PageStorageKey _pageStorageKey = const PageStorageKey('pageStorageKey');
-  final _scrollController = ScrollController(initialScrollOffset: 0, keepScrollOffset: true);
+  final _scrollController =
+      ScrollController(initialScrollOffset: 0, keepScrollOffset: true);
 
   @override
   void initState() {
@@ -27,7 +29,8 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
     charactersListBloc.add(GetAllCharactersEvent());
 
     _scrollController.addListener(() {
-      if (_scrollController.offset == _scrollController.position.maxScrollExtent) {
+      if (_scrollController.offset ==
+          _scrollController.position.maxScrollExtent) {
         // TODO: improve UX not to return to first element
         charactersListBloc.add(GetAllCharactersEvent());
       }
