@@ -2,6 +2,7 @@ import 'package:oracle_rm/core/characters/data/models/models.dart';
 import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
 import 'package:oracle_rm/core/episodes/data/data.dart';
 import 'package:oracle_rm/core/episodes/domain/entities/entities.dart';
+import 'package:oracle_rm/core/favorites/domain/entities/entities.dart';
 
 class Faux {
   static const character = Character(
@@ -12,9 +13,19 @@ class Faux {
     episodesIds: ['1'],
   );
 
+  static const favoriteCharacter = FavoriteCharacter(
+    character: Faux.character,
+    isFavorite: true,
+  );
+
   static const charactersResponse = CharactersResponse(
     nextPage: 1,
     charactersList: [Faux.character],
+  );
+
+  static const favoriteCharactersResponse = FavoriteCharactersResponse(
+    nextPage: 1,
+    charactersList: [Faux.favoriteCharacter],
   );
 
   static const charactersResponseNextPageNull = CharactersResponse(
@@ -47,8 +58,7 @@ class Faux {
     episodes: episodes,
   );
 
-  static const episodeModel =
-      EpisodeModel(name: 'Pilot', airDate: 'December 2, 2013');
+  static const episodeModel = EpisodeModel(name: 'Pilot', airDate: 'December 2, 2013');
 
   static const episodesModels = [
     episodeModel,

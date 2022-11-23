@@ -13,7 +13,7 @@ class FavoritesLocalDataSourceImpl implements FavoritesLocalDataSource {
 
   @override
   List<String> getAll() {
-    return sharedPreferences.getStringList('characters') ?? [];
+    return sharedPreferences.getStringList('favorites') ?? [];
   }
 
   @override

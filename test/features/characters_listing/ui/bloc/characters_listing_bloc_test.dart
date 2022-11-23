@@ -17,8 +17,7 @@ void main() {
 
   setUpAll(() {
     mockGetAllCharactersUseCase = MockGetAllCharacters();
-    charactersListingBloc = CharactersListingBloc(
-        getAllCharactersUseCase: mockGetAllCharactersUseCase);
+    charactersListingBloc = CharactersListingBloc(getAllCharactersUseCase: mockGetAllCharactersUseCase);
   });
 
   test('verify initial state is CharactersListInitialState', () {
@@ -26,17 +25,14 @@ void main() {
   });
 
   group('GetAllCharactersEvent', () {
-    const CharactersResponse charactersResponse = Faux.charactersResponse;
+    const FavoriteCharactersResponse favoriteCharactersResponse = Faux.favoriteCharactersResponse;
 
-    test(
-        'should emit [CharactersListLoadedState] with listLength equals 2 when nextPage is not null',
-        () async {
-      when(mockGetAllCharactersUseCase(any))
-          .thenAnswer((_) async => const Right(charactersResponse));
+    test('should emit [CharactersListLoadedState] with listLength equals 2 when nextPage is not null', () async {
+      when(mockGetAllCharactersUseCase(any)).thenAnswer((_) async => const Right(favoriteCharactersResponse));
 
       final expectedStates = [
         CharactersListLoadedState(
-          charactersList: charactersResponse.charactersList,
+          charactersList: favoriteCharactersResponse.charactersList,
           listLength: 2,
         ),
       ];
@@ -46,12 +42,9 @@ void main() {
       expect(charactersListingBloc.stream, emitsInOrder(expectedStates));
     });
 
-    test(
-        'should emit [CharactersListLoadingState, CharactersListErrorState] when fails to retrieve data',
-        () {
+    test('should emit [CharactersListLoadingState, CharactersListErrorState] when fails to retrieve data', () {
       const appError = AppError(properties: []);
-      when(mockGetAllCharactersUseCase(any))
-          .thenAnswer((_) async => const Left(appError));
+      when(mockGetAllCharactersUseCase(any)).thenAnswer((_) async => const Left(appError));
 
       final expectedStates = [
         CharactersListErrorState(failure: appError),

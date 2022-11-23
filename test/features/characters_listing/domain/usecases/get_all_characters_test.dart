@@ -14,36 +14,31 @@ void main() {
     late GetAllCharacters getAllCharactersUseCase;
 
     const page = 1;
-    const CharactersResponse charactersResponse = Faux.charactersResponse;
+    const FavoriteCharactersResponse favoriteCharactersResponse = Faux.favoriteCharactersResponse;
 
     setUp(() {
       mockCharactersRepository = MockCharactersRepository();
-      getAllCharactersUseCase =
-          GetAllCharacters(charactersRepository: mockCharactersRepository);
+      getAllCharactersUseCase = GetAllCharacters(charactersRepository: mockCharactersRepository);
     });
 
     test('should return list of characters from repository', () async {
-      when(mockCharactersRepository.getAllCharacters(pageNumber: page))
-          .thenAnswer((_) async => const Right(charactersResponse));
+      when(mockCharactersRepository.getAllCharacters(pageNumber: page)).thenAnswer((_) async => const Right(favoriteCharactersResponse));
 
       final sut = await getAllCharactersUseCase(page);
 
-      expect(sut, const Right(charactersResponse));
-      verify(mockCharactersRepository.getAllCharacters(pageNumber: page))
-          .called(1);
+      expect(sut, const Right(favoriteCharactersResponse));
+      verify(mockCharactersRepository.getAllCharacters(pageNumber: page)).called(1);
       verifyNoMoreInteractions(mockCharactersRepository);
     });
 
     test('should return AppError from repository', () async {
       const appError = AppError(properties: []);
-      when(mockCharactersRepository.getAllCharacters(pageNumber: page))
-          .thenAnswer((_) async => const Left(appError));
+      when(mockCharactersRepository.getAllCharacters(pageNumber: page)).thenAnswer((_) async => const Left(appError));
 
       final sut = await getAllCharactersUseCase(page);
 
       expect(sut, const Left(appError));
-      verify(mockCharactersRepository.getAllCharacters(pageNumber: page))
-          .called(1);
+      verify(mockCharactersRepository.getAllCharacters(pageNumber: page)).called(1);
       verifyNoMoreInteractions(mockCharactersRepository);
     });
   });
