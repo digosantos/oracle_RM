@@ -22,18 +22,18 @@ class CharactersRepositoryImpl implements CharactersRepository {
       final charactersResponse = await charactersRemoteDataSource.getAllCharacters(pageNumber: pageNumber);
       final favoriteCharactersIds = favoritesLocalDataSource.getAll();
 
-      List<FavoriteCharacter> charactersToDisplay = [];
+      List<FavoriteCharacter> favoriteCharacters = [];
 
       for (var character in charactersResponse.charactersList) {
         if (favoriteCharactersIds.contains(character.id)) {
-          charactersToDisplay.add(
+          favoriteCharacters.add(
             FavoriteCharacter(character: character, isFavorite: true),
           );
 
           /// Optimize amount of iterations
           favoriteCharactersIds.remove(character.id);
         } else {
-          charactersToDisplay.add(
+          favoriteCharacters.add(
             FavoriteCharacter(character: character, isFavorite: false),
           );
         }
@@ -41,7 +41,7 @@ class CharactersRepositoryImpl implements CharactersRepository {
 
       return Right(FavoriteCharactersResponse(
         nextPage: charactersResponse.nextPage,
-        charactersList: charactersToDisplay,
+        charactersList: favoriteCharacters,
       ));
     } on ServerException {
       return const Left(AppError(properties: []));

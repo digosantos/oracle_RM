@@ -13,8 +13,16 @@ class Faux {
     episodesIds: ['1'],
   );
 
+  static const rickCharacter = Character(
+    id: '1',
+    name: 'Rick Sanchez',
+    imageUrl: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+    species: 'Human',
+    episodesIds: ['1', '2', '3'],
+  );
+
   static const favoriteCharacter = FavoriteCharacter(
-    character: Faux.character,
+    character: Faux.characterModel,
     isFavorite: true,
   );
 
@@ -25,6 +33,11 @@ class Faux {
 
   static const favoriteCharactersResponse = FavoriteCharactersResponse(
     nextPage: 1,
+    charactersList: [Faux.favoriteCharacter],
+  );
+
+  static const favoriteCharactersResponseNextPageNull = FavoriteCharactersResponse(
+    nextPage: null,
     charactersList: [Faux.favoriteCharacter],
   );
 
