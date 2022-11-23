@@ -26,7 +26,10 @@ Future<void> init() async {
 
   /// Bloc:
   sl.registerFactory(
-    () => CharactersListingBloc(getAllCharactersUseCase: sl()),
+    () => CharactersListingBloc(
+      getAllCharactersUseCase: sl(),
+      updateFavoriteUseCase: sl(),
+    ),
   );
 
   /// Use Cases:
@@ -90,10 +93,8 @@ Future<void> init() async {
 
   /// Use Cases:
   sl.registerLazySingleton<UseCase<bool, String>>(
-    () => SaveFavorite(favoritesRepository: sl()),
+    () => UpdateFavorite(favoritesRepository: sl()),
   );
-
-  sl.registerLazySingleton(() => RemoveFavorite(favoritesRepository: sl()));
 
   /// Repositories:
   sl.registerLazySingleton<FavoritesRepository>(

@@ -19,20 +19,9 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   }
 
   @override
-  Future<Either<AppError, bool>> remove({required String characterId}) async {
+  Future<Either<AppError, bool>> update({required String characterId}) async {
     try {
-      return Right(
-          await favoritesLocalDataSource.remove(characterId: characterId));
-    } on AppError {
-      return const Left(AppError(properties: []));
-    }
-  }
-
-  @override
-  Future<Either<AppError, bool>> save({required String characterId}) async {
-    try {
-      return Right(
-          await favoritesLocalDataSource.save(characterId: characterId));
+      return Right(await favoritesLocalDataSource.update(characterId: characterId));
     } on AppError {
       return const Left(AppError(properties: []));
     }

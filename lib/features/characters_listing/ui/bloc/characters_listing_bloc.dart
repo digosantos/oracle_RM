@@ -7,13 +7,18 @@ import '../../../../core/favorites/domain/entities/entities.dart';
 
 class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListingState> {
   final UseCase<FavoriteCharactersResponse, int> getAllCharactersUseCase;
+  final UseCase<bool, String> updateFavoriteUseCase;
 
   int? page = 1;
   List<FavoriteCharacter> charactersList = [];
 
-  CharactersListingBloc({required this.getAllCharactersUseCase}) : super(CharactersListInitialState()) {
+  CharactersListingBloc({
+    required this.getAllCharactersUseCase,
+    required this.updateFavoriteUseCase,
+  }) : super(CharactersListInitialState()) {
     on<GetAllCharactersEvent>(_loadCharacters);
     on<CharacterCardTappedEvent>(_redirectToCharacterDetails);
+    on<FavoriteCharacterTappedEvent>(_favoriteCharacter);
   }
 
   /// Callbacks
@@ -38,6 +43,10 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
   }
 
   void _redirectToCharacterDetails(CharacterCardTappedEvent event, Emitter emit) {
-    emit(RedirectToCharacterDetailsState(characterToDiplay: event.character));
+    emit(RedirectToCharacterDetailsState(characterToDiplay: event.favoriteCharacter));
+  }
+
+  void _favoriteCharacter(FavoriteCharacterTappedEvent event, Emitter emit) {
+    updateFavoriteUseCase(event.favoriteCharacter.character.id);
   }
 }

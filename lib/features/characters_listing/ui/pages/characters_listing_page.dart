@@ -16,7 +16,7 @@ class CharactersListingPage extends StatefulWidget {
   State<CharactersListingPage> createState() => _CharactersListingPageState();
 }
 
-class _CharactersListingPageState extends State<CharactersListingPage> with CardDelegate {
+class _CharactersListingPageState extends State<CharactersListingPage> with CardDelegate, FavoriteButtonDelegate {
   final charactersListBloc = sl<CharactersListingBloc>();
   final PageStorageKey _pageStorageKey = const PageStorageKey('pageStorageKey');
   final _scrollController = ScrollController(initialScrollOffset: 0, keepScrollOffset: true);
@@ -84,8 +84,9 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
                   }
 
                   return CharacterCard(
-                    characterToDiplay: state.charactersList[index],
+                    favoriteCharacter: state.charactersList[index],
                     cardDelegate: this,
+                    favoriteButtonDelegate: this,
                   );
                 },
               ),
@@ -99,7 +100,12 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
   }
 
   @override
-  void onPressed({required FavoriteCharacter character}) {
-    charactersListBloc.add(CharacterCardTappedEvent(character: character));
+  void onPressed({required FavoriteCharacter favoriteCharacter}) {
+    charactersListBloc.add(CharacterCardTappedEvent(favoriteCharacter: favoriteCharacter));
+  }
+
+  @override
+  void onFavoritePressed({required FavoriteCharacter favoriteCharacter}) {
+    charactersListBloc.add(FavoriteCharacterTappedEvent(favoriteCharacter: favoriteCharacter));
   }
 }

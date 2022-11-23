@@ -1,2 +1,2 @@
-export './save_favorite.dart';
-export './remove_favorite.dart';
+export './update_favorite.dart';
+export './get_favorites.dart';

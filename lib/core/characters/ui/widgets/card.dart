@@ -5,25 +5,31 @@ import '../../../favorites/domain/entities/entities.dart';
 import '../../../injection_container.dart';
 
 abstract class CardDelegate {
-  void onPressed({required FavoriteCharacter character});
+  void onPressed({required FavoriteCharacter favoriteCharacter});
+}
+
+abstract class FavoriteButtonDelegate {
+  void onFavoritePressed({required FavoriteCharacter favoriteCharacter});
 }
 
 class CharacterCard extends StatelessWidget {
-  final FavoriteCharacter characterToDiplay;
+  final FavoriteCharacter favoriteCharacter;
   final CardDelegate cardDelegate;
+  final FavoriteButtonDelegate favoriteButtonDelegate;
 
   TextStyle get subtitle18 => sl<TextStyles>().subtitle18;
 
   const CharacterCard({
     Key? key,
-    required this.characterToDiplay,
+    required this.favoriteCharacter,
     required this.cardDelegate,
+    required this.favoriteButtonDelegate,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => cardDelegate.onPressed(character: characterToDiplay),
+      onTap: () => cardDelegate.onPressed(favoriteCharacter: favoriteCharacter),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Container(
@@ -37,7 +43,7 @@ class CharacterCard extends StatelessWidget {
             children: [
               const SizedBox(height: 24),
               Text(
-                characterToDiplay.character.name,
+                favoriteCharacter.character.name,
                 style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -50,7 +56,7 @@ class CharacterCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(40),
                   child: Image.network(
-                    characterToDiplay.character.imageUrl,
+                    favoriteCharacter.character.imageUrl,
                     fit: BoxFit.fill,
                     height: 300,
                     width: 300,
@@ -67,19 +73,19 @@ class CharacterCard extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                'Espécie: ${characterToDiplay.character.species}',
+                'Espécie: ${favoriteCharacter.character.species}',
                 textAlign: TextAlign.center,
                 style: subtitle18,
               ),
               const SizedBox(height: 12),
               Text(
-                'Total de Episódios: ${characterToDiplay.character.episodesIds.length.toString()}',
+                'Total de Episódios: ${favoriteCharacter.character.episodesIds.length.toString()}',
                 textAlign: TextAlign.center,
                 style: subtitle18,
               ),
               const SizedBox(height: 42),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () => favoriteButtonDelegate.onFavoritePressed(favoriteCharacter: favoriteCharacter),
                 icon: const Icon(Icons.favorite, color: Colors.red),
                 label: const Text(
                   'Favoritar',
