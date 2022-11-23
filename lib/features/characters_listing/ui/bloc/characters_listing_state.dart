@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
 import 'package:oracle_rm/core/error/error.dart';
+
+import '../../../../core/favorites/domain/entities/entities.dart';
 
 abstract class CharactersListingState extends Equatable {
   @override
@@ -12,11 +13,10 @@ class CharactersListInitialState extends CharactersListingState {}
 class CharactersListLoadingState extends CharactersListingState {}
 
 class CharactersListLoadedState extends CharactersListingState {
-  final List<Character> charactersList;
+  final List<FavoriteCharacter> charactersList;
   final int listLength;
 
-  CharactersListLoadedState(
-      {required this.charactersList, required this.listLength});
+  CharactersListLoadedState({required this.charactersList, required this.listLength});
 
   @override
   List<Object?> get props => [charactersList, listLength];
@@ -32,10 +32,10 @@ class CharactersListErrorState extends CharactersListingState {
 }
 
 class RedirectToCharacterDetailsState extends CharactersListingState {
-  final Character character;
+  final FavoriteCharacter characterToDiplay;
 
-  RedirectToCharacterDetailsState({required this.character});
+  RedirectToCharacterDetailsState({required this.characterToDiplay});
 
   @override
-  List<Object?> get props => [character];
+  List<Object?> get props => [characterToDiplay];
 }

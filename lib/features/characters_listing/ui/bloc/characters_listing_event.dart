@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
+
+import '../../../../core/favorites/domain/entities/entities.dart';
 
 abstract class CharactersListingEvent extends Equatable {
   const CharactersListingEvent();
@@ -11,7 +12,7 @@ abstract class CharactersListingEvent extends Equatable {
 class GetAllCharactersEvent extends CharactersListingEvent {}
 
 class CharacterCardTappedEvent extends CharactersListingEvent {
-  final Character character;
+  final FavoriteCharacter character;
 
   const CharacterCardTappedEvent({required this.character});
 

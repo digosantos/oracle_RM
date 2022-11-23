@@ -2,6 +2,7 @@ import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
 
 import '../../../episodes/domain/entities/entities.dart';
 
+/// NOTE:
 class CharacterDetails extends Character {
   final String status;
   final String origin;

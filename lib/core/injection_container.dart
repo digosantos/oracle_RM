@@ -30,7 +30,7 @@ Future<void> init() async {
   );
 
   /// Use Cases:
-  sl.registerLazySingleton<UseCase<CharactersResponse, int>>(
+  sl.registerLazySingleton<UseCase<FavoriteCharactersResponse, int>>(
     () => GetAllCharacters(charactersRepository: sl()),
   );
 
@@ -44,16 +44,14 @@ Future<void> init() async {
   );
 
   /// Use Cases:
-  sl.registerLazySingleton<UseCase<CharacterDetails, RequestedCharacterParam>>(
-      () => GetCharacterDetails(charactersRepository: sl()));
+  sl.registerLazySingleton<UseCase<CharacterDetails, RequestedCharacterParam>>(() => GetCharacterDetails(charactersRepository: sl()));
 
   /// ---------------------
   /// Core
   /// ---------------------
 
   /// Network:
-  sl.registerLazySingleton<BaseNetworkClient>(
-      () => BaseNetworkClient(client: sl()));
+  sl.registerLazySingleton<BaseNetworkClient>(() => BaseNetworkClient(client: sl()));
 
   /// External:
   sl.registerLazySingleton<GraphQLClient>(
@@ -75,7 +73,10 @@ Future<void> init() async {
 
   /// Repositories:
   sl.registerLazySingleton<CharactersRepository>(
-    () => CharactersRepositoryImpl(charactersRemoteDataSource: sl()),
+    () => CharactersRepositoryImpl(
+      charactersRemoteDataSource: sl(),
+      favoritesLocalDataSource: sl(),
+    ),
   );
 
   /// Data sources:

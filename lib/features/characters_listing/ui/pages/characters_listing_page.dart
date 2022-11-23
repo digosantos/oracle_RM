@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:oracle_rm/core/characters/domain/entities/character.dart';
 import 'package:oracle_rm/core/characters/ui/widgets/card.dart';
 import 'package:oracle_rm/features/character_details/domain/usecases/get_character_details.dart';
 import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 
 import '../../../../core/common/routing/routing.dart';
+import '../../../../core/favorites/domain/entities/entities.dart';
 import '../../../../core/injection_container.dart';
 
 class CharactersListingPage extends StatefulWidget {
@@ -16,12 +16,10 @@ class CharactersListingPage extends StatefulWidget {
   State<CharactersListingPage> createState() => _CharactersListingPageState();
 }
 
-class _CharactersListingPageState extends State<CharactersListingPage>
-    with CardDelegate {
+class _CharactersListingPageState extends State<CharactersListingPage> with CardDelegate {
   final charactersListBloc = sl<CharactersListingBloc>();
   final PageStorageKey _pageStorageKey = const PageStorageKey('pageStorageKey');
-  final _scrollController =
-      ScrollController(initialScrollOffset: 0, keepScrollOffset: true);
+  final _scrollController = ScrollController(initialScrollOffset: 0, keepScrollOffset: true);
 
   @override
   void initState() {
@@ -29,8 +27,7 @@ class _CharactersListingPageState extends State<CharactersListingPage>
     charactersListBloc.add(GetAllCharactersEvent());
 
     _scrollController.addListener(() {
-      if (_scrollController.offset ==
-          _scrollController.position.maxScrollExtent) {
+      if (_scrollController.offset == _scrollController.position.maxScrollExtent) {
         // TODO: improve UX not to return to first element
         charactersListBloc.add(GetAllCharactersEvent());
       }
@@ -62,8 +59,8 @@ class _CharactersListingPageState extends State<CharactersListingPage>
             context.push(
               Routes.characterDetails.routeName,
               extra: RequestedCharacterParam(
-                id: state.character.id,
-                episodesIds: state.character.episodesIds,
+                id: state.characterToDiplay.character.id,
+                episodesIds: state.characterToDiplay.character.episodesIds,
               ),
             );
           }
@@ -87,7 +84,7 @@ class _CharactersListingPageState extends State<CharactersListingPage>
                   }
 
                   return CharacterCard(
-                    character: state.charactersList[index],
+                    characterToDiplay: state.charactersList[index],
                     cardDelegate: this,
                   );
                 },
@@ -102,7 +99,7 @@ class _CharactersListingPageState extends State<CharactersListingPage>
   }
 
   @override
-  void onPressed({required Character character}) {
+  void onPressed({required FavoriteCharacter character}) {
     charactersListBloc.add(CharacterCardTappedEvent(character: character));
   }
 }
