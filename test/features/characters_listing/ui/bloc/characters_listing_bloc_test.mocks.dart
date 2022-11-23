@@ -3,16 +3,20 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:oracle_rm/core/characters/domain/entities/entities.dart' as _i7;
+import 'package:oracle_rm/core/characters/domain/entities/entities.dart' as _i8;
 import 'package:oracle_rm/core/characters/domain/repositories/repositories.dart'
     as _i2;
-import 'package:oracle_rm/core/error/error.dart' as _i6;
-import 'package:oracle_rm/features/characters_listing/domain/usecases/get_all_characters.dart'
+import 'package:oracle_rm/core/error/error.dart' as _i7;
+import 'package:oracle_rm/core/favorites/domain/repositories/repositories.dart'
     as _i4;
+import 'package:oracle_rm/core/favorites/domain/usecases/update_favorite.dart'
+    as _i9;
+import 'package:oracle_rm/features/characters_listing/domain/usecases/get_all_characters.dart'
+    as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -46,10 +50,21 @@ class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
         );
 }
 
+class _FakeFavoritesRepository_2 extends _i1.SmartFake
+    implements _i4.FavoritesRepository {
+  _FakeFavoritesRepository_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [GetAllCharacters].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetAllCharacters extends _i1.Mock implements _i4.GetAllCharacters {
+class MockGetAllCharacters extends _i1.Mock implements _i5.GetAllCharacters {
   MockGetAllCharacters() {
     _i1.throwOnMissingStub(this);
   }
@@ -63,22 +78,56 @@ class MockGetAllCharacters extends _i1.Mock implements _i4.GetAllCharacters {
         ),
       ) as _i2.CharactersRepository);
   @override
-  _i5.Future<_i3.Either<_i6.AppError, _i7.FavoriteCharactersResponse>> call(
+  _i6.Future<_i3.Either<_i7.AppError, _i8.FavoriteCharactersResponse>> call(
           int? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [params],
         ),
-        returnValue: _i5.Future<
-                _i3.Either<_i6.AppError, _i7.FavoriteCharactersResponse>>.value(
-            _FakeEither_1<_i6.AppError, _i7.FavoriteCharactersResponse>(
+        returnValue: _i6.Future<
+                _i3.Either<_i7.AppError, _i8.FavoriteCharactersResponse>>.value(
+            _FakeEither_1<_i7.AppError, _i8.FavoriteCharactersResponse>(
           this,
           Invocation.method(
             #call,
             [params],
           ),
         )),
-      ) as _i5
-          .Future<_i3.Either<_i6.AppError, _i7.FavoriteCharactersResponse>>);
+      ) as _i6
+          .Future<_i3.Either<_i7.AppError, _i8.FavoriteCharactersResponse>>);
+}
+
+/// A class which mocks [UpdateFavorite].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUpdateFavorite extends _i1.Mock implements _i9.UpdateFavorite {
+  MockUpdateFavorite() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.FavoritesRepository get favoritesRepository => (super.noSuchMethod(
+        Invocation.getter(#favoritesRepository),
+        returnValue: _FakeFavoritesRepository_2(
+          this,
+          Invocation.getter(#favoritesRepository),
+        ),
+      ) as _i4.FavoritesRepository);
+  @override
+  _i6.Future<_i3.Either<_i7.AppError, bool>> call(String? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [params],
+        ),
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, bool>>.value(
+            _FakeEither_1<_i7.AppError, bool>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, bool>>);
 }

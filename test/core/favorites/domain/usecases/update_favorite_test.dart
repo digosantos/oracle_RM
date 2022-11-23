@@ -9,36 +9,33 @@ import '../repositories/favorites_repository_test.mocks.dart';
 
 void main() {
   late MockFavoritesRepository mockFavoritesRepository;
-  late SaveFavorite saveFavoriteUseCase;
+  late UpdateFavorite updateFavoriteUseCase;
 
   setUp(() {
     mockFavoritesRepository = MockFavoritesRepository();
-    saveFavoriteUseCase =
-        SaveFavorite(favoritesRepository: mockFavoritesRepository);
+    updateFavoriteUseCase = UpdateFavorite(favoritesRepository: mockFavoritesRepository);
   });
 
-  group('Save favorite use case', () {
+  group('Update favorite use case', () {
     final characterId = Faux.character.id;
 
     test('should successfully persist character ID locally', () async {
-      when(mockFavoritesRepository.save(characterId: characterId))
-          .thenAnswer((_) async => const Right(true));
+      when(mockFavoritesRepository.update(characterId: characterId)).thenAnswer((_) async => const Right(true));
 
-      final sut = await saveFavoriteUseCase(characterId);
+      final sut = await updateFavoriteUseCase(characterId);
 
       expect(sut, const Right(true));
-      verify(mockFavoritesRepository.save(characterId: characterId)).called(1);
+      verify(mockFavoritesRepository.update(characterId: characterId)).called(1);
       verifyNoMoreInteractions(mockFavoritesRepository);
     });
 
     test('should fail to persist character ID locally', () async {
-      when(mockFavoritesRepository.save(characterId: characterId))
-          .thenAnswer((_) async => const Left(AppError(properties: [])));
+      when(mockFavoritesRepository.update(characterId: characterId)).thenAnswer((_) async => const Left(AppError(properties: [])));
 
-      final sut = await saveFavoriteUseCase(characterId);
+      final sut = await updateFavoriteUseCase(characterId);
 
       expect(sut, const Left(AppError(properties: [])));
-      verify(mockFavoritesRepository.save(characterId: characterId)).called(1);
+      verify(mockFavoritesRepository.update(characterId: characterId)).called(1);
       verifyNoMoreInteractions(mockFavoritesRepository);
     });
   });

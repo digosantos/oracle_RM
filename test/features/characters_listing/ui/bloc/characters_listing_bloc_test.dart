@@ -4,20 +4,26 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
 import 'package:oracle_rm/core/error/error.dart';
+import 'package:oracle_rm/core/favorites/domain/usecases/usecases.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
 import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 
 import '../../../../utils/faux.dart';
 import 'characters_listing_bloc_test.mocks.dart';
 
-@GenerateMocks([GetAllCharacters])
+@GenerateMocks([GetAllCharacters, UpdateFavorite])
 void main() {
   late MockGetAllCharacters mockGetAllCharactersUseCase;
+  late MockUpdateFavorite mockUpdateFavorite;
   late CharactersListingBloc charactersListingBloc;
 
   setUpAll(() {
     mockGetAllCharactersUseCase = MockGetAllCharacters();
-    charactersListingBloc = CharactersListingBloc(getAllCharactersUseCase: mockGetAllCharactersUseCase);
+    mockUpdateFavorite = MockUpdateFavorite();
+    charactersListingBloc = CharactersListingBloc(
+      getAllCharactersUseCase: mockGetAllCharactersUseCase,
+      updateFavoriteUseCase: mockUpdateFavorite,
+    );
   });
 
   test('verify initial state is CharactersListInitialState', () {

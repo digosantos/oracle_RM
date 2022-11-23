@@ -38,19 +38,10 @@ class MockFavoritesLocalDataSource extends _i1.Mock
         returnValue: <String>[],
       ) as List<String>);
   @override
-  _i3.Future<bool> save({required String? characterId}) => (super.noSuchMethod(
-        Invocation.method(
-          #save,
-          [],
-          {#characterId: characterId},
-        ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
-  @override
-  _i3.Future<bool> remove({required String? characterId}) =>
+  _i3.Future<bool> update({required String? characterId}) =>
       (super.noSuchMethod(
         Invocation.method(
-          #remove,
+          #update,
           [],
           {#characterId: characterId},
         ),
