@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oracle_rm/core/characters/ui/widgets/favorite_button.dart';
 
 import '../../../common/ui/text_styles.dart';
 import '../../../favorites/domain/entities/entities.dart';
@@ -12,7 +13,7 @@ abstract class FavoriteButtonDelegate {
   void onFavoritePressed({required FavoriteCharacter favoriteCharacter});
 }
 
-class CharacterCard extends StatelessWidget {
+class CharacterCard extends StatelessWidget with FavoriteButtonDelegate {
   final FavoriteCharacter favoriteCharacter;
   final CardDelegate cardDelegate;
   final FavoriteButtonDelegate favoriteButtonDelegate;
@@ -36,7 +37,7 @@ class CharacterCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: Colors.black, width: 4),
-            color: Colors.white,
+            color: (favoriteCharacter.isFavorite) ? Colors.yellowAccent : Colors.white,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -84,32 +85,17 @@ class CharacterCard extends StatelessWidget {
                 style: subtitle18,
               ),
               const SizedBox(height: 42),
-              ElevatedButton.icon(
-                onPressed: () => favoriteButtonDelegate.onFavoritePressed(favoriteCharacter: favoriteCharacter),
-                icon: const Icon(Icons.favorite, color: Colors.red),
-                label: const Text(
-                  'Favoritar',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      side: BorderSide(color: Colors.black),
-                    ),
-                  ),
-                ),
-              ),
+              FavoriteButton(favoriteCharacter: favoriteCharacter, favoriteButtonDelegate: this),
               const SizedBox(height: 24),
             ],
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void onFavoritePressed({required FavoriteCharacter favoriteCharacter}) {
+    favoriteButtonDelegate.onFavoritePressed(favoriteCharacter: favoriteCharacter);
   }
 }

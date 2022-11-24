@@ -8,6 +8,10 @@ class FavoriteCharacter extends Equatable {
 
   const FavoriteCharacter({required this.character, required this.isFavorite});
 
+  factory FavoriteCharacter.update({required FavoriteCharacter favoriteCharacter}) {
+    return FavoriteCharacter(character: favoriteCharacter.character, isFavorite: !favoriteCharacter.isFavorite);
+  }
+
   @override
   List<Object?> get props => [character, isFavorite];
 }

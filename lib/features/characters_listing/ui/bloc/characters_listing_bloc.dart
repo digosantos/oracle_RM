@@ -35,7 +35,7 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
 
         charactersList = List.of(charactersList)..addAll(allCharactersResponse.charactersList);
 
-        final listLength = (allCharactersResponse.nextPage != null) ? charactersList.length + 1 : charactersList.length;
+        final listLength = (page != null) ? charactersList.length + 1 : charactersList.length;
 
         return CharactersListLoadedState(charactersList: charactersList, listLength: listLength);
       },
@@ -46,7 +46,31 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
     emit(RedirectToCharacterDetailsState(characterToDiplay: event.favoriteCharacter));
   }
 
-  void _favoriteCharacter(FavoriteCharacterTappedEvent event, Emitter emit) {
-    updateFavoriteUseCase(event.favoriteCharacter.character.id);
+  void _favoriteCharacter(FavoriteCharacterTappedEvent event, Emitter emit) async {
+    final favoriteCharacterId = event.favoriteCharacter.character.id;
+    final isUpdateSuccessful = await updateFavoriteUseCase(favoriteCharacterId);
+
+    emit(isUpdateSuccessful.fold(
+      (failure) => CharactersListErrorState(
+        failure: AppError(properties: failure.properties),
+      ),
+      (isSuccess) {
+        if (isSuccess) {
+          final indexToUpdate = charactersList.indexWhere((favoriteCharacter) => favoriteCharacter.character.id == favoriteCharacterId);
+
+          final updatedFavoriteCharacter = FavoriteCharacter.update(favoriteCharacter: charactersList[indexToUpdate]);
+
+          /// Creates a deep copy of previous list in order to differ states
+          final updatedList = <FavoriteCharacter>[...charactersList];
+          updatedList.removeAt(indexToUpdate);
+          updatedList.insert(indexToUpdate, updatedFavoriteCharacter);
+
+          charactersList = updatedList;
+        }
+
+        final listLength = (page != null) ? charactersList.length + 1 : charactersList.length;
+        return CharactersListLoadedState(charactersList: charactersList, listLength: listLength);
+      },
+    ));
   }
 }
