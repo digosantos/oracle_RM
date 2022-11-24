@@ -30,7 +30,7 @@ class FavoritesLocalDataSourceImpl implements FavoritesLocalDataSource {
       } else {
         favorites.add(characterId);
       }
-      return await sharedPreferences.setStringList('favorites', favorites);
+      return await sharedPreferences.setStringList(favoritesKey, favorites);
     } else {
       /// Create preferences with key
       return await sharedPreferences.setStringList(favoritesKey, [characterId]);
