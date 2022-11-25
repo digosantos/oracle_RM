@@ -14,6 +14,7 @@ class CharacterDetailsPage extends StatelessWidget with FavoriteButtonDelegate {
 
   final characterDetailsBloc = sl<CharacterDetailsBloc>();
   TextStyle get subtitle18 => sl<TextStyles>().subtitle18;
+  TextStyle get text16 => sl<TextStyles>().text16;
 
   CharacterDetailsPage({Key? key, required this.requestedCharacterParam}) : super(key: key) {
     characterDetailsBloc.add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacterParam));
@@ -60,6 +61,14 @@ class CharacterDetailsPage extends StatelessWidget with FavoriteButtonDelegate {
                     ),
                   ),
                   const SizedBox(height: 12),
+                  Align(
+                    alignment: Alignment.center,
+                    child: FavoriteButton(
+                      favoriteCharacter: state.favoriteCharacter,
+                      favoriteButtonDelegate: this,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -92,18 +101,40 @@ class CharacterDetailsPage extends StatelessWidget with FavoriteButtonDelegate {
                         textAlign: TextAlign.center,
                         style: subtitle18,
                       ),
+                      const SizedBox(height: 24),
+                      const Text(
+                        'Lista de Episódios:',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
+                      ),
                       const SizedBox(height: 12),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.characterDetails.episodes.length,
+                        itemBuilder: (context, index) {
+                          final episode = state.characterDetails.episodes[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(episode.name, style: text16),
+                                Text(episode.airDate, style: text16),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                       Text(
                         'Total de Episódios: ${characterDetails.episodesIds.length.toString()}',
                         textAlign: TextAlign.center,
                         style: subtitle18,
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 42),
-                  FavoriteButton(
-                    favoriteCharacter: state.favoriteCharacter,
-                    favoriteButtonDelegate: this,
                   ),
                   const SizedBox(height: 24),
                 ],

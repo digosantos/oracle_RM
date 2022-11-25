@@ -6,4 +6,9 @@ class TextStyles {
     fontWeight: FontWeight.bold,
     fontSize: 18,
   );
+
+  final text16 = const TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+  );
 }
