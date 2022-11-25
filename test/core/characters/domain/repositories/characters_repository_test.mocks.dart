@@ -11,6 +11,8 @@ import 'package:oracle_rm/core/characters/domain/entities/entities.dart' as _i6;
 import 'package:oracle_rm/core/characters/domain/repositories/characters_repository.dart'
     as _i3;
 import 'package:oracle_rm/core/error/error.dart' as _i5;
+import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart'
+    as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -44,11 +46,18 @@ class MockCharactersRepository extends _i1.Mock
 
   @override
   _i4.Future<_i2.Either<_i5.AppError, _i6.FavoriteCharactersResponse>>
-      getAllCharacters({required int? pageNumber}) => (super.noSuchMethod(
+      getAllCharacters({
+    required int? pageNumber,
+    _i7.Filter? filter,
+  }) =>
+          (super.noSuchMethod(
             Invocation.method(
               #getAllCharacters,
               [],
-              {#pageNumber: pageNumber},
+              {
+                #pageNumber: pageNumber,
+                #filter: filter,
+              },
             ),
             returnValue: _i4.Future<
                     _i2.Either<_i5.AppError,
@@ -58,7 +67,10 @@ class MockCharactersRepository extends _i1.Mock
               Invocation.method(
                 #getAllCharacters,
                 [],
-                {#pageNumber: pageNumber},
+                {
+                  #pageNumber: pageNumber,
+                  #filter: filter,
+                },
               ),
             )),
           ) as _i4.Future<

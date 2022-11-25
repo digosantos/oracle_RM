@@ -9,6 +9,8 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:oracle_rm/core/characters/data/datasources/characters_remote_datasource.dart'
     as _i3;
 import 'package:oracle_rm/core/characters/data/models/models.dart' as _i2;
+import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart'
+    as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -53,13 +55,18 @@ class MockCharactersRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.CharactersResponseModel> getAllCharacters(
-          {required int? pageNumber}) =>
+  _i4.Future<_i2.CharactersResponseModel> getAllCharacters({
+    required int? pageNumber,
+    _i5.Filter? filter,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #getAllCharacters,
           [],
-          {#pageNumber: pageNumber},
+          {
+            #pageNumber: pageNumber,
+            #filter: filter,
+          },
         ),
         returnValue: _i4.Future<_i2.CharactersResponseModel>.value(
             _FakeCharactersResponseModel_0(
@@ -67,7 +74,10 @@ class MockCharactersRemoteDataSource extends _i1.Mock
           Invocation.method(
             #getAllCharacters,
             [],
-            {#pageNumber: pageNumber},
+            {
+              #pageNumber: pageNumber,
+              #filter: filter,
+            },
           ),
         )),
       ) as _i4.Future<_i2.CharactersResponseModel>);

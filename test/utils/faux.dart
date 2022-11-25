@@ -4,6 +4,7 @@ import 'package:oracle_rm/core/episodes/data/data.dart';
 import 'package:oracle_rm/core/episodes/domain/entities/entities.dart';
 import 'package:oracle_rm/core/favorites/data/models/models.dart';
 import 'package:oracle_rm/core/favorites/domain/entities/entities.dart';
+import 'package:oracle_rm/features/characters_listing/domain/usecases/get_all_characters.dart';
 
 class Faux {
   static const character = Character(
@@ -14,13 +15,7 @@ class Faux {
     episodesIds: ['1', '2', '3'],
   );
 
-  // static const rickCharacter = Character(
-  //   id: '1',
-  //   name: 'Rick Sanchez',
-  //   imageUrl: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-  //   species: 'Human',
-  //   episodesIds: ['1', '2', '3'],
-  // );
+  static const getCharactersParams = GetCharactersParams(pageNumber: 1);
 
   static const favoriteCharacter = FavoriteCharacter(
     character: Faux.characterModel,

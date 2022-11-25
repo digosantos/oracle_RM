@@ -83,7 +83,7 @@ class MockGetAllCharacters extends _i1.Mock implements _i5.GetAllCharacters {
       ) as _i2.CharactersRepository);
   @override
   _i6.Future<_i3.Either<_i7.AppError, _i8.FavoriteCharactersResponse>> call(
-          int? params) =>
+          _i5.GetCharactersParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,

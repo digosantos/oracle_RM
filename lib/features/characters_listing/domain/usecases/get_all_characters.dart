@@ -21,7 +21,7 @@ class GetCharactersParams {
   final int pageNumber;
   final Filter? filter;
 
-  GetCharactersParams({required this.pageNumber, this.filter});
+  const GetCharactersParams({required this.pageNumber, this.filter});
 }
 
 class GetAllCharacters extends UseCase<FavoriteCharactersResponse, GetCharactersParams> {
