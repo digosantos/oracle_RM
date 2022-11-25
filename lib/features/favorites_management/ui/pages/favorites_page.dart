@@ -13,7 +13,8 @@ class FavoritesPage extends StatefulWidget {
   State<FavoritesPage> createState() => _FavoritesPageState();
 }
 
-class _FavoritesPageState extends State<FavoritesPage> with CardDelegate, FavoriteButtonDelegate {
+class _FavoritesPageState extends State<FavoritesPage>
+    with CardDelegate, FavoriteButtonDelegate {
   final favoritesBloc = sl<FavoritesBloc>();
 
   @override
@@ -85,6 +86,7 @@ class _FavoritesPageState extends State<FavoritesPage> with CardDelegate, Favori
 
   @override
   void onFavoritePressed({required FavoriteCharacter favoriteCharacter}) {
-    favoritesBloc.add(FavoriteTappedEvent(favoriteCharacter: favoriteCharacter));
+    favoritesBloc
+        .add(FavoriteTappedEvent(favoriteCharacter: favoriteCharacter));
   }
 }

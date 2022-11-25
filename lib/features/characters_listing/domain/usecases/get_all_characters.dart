@@ -24,13 +24,16 @@ class GetCharactersParams {
   const GetCharactersParams({required this.pageNumber, this.filter});
 }
 
-class GetAllCharacters extends UseCase<FavoriteCharactersResponse, GetCharactersParams> {
+class GetAllCharacters
+    extends UseCase<FavoriteCharactersResponse, GetCharactersParams> {
   final CharactersRepository charactersRepository;
 
   GetAllCharacters({required this.charactersRepository});
 
   @override
-  Future<Either<AppError, FavoriteCharactersResponse>> call(GetCharactersParams params) async {
-    return await charactersRepository.getAllCharacters(pageNumber: params.pageNumber, filter: params.filter);
+  Future<Either<AppError, FavoriteCharactersResponse>> call(
+      GetCharactersParams params) async {
+    return await charactersRepository.getAllCharacters(
+        pageNumber: params.pageNumber, filter: params.filter);
   }
 }

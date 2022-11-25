@@ -15,7 +15,8 @@ class GetAllCharactersEvent extends CharactersListingEvent {
   const GetAllCharactersEvent({this.filter});
 }
 
-class CharacterCardTappedEvent extends CharactersListingEvent with EquatableMixin {
+class CharacterCardTappedEvent extends CharactersListingEvent
+    with EquatableMixin {
   final FavoriteCharacter favoriteCharacter;
 
   const CharacterCardTappedEvent({required this.favoriteCharacter});
@@ -24,7 +25,8 @@ class CharacterCardTappedEvent extends CharactersListingEvent with EquatableMixi
   List<Object?> get props => [favoriteCharacter];
 }
 
-class FavoriteCharacterTappedEvent extends CharactersListingEvent with EquatableMixin {
+class FavoriteCharacterTappedEvent extends CharactersListingEvent
+    with EquatableMixin {
   final FavoriteCharacter favoriteCharacter;
 
   const FavoriteCharacterTappedEvent({required this.favoriteCharacter});

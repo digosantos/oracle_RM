@@ -8,8 +8,10 @@ import '../../../../core/favorites/domain/entities/entities.dart';
 import '../../../characters_listing/domain/usecases/usecases.dart';
 import './bloc.dart';
 
-class CharacterDetailsBloc extends Bloc<CharacterDetailsEvent, CharacterDetailsState> {
-  final UseCase<CharacterDetails, RequestedCharacterParam> getCharacterDetailsUseCase;
+class CharacterDetailsBloc
+    extends Bloc<CharacterDetailsEvent, CharacterDetailsState> {
+  final UseCase<CharacterDetails, RequestedCharacterParam>
+      getCharacterDetailsUseCase;
   final UseCase<UpdatedFavorite, String> updateFavoriteUseCase;
 
   late CharacterDetails characterDetails;
@@ -23,7 +25,8 @@ class CharacterDetailsBloc extends Bloc<CharacterDetailsEvent, CharacterDetailsS
   }
 
   /// Callbacks
-  void _loadCharacterDetails(GetCharacterDetailsEvent event, Emitter emit) async {
+  void _loadCharacterDetails(
+      GetCharacterDetailsEvent event, Emitter emit) async {
     emit(LoadingState());
     final response = await getCharacterDetailsUseCase(event.requestedCharacter);
 
@@ -41,9 +44,11 @@ class CharacterDetailsBloc extends Bloc<CharacterDetailsEvent, CharacterDetailsS
     ));
   }
 
-  void _favoriteCharacter(FavoriteCharacterDetailsTappedEvent event, Emitter emit) async {
+  void _favoriteCharacter(
+      FavoriteCharacterDetailsTappedEvent event, Emitter emit) async {
     final favoriteCharacterId = event.favoriteCharacter.character.id;
-    final updatedFavoriteResult = await updateFavoriteUseCase(favoriteCharacterId);
+    final updatedFavoriteResult =
+        await updateFavoriteUseCase(favoriteCharacterId);
 
     emit(
       updatedFavoriteResult.fold(

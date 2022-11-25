@@ -5,9 +5,12 @@ import '../../../../features/characters_listing/domain/usecases/usecases.dart';
 import '../models/models.dart';
 
 abstract class CharactersRemoteDataSource {
-  Future<CharactersResponseModel> getAllCharacters({required int pageNumber, Filter? filter});
-  Future<List<CharacterModel>> getCharactersList({required List<String> characterIdList});
-  Future<CharacterDetailsModel> getCharacterDetails({required String id, required List<String> episodesIds});
+  Future<CharactersResponseModel> getAllCharacters(
+      {required int pageNumber, Filter? filter});
+  Future<List<CharacterModel>> getCharactersList(
+      {required List<String> characterIdList});
+  Future<CharacterDetailsModel> getCharacterDetails(
+      {required String id, required List<String> episodesIds});
 }
 
 class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
@@ -16,7 +19,8 @@ class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
   CharactersRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<CharactersResponseModel> getAllCharacters({required int pageNumber, Filter? filter}) async {
+  Future<CharactersResponseModel> getAllCharacters(
+      {required int pageNumber, Filter? filter}) async {
     Map<String, dynamic> params = {'page': pageNumber, 'filter': {}};
 
     if (filter != null) {
@@ -38,7 +42,8 @@ class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
   }
 
   @override
-  Future<CharacterDetailsModel> getCharacterDetails({required String id, required List<String> episodesIds}) async {
+  Future<CharacterDetailsModel> getCharacterDetails(
+      {required String id, required List<String> episodesIds}) async {
     final result = await client.query(
       document: Queries.getCharacterDetails(),
       params: {'id': id, 'episodesIds': episodesIds},
@@ -47,13 +52,15 @@ class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
   }
 
   @override
-  Future<List<CharacterModel>> getCharactersList({required List<String> characterIdList}) async {
+  Future<List<CharacterModel>> getCharactersList(
+      {required List<String> characterIdList}) async {
     final result = await client.query(
       document: Queries.getCharactersById(),
       params: {'ids': characterIdList},
     );
     return List<CharacterModel>.from(
-      result['charactersByIds'].map((character) => CharacterModel.fromJson(character)),
+      result['charactersByIds']
+          .map((character) => CharacterModel.fromJson(character)),
     );
   }
 }

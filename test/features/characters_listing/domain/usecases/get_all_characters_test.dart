@@ -14,33 +14,41 @@ void main() {
     late GetAllCharacters getAllCharactersUseCase;
 
     const getCharactersParams = Faux.getCharactersParams;
-    const FavoriteCharactersResponse favoriteCharactersResponse = Faux.favoriteCharactersResponse;
+    const FavoriteCharactersResponse favoriteCharactersResponse =
+        Faux.favoriteCharactersResponse;
 
     setUp(() {
       mockCharactersRepository = MockCharactersRepository();
-      getAllCharactersUseCase = GetAllCharacters(charactersRepository: mockCharactersRepository);
+      getAllCharactersUseCase =
+          GetAllCharacters(charactersRepository: mockCharactersRepository);
     });
 
     test('should return list of characters from repository', () async {
-      when(mockCharactersRepository.getAllCharacters(pageNumber: getCharactersParams.pageNumber))
+      when(mockCharactersRepository.getAllCharacters(
+              pageNumber: getCharactersParams.pageNumber))
           .thenAnswer((_) async => const Right(favoriteCharactersResponse));
 
       final sut = await getAllCharactersUseCase(getCharactersParams);
 
       expect(sut, const Right(favoriteCharactersResponse));
-      verify(mockCharactersRepository.getAllCharacters(pageNumber: getCharactersParams.pageNumber)).called(1);
+      verify(mockCharactersRepository.getAllCharacters(
+              pageNumber: getCharactersParams.pageNumber))
+          .called(1);
       verifyNoMoreInteractions(mockCharactersRepository);
     });
 
     test('should return AppError from repository', () async {
       const appError = AppError(properties: []);
-      when(mockCharactersRepository.getAllCharacters(pageNumber: getCharactersParams.pageNumber))
+      when(mockCharactersRepository.getAllCharacters(
+              pageNumber: getCharactersParams.pageNumber))
           .thenAnswer((_) async => const Left(appError));
 
       final sut = await getAllCharactersUseCase(getCharactersParams);
 
       expect(sut, const Left(appError));
-      verify(mockCharactersRepository.getAllCharacters(pageNumber: getCharactersParams.pageNumber)).called(1);
+      verify(mockCharactersRepository.getAllCharacters(
+              pageNumber: getCharactersParams.pageNumber))
+          .called(1);
       verifyNoMoreInteractions(mockCharactersRepository);
     });
   });

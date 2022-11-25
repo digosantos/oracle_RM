@@ -21,18 +21,21 @@ void main() {
       const List<String> favoriteIdsList = ['999', '2'];
       await setupPreferences(Faux.favoritesKey, favoriteIdsList);
       sharedPreferences = await SharedPreferences.getInstance();
-      favoritesLocalDataSourceImpl = FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
+      favoritesLocalDataSourceImpl =
+          FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
 
       final sut = favoritesLocalDataSourceImpl.getAll();
 
       expect(sut, favoriteIdsList);
-      expect(sharedPreferences.getStringList(Faux.favoritesKey), favoriteIdsList);
+      expect(
+          sharedPreferences.getStringList(Faux.favoritesKey), favoriteIdsList);
     });
 
     test('should get empty list of favorite characterIds', () async {
       await setupPreferences(Faux.favoritesKey, []);
       sharedPreferences = await SharedPreferences.getInstance();
-      favoritesLocalDataSourceImpl = FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
+      favoritesLocalDataSourceImpl =
+          FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
 
       final sut = favoritesLocalDataSourceImpl.getAll();
 
@@ -46,22 +49,27 @@ void main() {
       const updatedFavorite = Faux.updatedFavorite;
       await setupPreferences(Faux.favoritesKey, []);
       sharedPreferences = await SharedPreferences.getInstance();
-      favoritesLocalDataSourceImpl = FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
+      favoritesLocalDataSourceImpl =
+          FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
 
-      final sut = await favoritesLocalDataSourceImpl.update(characterId: characterId);
+      final sut =
+          await favoritesLocalDataSourceImpl.update(characterId: characterId);
 
       expect(sut.isFavorite, updatedFavorite.isFavorite);
       expect(sut.characterId, updatedFavorite.characterId);
-      expect(sharedPreferences.getStringList(Faux.favoritesKey), [Faux.character.id]);
+      expect(sharedPreferences.getStringList(Faux.favoritesKey),
+          [Faux.character.id]);
     });
 
     test('should remove characterId', () async {
       const updatedNotFavorite = Faux.updatedNotFavorite;
       await setupPreferences(Faux.favoritesKey, ['1', '2']);
       sharedPreferences = await SharedPreferences.getInstance();
-      favoritesLocalDataSourceImpl = FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
+      favoritesLocalDataSourceImpl =
+          FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
 
-      final sut = await favoritesLocalDataSourceImpl.update(characterId: characterId);
+      final sut =
+          await favoritesLocalDataSourceImpl.update(characterId: characterId);
 
       expect(sut.isFavorite, updatedNotFavorite.isFavorite);
       expect(sut.characterId, updatedNotFavorite.characterId);
@@ -71,7 +79,8 @@ void main() {
 }
 
 Future setupPreferences(String key, List<String> value) async {
-  SharedPreferences.setMockInitialValues(<String, Object>{'flutter.$key': value});
+  SharedPreferences.setMockInitialValues(
+      <String, Object>{'flutter.$key': value});
   final preferences = await SharedPreferences.getInstance();
   await preferences.setStringList(key, value);
 }

@@ -42,7 +42,8 @@ class Faux {
     charactersList: [Faux.favoriteCharacter],
   );
 
-  static const favoriteCharactersResponseNextPageNull = FavoriteCharactersResponse(
+  static const favoriteCharactersResponseNextPageNull =
+      FavoriteCharactersResponse(
     nextPage: null,
     charactersList: [Faux.favoriteCharacter],
   );
@@ -77,7 +78,8 @@ class Faux {
     Episode(name: 'Anatomy Park', airDate: 'December 16, 2013'),
   ];
 
-  static const episodeModel = EpisodeModel(name: 'Pilot', airDate: 'December 2, 2013');
+  static const episodeModel =
+      EpisodeModel(name: 'Pilot', airDate: 'December 2, 2013');
 
   static const episodesModels = [
     episodeModel,

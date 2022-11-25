@@ -7,10 +7,13 @@ import '../../../../core/favorites/data/models/models.dart';
 import '../../../../core/favorites/domain/entities/entities.dart';
 import './bloc.dart';
 
-class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListingState> {
-  final UseCase<FavoriteCharactersResponse, GetCharactersParams> getAllCharactersUseCase;
+class CharactersListingBloc
+    extends Bloc<CharactersListingEvent, CharactersListingState> {
+  final UseCase<FavoriteCharactersResponse, GetCharactersParams>
+      getAllCharactersUseCase;
   final UseCase<UpdatedFavorite, String> updateFavoriteUseCase;
-  final UseCase<Stream<UpdatedFavorite>, NoParams> observeUpdatedFavoritesUseCase;
+  final UseCase<Stream<UpdatedFavorite>, NoParams>
+      observeUpdatedFavoritesUseCase;
 
   int? page = 1;
   List<FavoriteCharacter> charactersList = [];
@@ -36,7 +39,8 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
     await result.fold((failure) async => null, (updatedFavorite) async {
       await emit.forEach(updatedFavorite, onData: (updatedFavorite) {
         final indexToUpdate = charactersList.indexWhere(
-          (favoriteCharacter) => favoriteCharacter.character.id == updatedFavorite.characterId,
+          (favoriteCharacter) =>
+              favoriteCharacter.character.id == updatedFavorite.characterId,
         );
 
         if (indexToUpdate == -1) return state;
@@ -53,8 +57,10 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
 
         charactersList = updatedList;
 
-        final listLength = (page != null) ? charactersList.length + 1 : charactersList.length;
-        return CharactersListLoadedState(charactersList: charactersList, listLength: listLength);
+        final listLength =
+            (page != null) ? charactersList.length + 1 : charactersList.length;
+        return CharactersListLoadedState(
+            charactersList: charactersList, listLength: listLength);
       });
     });
   }
@@ -80,24 +86,31 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
           page = 1;
         }
 
-        charactersList = List.of(charactersList)..addAll(allCharactersResponse.charactersList);
+        charactersList = List.of(charactersList)
+          ..addAll(allCharactersResponse.charactersList);
 
-        final listLength = (page != null) ? charactersList.length + 1 : charactersList.length;
-        return CharactersListLoadedState(charactersList: charactersList, listLength: listLength);
+        final listLength =
+            (page != null) ? charactersList.length + 1 : charactersList.length;
+        return CharactersListLoadedState(
+            charactersList: charactersList, listLength: listLength);
       },
     ));
   }
 
-  void _redirectToCharacterDetails(CharacterCardTappedEvent event, Emitter emit) {
-    emit(RedirectToCharacterDetailsState(favoriteCharacter: event.favoriteCharacter));
+  void _redirectToCharacterDetails(
+      CharacterCardTappedEvent event, Emitter emit) {
+    emit(RedirectToCharacterDetailsState(
+        favoriteCharacter: event.favoriteCharacter));
   }
 
   void _redirectToFavorites(FavoritesTappedEvent event, Emitter emit) {
     emit(RedirectToFavoritesState());
   }
 
-  void _favoriteCharacter(FavoriteCharacterTappedEvent event, Emitter emit) async {
-    final updatedFavoriteResult = await updateFavoriteUseCase(event.favoriteCharacter.character.id);
+  void _favoriteCharacter(
+      FavoriteCharacterTappedEvent event, Emitter emit) async {
+    final updatedFavoriteResult =
+        await updateFavoriteUseCase(event.favoriteCharacter.character.id);
 
     emit(
       updatedFavoriteResult.fold(
@@ -105,8 +118,11 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
           failure: AppError(properties: failure.properties),
         ),
         (updatedFavorite) {
-          final listLength = (page != null) ? charactersList.length + 1 : charactersList.length;
-          return CharactersListLoadedState(charactersList: charactersList, listLength: listLength);
+          final listLength = (page != null)
+              ? charactersList.length + 1
+              : charactersList.length;
+          return CharactersListLoadedState(
+              charactersList: charactersList, listLength: listLength);
         },
       ),
     );

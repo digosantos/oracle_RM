@@ -11,17 +11,20 @@ class CharactersListInitialState extends CharactersListingState {}
 
 class CharactersListLoadingState extends CharactersListingState {}
 
-class CharactersListLoadedState extends CharactersListingState with EquatableMixin {
+class CharactersListLoadedState extends CharactersListingState
+    with EquatableMixin {
   final List<FavoriteCharacter> charactersList;
   final int listLength;
 
-  const CharactersListLoadedState({required this.charactersList, required this.listLength});
+  const CharactersListLoadedState(
+      {required this.charactersList, required this.listLength});
 
   @override
   List<Object?> get props => [charactersList, listLength];
 }
 
-class CharactersListErrorState extends CharactersListingState with EquatableMixin {
+class CharactersListErrorState extends CharactersListingState
+    with EquatableMixin {
   final Failure failure;
 
   const CharactersListErrorState({required this.failure});

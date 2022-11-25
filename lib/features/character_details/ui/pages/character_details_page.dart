@@ -16,8 +16,10 @@ class CharacterDetailsPage extends StatelessWidget with FavoriteButtonDelegate {
   TextStyle get subtitle18 => sl<TextStyles>().subtitle18;
   TextStyle get text16 => sl<TextStyles>().text16;
 
-  CharacterDetailsPage({Key? key, required this.requestedCharacterParam}) : super(key: key) {
-    characterDetailsBloc.add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacterParam));
+  CharacterDetailsPage({Key? key, required this.requestedCharacterParam})
+      : super(key: key) {
+    characterDetailsBloc.add(
+        GetCharacterDetailsEvent(requestedCharacter: requestedCharacterParam));
   }
 
   @override
@@ -116,7 +118,8 @@ class CharacterDetailsPage extends StatelessWidget with FavoriteButtonDelegate {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: state.characterDetails.episodes.length,
                         itemBuilder: (context, index) {
-                          final episode = state.characterDetails.episodes[index];
+                          final episode =
+                              state.characterDetails.episodes[index];
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             child: Column(
@@ -149,6 +152,7 @@ class CharacterDetailsPage extends StatelessWidget with FavoriteButtonDelegate {
 
   @override
   void onFavoritePressed({required FavoriteCharacter favoriteCharacter}) {
-    characterDetailsBloc.add(FavoriteCharacterDetailsTappedEvent(favoriteCharacter: favoriteCharacter));
+    characterDetailsBloc.add(FavoriteCharacterDetailsTappedEvent(
+        favoriteCharacter: favoriteCharacter));
   }
 }

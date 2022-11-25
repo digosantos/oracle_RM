@@ -39,8 +39,11 @@ void main() {
       episodesIds: episodesIds,
     );
 
-    test('should emit [LoadingState, DetailsLoadedState] when data is successfully retrieved', () async {
-      when(mockGetCharacterDetailsUseCase(any)).thenAnswer((_) async => const Right(characterDetails));
+    test(
+        'should emit [LoadingState, DetailsLoadedState] when data is successfully retrieved',
+        () async {
+      when(mockGetCharacterDetailsUseCase(any))
+          .thenAnswer((_) async => const Right(characterDetails));
 
       final expectedStates = [
         LoadingState(),
@@ -50,21 +53,25 @@ void main() {
         ),
       ];
 
-      characterDetailsBloc.add(const GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));
+      characterDetailsBloc.add(const GetCharacterDetailsEvent(
+          requestedCharacter: requestedCharacter));
 
       expect(characterDetailsBloc.stream, emitsInOrder(expectedStates));
     });
 
-    test('should emit [LoadingState, ErrorState] when fails to retrieve data', () {
+    test('should emit [LoadingState, ErrorState] when fails to retrieve data',
+        () {
       const appError = AppError(properties: []);
-      when(mockGetCharacterDetailsUseCase(any)).thenAnswer((_) async => const Left(appError));
+      when(mockGetCharacterDetailsUseCase(any))
+          .thenAnswer((_) async => const Left(appError));
 
       final expectedStates = [
         LoadingState(),
         ErrorState(failure: appError),
       ];
 
-      characterDetailsBloc.add(const GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));
+      characterDetailsBloc.add(const GetCharacterDetailsEvent(
+          requestedCharacter: requestedCharacter));
 
       expect(characterDetailsBloc.stream, emitsInOrder(expectedStates));
     });

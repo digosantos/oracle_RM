@@ -24,26 +24,32 @@ void main() {
   });
 
   group('Get all characters repository implementation', () {
-    const FavoriteCharactersResponse favoriteCharactersResponse = FavoriteCharactersResponse(
+    const FavoriteCharactersResponse favoriteCharactersResponse =
+        FavoriteCharactersResponse(
       nextPage: 2,
       charactersList: [Faux.favoriteCharacter],
     );
     const page = 1;
 
     test('should return FavoriteCharactersResponse', () async {
-      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page)).thenAnswer((_) async => Faux.charactersResponseModel);
-      when(mockFavoritesLocalDataSource.getAll()).thenAnswer((_) => [Faux.favoriteCharacter.character.id]);
+      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page))
+          .thenAnswer((_) async => Faux.charactersResponseModel);
+      when(mockFavoritesLocalDataSource.getAll())
+          .thenAnswer((_) => [Faux.favoriteCharacter.character.id]);
 
-      final sut = await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
+      final sut =
+          await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
 
       expect(sut, const Right(favoriteCharactersResponse));
     });
 
     test('should return AppError', () async {
-      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page)).thenThrow(ServerException());
+      when(mockCharactersRemoteDataSource.getAllCharacters(pageNumber: page))
+          .thenThrow(ServerException());
       when(mockFavoritesLocalDataSource.getAll()).thenAnswer((_) => []);
 
-      final sut = await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
+      final sut =
+          await charactersRepositoryImpl.getAllCharacters(pageNumber: page);
 
       expect(sut, const Left(AppError(properties: [])));
     });

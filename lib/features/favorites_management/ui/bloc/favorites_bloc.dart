@@ -9,7 +9,8 @@ import './bloc.dart';
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   final UseCase<List<FavoriteCharacter>, NoParams> getFavoriteCharactersUseCase;
   final UseCase<UpdatedFavorite, String> updateFavoriteUseCase;
-  final UseCase<Stream<UpdatedFavorite>, NoParams> observeUpdatedFavoritesUseCase;
+  final UseCase<Stream<UpdatedFavorite>, NoParams>
+      observeUpdatedFavoritesUseCase;
 
   List<FavoriteCharacter> charactersList = [];
 
@@ -32,7 +33,8 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     await result.fold((failure) async => null, (updatedFavorite) async {
       await emit.forEach(updatedFavorite, onData: (updatedFavorite) {
         final indexToUpdate = charactersList.indexWhere(
-          (favoriteCharacter) => favoriteCharacter.character.id == updatedFavorite.characterId,
+          (favoriteCharacter) =>
+              favoriteCharacter.character.id == updatedFavorite.characterId,
         );
 
         if (indexToUpdate == -1) return state;
@@ -62,7 +64,8 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   }
 
   void _favoriteCharacter(FavoriteTappedEvent event, Emitter emit) async {
-    final updatedFavoriteResult = await updateFavoriteUseCase(event.favoriteCharacter.character.id);
+    final updatedFavoriteResult =
+        await updateFavoriteUseCase(event.favoriteCharacter.character.id);
 
     emit(
       updatedFavoriteResult.fold(

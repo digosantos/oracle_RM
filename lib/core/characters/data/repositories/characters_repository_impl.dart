@@ -18,9 +18,11 @@ class CharactersRepositoryImpl implements CharactersRepository {
   });
 
   @override
-  Future<Either<AppError, FavoriteCharactersResponse>> getAllCharacters({required int pageNumber, Filter? filter}) async {
+  Future<Either<AppError, FavoriteCharactersResponse>> getAllCharacters(
+      {required int pageNumber, Filter? filter}) async {
     try {
-      final charactersResponse = await charactersRemoteDataSource.getAllCharacters(pageNumber: pageNumber, filter: filter);
+      final charactersResponse = await charactersRemoteDataSource
+          .getAllCharacters(pageNumber: pageNumber, filter: filter);
       final favoriteCharactersIds = favoritesLocalDataSource.getAll();
 
       List<FavoriteCharacter> favoriteCharacters = [];
@@ -50,9 +52,11 @@ class CharactersRepositoryImpl implements CharactersRepository {
   }
 
   @override
-  Future<Either<AppError, CharacterDetails>> getCharacterDetails({required String id, required List<String> episodesIds}) async {
+  Future<Either<AppError, CharacterDetails>> getCharacterDetails(
+      {required String id, required List<String> episodesIds}) async {
     try {
-      final characterDetails = await charactersRemoteDataSource.getCharacterDetails(id: id, episodesIds: episodesIds);
+      final characterDetails = await charactersRemoteDataSource
+          .getCharacterDetails(id: id, episodesIds: episodesIds);
       return Right(characterDetails);
     } on ServerException {
       return const Left(AppError(properties: []));
@@ -60,9 +64,11 @@ class CharactersRepositoryImpl implements CharactersRepository {
   }
 
   @override
-  Future<Either<AppError, List<Character>>> getCharactersList({required List<String> characterIdList}) async {
+  Future<Either<AppError, List<Character>>> getCharactersList(
+      {required List<String> characterIdList}) async {
     try {
-      final charactersList = await charactersRemoteDataSource.getCharactersList(characterIdList: characterIdList);
+      final charactersList = await charactersRemoteDataSource.getCharactersList(
+          characterIdList: characterIdList);
       return Right(charactersList);
     } on ServerException {
       return const Left(AppError(properties: []));

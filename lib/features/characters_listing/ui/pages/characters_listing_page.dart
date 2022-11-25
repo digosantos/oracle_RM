@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oracle_rm/core/characters/ui/widgets/card.dart';
-import 'package:oracle_rm/features/character_details/domain/usecases/get_character_details.dart';
 import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 
 import '../../../../core/common/routing/routing.dart';
@@ -17,7 +16,8 @@ class CharactersListingPage extends StatefulWidget {
   State<CharactersListingPage> createState() => _CharactersListingPageState();
 }
 
-class _CharactersListingPageState extends State<CharactersListingPage> with CardDelegate, FavoriteButtonDelegate {
+class _CharactersListingPageState extends State<CharactersListingPage>
+    with CardDelegate, FavoriteButtonDelegate {
   final charactersListBloc = sl<CharactersListingBloc>();
   final PageStorageKey _pageStorageKey = const PageStorageKey('pageStorageKey');
   final _scrollController = ScrollController();
@@ -26,12 +26,13 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
   @override
   void initState() {
     super.initState();
-    charactersListBloc.add(GetAllCharactersEvent());
+    charactersListBloc.add(const GetAllCharactersEvent());
 
     _scrollController.addListener(() {
-      if (_scrollController.offset == _scrollController.position.maxScrollExtent) {
+      if (_scrollController.offset ==
+          _scrollController.position.maxScrollExtent) {
         // TODO: improve UX not to return to first element
-        charactersListBloc.add(GetAllCharactersEvent());
+        charactersListBloc.add(const GetAllCharactersEvent());
       }
     });
   }
@@ -54,7 +55,8 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
       body: BlocConsumer<CharactersListingBloc, CharactersListingState>(
         bloc: charactersListBloc,
         buildWhen: (_, state) {
-          return state is! RedirectToCharacterDetailsState && state is! RedirectToFavoritesState;
+          return state is! RedirectToCharacterDetailsState &&
+              state is! RedirectToFavoritesState;
         },
         listener: (context, state) {
           if (state is RedirectToCharacterDetailsState) {
@@ -89,15 +91,17 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
                       ));
                     },
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: const Icon(Icons.search),
                       hintText: 'Procure por nome ou espécie',
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: Colors.purple, width: 2),
+                        borderSide:
+                            const BorderSide(color: Colors.purple, width: 2),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: Colors.purple, width: 2),
+                        borderSide:
+                            const BorderSide(color: Colors.purple, width: 2),
                       ),
                     ),
                   ),
@@ -125,7 +129,7 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
                     },
                   ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
               ],
             );
           }
@@ -138,11 +142,13 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
 
   @override
   void onPressed({required FavoriteCharacter favoriteCharacter}) {
-    charactersListBloc.add(CharacterCardTappedEvent(favoriteCharacter: favoriteCharacter));
+    charactersListBloc
+        .add(CharacterCardTappedEvent(favoriteCharacter: favoriteCharacter));
   }
 
   @override
   void onFavoritePressed({required FavoriteCharacter favoriteCharacter}) {
-    charactersListBloc.add(FavoriteCharacterTappedEvent(favoriteCharacter: favoriteCharacter));
+    charactersListBloc.add(
+        FavoriteCharacterTappedEvent(favoriteCharacter: favoriteCharacter));
   }
 }

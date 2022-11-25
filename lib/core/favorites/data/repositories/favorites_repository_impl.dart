@@ -12,7 +12,8 @@ import '../datasources/datasources.dart';
 class FavoritesRepositoryImpl implements FavoritesRepository {
   final FavoritesLocalDataSource favoritesLocalDataSource;
   final CharactersRepository charactersRepository;
-  final StreamController<UpdatedFavorite> _streamController = StreamController.broadcast();
+  final StreamController<UpdatedFavorite> _streamController =
+      StreamController.broadcast();
 
   FavoritesRepositoryImpl({
     required this.favoritesLocalDataSource,
@@ -32,9 +33,11 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   }
 
   @override
-  Future<Either<AppError, UpdatedFavorite>> update({required String characterId}) async {
+  Future<Either<AppError, UpdatedFavorite>> update(
+      {required String characterId}) async {
     try {
-      final updatedFavorite = await favoritesLocalDataSource.update(characterId: characterId);
+      final updatedFavorite =
+          await favoritesLocalDataSource.update(characterId: characterId);
       _streamController.add(updatedFavorite);
       return Right(updatedFavorite);
     } on AppError {
@@ -43,15 +46,18 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   }
 
   @override
-  Future<Either<AppError, List<FavoriteCharacter>>> getFavoriteCharacters({required List<String> charactersIds}) async {
+  Future<Either<AppError, List<FavoriteCharacter>>> getFavoriteCharacters(
+      {required List<String> charactersIds}) async {
     try {
-      final getCharactersListResult = await charactersRepository.getCharactersList(characterIdList: charactersIds);
+      final getCharactersListResult = await charactersRepository
+          .getCharactersList(characterIdList: charactersIds);
 
       return getCharactersListResult.fold(
         (failure) => const Left(AppError(properties: [])),
         (charactersList) {
           return Right(List<FavoriteCharacter>.from(
-            charactersList.map((character) => FavoriteCharacter(character: character, isFavorite: true)),
+            charactersList.map((character) =>
+                FavoriteCharacter(character: character, isFavorite: true)),
           ));
         },
       );

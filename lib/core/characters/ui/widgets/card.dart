@@ -39,7 +39,9 @@ class CharacterCard extends StatelessWidget with FavoriteButtonDelegate {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: Colors.black, width: 4),
-            color: (favoriteCharacter.isFavorite) ? Colors.yellowAccent : Colors.white,
+            color: (favoriteCharacter.isFavorite)
+                ? Colors.yellowAccent
+                : Colors.white,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +91,9 @@ class CharacterCard extends StatelessWidget with FavoriteButtonDelegate {
                 style: subtitle18,
               ),
               const SizedBox(height: 42),
-              FavoriteButton(favoriteCharacter: favoriteCharacter, favoriteButtonDelegate: this),
+              FavoriteButton(
+                  favoriteCharacter: favoriteCharacter,
+                  favoriteButtonDelegate: this),
               const SizedBox(height: 24),
             ],
           ),
@@ -100,6 +104,7 @@ class CharacterCard extends StatelessWidget with FavoriteButtonDelegate {
 
   @override
   void onFavoritePressed({required FavoriteCharacter favoriteCharacter}) {
-    favoriteButtonDelegate.onFavoritePressed(favoriteCharacter: favoriteCharacter);
+    favoriteButtonDelegate.onFavoritePressed(
+        favoriteCharacter: favoriteCharacter);
   }
 }

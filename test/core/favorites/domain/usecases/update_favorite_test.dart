@@ -13,7 +13,8 @@ void main() {
 
   setUp(() {
     mockFavoritesRepository = MockFavoritesRepository();
-    updateFavoriteUseCase = UpdateFavorite(favoritesRepository: mockFavoritesRepository);
+    updateFavoriteUseCase =
+        UpdateFavorite(favoritesRepository: mockFavoritesRepository);
   });
 
   group('Update favorite use case', () {
@@ -21,22 +22,26 @@ void main() {
     const updatedFavorite = Faux.updatedFavorite;
 
     test('should successfully persist character ID locally', () async {
-      when(mockFavoritesRepository.update(characterId: characterId)).thenAnswer((_) async => const Right(updatedFavorite));
+      when(mockFavoritesRepository.update(characterId: characterId))
+          .thenAnswer((_) async => const Right(updatedFavorite));
 
       final sut = await updateFavoriteUseCase(characterId);
 
       expect(sut, const Right(updatedFavorite));
-      verify(mockFavoritesRepository.update(characterId: characterId)).called(1);
+      verify(mockFavoritesRepository.update(characterId: characterId))
+          .called(1);
       verifyNoMoreInteractions(mockFavoritesRepository);
     });
 
     test('should fail to persist character ID locally', () async {
-      when(mockFavoritesRepository.update(characterId: characterId)).thenAnswer((_) async => const Left(AppError(properties: [])));
+      when(mockFavoritesRepository.update(characterId: characterId))
+          .thenAnswer((_) async => const Left(AppError(properties: [])));
 
       final sut = await updateFavoriteUseCase(characterId);
 
       expect(sut, const Left(AppError(properties: [])));
-      verify(mockFavoritesRepository.update(characterId: characterId)).called(1);
+      verify(mockFavoritesRepository.update(characterId: characterId))
+          .called(1);
       verifyNoMoreInteractions(mockFavoritesRepository);
     });
   });
