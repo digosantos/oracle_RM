@@ -8,6 +8,7 @@ import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 import '../../../../core/common/routing/routing.dart';
 import '../../../../core/favorites/domain/entities/entities.dart';
 import '../../../../core/injection_container.dart';
+import '../../domain/usecases/usecases.dart';
 
 class CharactersListingPage extends StatefulWidget {
   const CharactersListingPage({Key? key}) : super(key: key);
@@ -19,7 +20,8 @@ class CharactersListingPage extends StatefulWidget {
 class _CharactersListingPageState extends State<CharactersListingPage> with CardDelegate, FavoriteButtonDelegate {
   final charactersListBloc = sl<CharactersListingBloc>();
   final PageStorageKey _pageStorageKey = const PageStorageKey('pageStorageKey');
-  final _scrollController = ScrollController(initialScrollOffset: 0, keepScrollOffset: true);
+  final _scrollController = ScrollController();
+  final _searchTextController = TextEditingController();
 
   @override
   void initState() {
@@ -52,7 +54,7 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
       body: BlocConsumer<CharactersListingBloc, CharactersListingState>(
         bloc: charactersListBloc,
         buildWhen: (_, state) {
-          return state is! RedirectToCharacterDetailsState;
+          return state is! RedirectToCharacterDetailsState && state is! RedirectToFavoritesState;
         },
         listener: (context, state) {
           if (state is RedirectToCharacterDetailsState) {
@@ -71,29 +73,60 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
         },
         builder: (context, state) {
           if (state is CharactersListLoadedState) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 36),
-              child: ListView.builder(
-                key: _pageStorageKey,
-                controller: _scrollController,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: state.listLength,
-                itemBuilder: (context, index) {
-                  if (index == state.charactersList.length) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24),
-                      child: Center(child: CircularProgressIndicator()),
-                    );
-                  }
+            return Column(
+              children: [
+                const SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: TextField(
+                    controller: _searchTextController,
+                    onChanged: (value) {
+                      charactersListBloc.add(GetAllCharactersEvent(
+                        filter: Filter(
+                          filterType: FilterType.name,
+                          searchText: value,
+                        ),
+                      ));
+                    },
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      hintText: 'Procure por nome ou espécie',
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.purple, width: 2),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.purple, width: 2),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    key: _pageStorageKey,
+                    controller: _scrollController,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.listLength,
+                    itemBuilder: (context, index) {
+                      if (index == state.charactersList.length) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 24),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
 
-                  return CharacterCard(
-                    favoriteCharacter: state.charactersList[index],
-                    cardDelegate: this,
-                    favoriteButtonDelegate: this,
-                  );
-                },
-              ),
+                      return CharacterCard(
+                        favoriteCharacter: state.charactersList[index],
+                        cardDelegate: this,
+                        favoriteButtonDelegate: this,
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 24),
+              ],
             );
           }
 

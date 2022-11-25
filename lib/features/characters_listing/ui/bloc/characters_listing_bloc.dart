@@ -75,20 +75,21 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
       (allCharactersResponse) {
         page = allCharactersResponse.nextPage;
 
+        if (event.filter != null) {
+          charactersList = [];
+          page = 1;
+        }
+
         charactersList = List.of(charactersList)..addAll(allCharactersResponse.charactersList);
 
         final listLength = (page != null) ? charactersList.length + 1 : charactersList.length;
-
         return CharactersListLoadedState(charactersList: charactersList, listLength: listLength);
       },
     ));
   }
 
   void _redirectToCharacterDetails(CharacterCardTappedEvent event, Emitter emit) {
-    emit(RedirectToCharacterDetailsState(
-      favoriteCharacter: event.favoriteCharacter,
-      shouldRebuild: !state.shouldRebuild,
-    ));
+    emit(RedirectToCharacterDetailsState(favoriteCharacter: event.favoriteCharacter));
   }
 
   void _redirectToFavorites(FavoritesTappedEvent event, Emitter emit) {

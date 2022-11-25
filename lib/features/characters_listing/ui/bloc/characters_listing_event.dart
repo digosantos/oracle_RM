@@ -3,11 +3,8 @@ import 'package:oracle_rm/features/characters_listing/domain/usecases/get_all_ch
 
 import '../../../../core/favorites/domain/entities/entities.dart';
 
-abstract class CharactersListingEvent extends Equatable {
+abstract class CharactersListingEvent {
   const CharactersListingEvent();
-
-  @override
-  List<Object?> get props => [];
 }
 
 class SetupStreamEvent extends CharactersListingEvent {}
@@ -18,7 +15,7 @@ class GetAllCharactersEvent extends CharactersListingEvent {
   const GetAllCharactersEvent({this.filter});
 }
 
-class CharacterCardTappedEvent extends CharactersListingEvent {
+class CharacterCardTappedEvent extends CharactersListingEvent with EquatableMixin {
   final FavoriteCharacter favoriteCharacter;
 
   const CharacterCardTappedEvent({required this.favoriteCharacter});
@@ -27,7 +24,7 @@ class CharacterCardTappedEvent extends CharactersListingEvent {
   List<Object?> get props => [favoriteCharacter];
 }
 
-class FavoriteCharacterTappedEvent extends CharactersListingEvent {
+class FavoriteCharacterTappedEvent extends CharactersListingEvent with EquatableMixin {
   final FavoriteCharacter favoriteCharacter;
 
   const FavoriteCharacterTappedEvent({required this.favoriteCharacter});

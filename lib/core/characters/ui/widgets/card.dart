@@ -34,7 +34,7 @@ class CharacterCard extends StatelessWidget with FavoriteButtonDelegate {
         cardDelegate.onPressed(favoriteCharacter: favoriteCharacter);
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -54,23 +54,25 @@ class CharacterCard extends StatelessWidget with FavoriteButtonDelegate {
                 ),
               ),
               const SizedBox(height: 12),
-              Padding(
-                padding: const EdgeInsets.all(24),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: Image.network(
-                    favoriteCharacter.character.imageUrl,
-                    fit: BoxFit.fill,
-                    height: 300,
-                    width: 300,
-                    loadingBuilder: (_, image, loadingProgress) {
-                      if (loadingProgress == null) return image;
-                      return const SizedBox(
-                        height: 300,
-                        width: 300,
-                        child: Center(child: CircularProgressIndicator()),
-                      );
-                    },
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Image.network(
+                      favoriteCharacter.character.imageUrl,
+                      fit: BoxFit.contain,
+                      height: 300,
+                      width: 300,
+                      loadingBuilder: (_, image, loadingProgress) {
+                        if (loadingProgress == null) return image;
+                        return const SizedBox(
+                          height: 300,
+                          width: 300,
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
