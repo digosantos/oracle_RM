@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:oracle_rm/core/characters/data/datasources/characters_remote_datasource.dart';
 import 'package:oracle_rm/core/error/error.dart';
 import 'package:oracle_rm/core/favorites/data/datasources/datasources.dart';
+import 'package:oracle_rm/features/characters_listing/domain/usecases/get_all_characters.dart';
 
 import '../../../favorites/domain/entities/entities.dart';
 import '../../domain/entities/entities.dart';
@@ -17,9 +18,9 @@ class CharactersRepositoryImpl implements CharactersRepository {
   });
 
   @override
-  Future<Either<AppError, FavoriteCharactersResponse>> getAllCharacters({required int pageNumber}) async {
+  Future<Either<AppError, FavoriteCharactersResponse>> getAllCharacters({required int pageNumber, Filter? filter}) async {
     try {
-      final charactersResponse = await charactersRemoteDataSource.getAllCharacters(pageNumber: pageNumber);
+      final charactersResponse = await charactersRemoteDataSource.getAllCharacters(pageNumber: pageNumber, filter: filter);
       final favoriteCharactersIds = favoritesLocalDataSource.getAll();
 
       List<FavoriteCharacter> favoriteCharacters = [];

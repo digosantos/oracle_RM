@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oracle_rm/features/characters_listing/domain/usecases/get_all_characters.dart';
 
 import '../../../../core/domain/usecases/usecase.dart';
 import '../../../../core/error/error.dart';
@@ -7,7 +8,7 @@ import '../../../../core/favorites/domain/entities/entities.dart';
 import './bloc.dart';
 
 class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListingState> {
-  final UseCase<FavoriteCharactersResponse, int> getAllCharactersUseCase;
+  final UseCase<FavoriteCharactersResponse, GetCharactersParams> getAllCharactersUseCase;
   final UseCase<UpdatedFavorite, String> updateFavoriteUseCase;
   final UseCase<Stream<UpdatedFavorite>, NoParams> observeUpdatedFavoritesUseCase;
 
@@ -61,7 +62,12 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
   void _loadCharacters(GetAllCharactersEvent event, Emitter emit) async {
     if (page == null) return;
 
-    final response = await getAllCharactersUseCase(page!);
+    final getCharactersParams = GetCharactersParams(
+      pageNumber: page!,
+      filter: event.filter,
+    );
+
+    final response = await getAllCharactersUseCase(getCharactersParams);
     emit(response.fold(
       (failure) => CharactersListErrorState(
         failure: AppError(properties: failure.properties),

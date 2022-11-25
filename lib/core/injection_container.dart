@@ -38,7 +38,7 @@ Future<void> init() async {
   );
 
   /// Use Cases:
-  sl.registerLazySingleton<UseCase<FavoriteCharactersResponse, int>>(
+  sl.registerLazySingleton<UseCase<FavoriteCharactersResponse, GetCharactersParams>>(
     () => GetAllCharacters(charactersRepository: sl()),
   );
 

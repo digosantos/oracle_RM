@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:oracle_rm/features/characters_listing/domain/usecases/get_all_characters.dart';
 
 import '../../../../core/favorites/domain/entities/entities.dart';
 
@@ -11,7 +12,11 @@ abstract class CharactersListingEvent extends Equatable {
 
 class SetupStreamEvent extends CharactersListingEvent {}
 
-class GetAllCharactersEvent extends CharactersListingEvent {}
+class GetAllCharactersEvent extends CharactersListingEvent {
+  final Filter? filter;
+
+  const GetAllCharactersEvent({this.filter});
+}
 
 class CharacterCardTappedEvent extends CharactersListingEvent {
   final FavoriteCharacter favoriteCharacter;
