@@ -45,7 +45,7 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
           IconButton(
             icon: const Icon(Icons.favorite),
             iconSize: 28,
-            onPressed: () {},
+            onPressed: () => charactersListBloc.add(FavoritesTappedEvent()),
           ),
         ],
       ),
@@ -63,6 +63,10 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
                 episodesIds: state.favoriteCharacter.character.episodesIds,
               ),
             );
+          }
+
+          if (state is RedirectToFavoritesState) {
+            context.push(Routes.favorites.routeName);
           }
         },
         builder: (context, state) {

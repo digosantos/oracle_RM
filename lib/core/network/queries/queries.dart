@@ -43,4 +43,18 @@ class Queries {
       }
     }
   """;
+
+  static String getCharactersById() => """
+    query CharactersByIds(\$ids: [ID!]!) {
+      charactersByIds(ids: \$ids) {
+          id
+          name
+          image
+          species
+          episode {
+            id
+          }
+      }
+    }
+  """;
 }

@@ -1,10 +1,13 @@
 import 'package:get_it/get_it.dart';
 import 'package:graphql/client.dart';
+import 'package:oracle_rm/core/favorites/domain/entities/entities.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../features/character_details/ui/bloc/bloc.dart';
 import '../features/characters_listing/domain/usecases/usecases.dart';
 import '../features/characters_listing/ui/bloc/bloc.dart';
+import '../features/favorites_management/domain/usecases/usecases.dart';
+import '../features/favorites_management/ui/bloc/bloc.dart';
 import './characters/data/datasources/datasources.dart';
 import './characters/data/repositories/repositories.dart';
 import './characters/domain/entities/entities.dart';
@@ -59,6 +62,24 @@ Future<void> init() async {
   sl.registerLazySingleton<UseCase<CharacterDetails, RequestedCharacterParam>>(() => GetCharacterDetails(charactersRepository: sl()));
 
   /// ---------------------
+  /// Favorites Management
+  /// ---------------------
+
+  /// Bloc:
+  sl.registerFactory(
+    () => FavoritesBloc(
+      getFavoriteCharactersUseCase: sl(),
+      updateFavoriteUseCase: sl(),
+      observeUpdatedFavoritesUseCase: sl(),
+    ),
+  );
+
+  /// Use Cases:
+  sl.registerLazySingleton<UseCase<List<FavoriteCharacter>, NoParams>>(
+    () => GetFavoritesListUseCase(favoritesRepository: sl()),
+  );
+
+  /// ---------------------
   /// Core
   /// ---------------------
 
@@ -107,7 +128,10 @@ Future<void> init() async {
 
   /// Repositories:
   sl.registerLazySingleton<FavoritesRepository>(
-    () => FavoritesRepositoryImpl(favoritesLocalDataSource: sl()),
+    () => FavoritesRepositoryImpl(
+      favoritesLocalDataSource: sl(),
+      charactersRepository: sl(),
+    ),
   );
 
   /// Data sources:

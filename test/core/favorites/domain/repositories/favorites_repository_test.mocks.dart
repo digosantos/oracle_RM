@@ -9,6 +9,7 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:oracle_rm/core/error/error.dart' as _i6;
 import 'package:oracle_rm/core/favorites/data/models/models.dart' as _i5;
+import 'package:oracle_rm/core/favorites/domain/entities/entities.dart' as _i7;
 import 'package:oracle_rm/core/favorites/domain/repositories/favorites_repository.dart'
     as _i3;
 
@@ -48,21 +49,43 @@ class MockFavoritesRepository extends _i1.Mock
         returnValue: _i4.Stream<_i5.UpdatedFavorite>.empty(),
       ) as _i4.Stream<_i5.UpdatedFavorite>);
   @override
-  _i4.Future<_i2.Either<_i6.AppError, List<String>>> getAll() =>
+  _i4.Future<_i2.Either<_i6.AppError, List<String>>> getIds() =>
       (super.noSuchMethod(
         Invocation.method(
-          #getAll,
+          #getIds,
           [],
         ),
         returnValue: _i4.Future<_i2.Either<_i6.AppError, List<String>>>.value(
             _FakeEither_0<_i6.AppError, List<String>>(
           this,
           Invocation.method(
-            #getAll,
+            #getIds,
             [],
           ),
         )),
       ) as _i4.Future<_i2.Either<_i6.AppError, List<String>>>);
+  @override
+  _i4.Future<_i2.Either<_i6.AppError, List<_i7.FavoriteCharacter>>>
+      getFavoriteCharacters({required List<String>? charactersIds}) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #getFavoriteCharacters,
+              [],
+              {#charactersIds: charactersIds},
+            ),
+            returnValue: _i4.Future<
+                    _i2.Either<_i6.AppError,
+                        List<_i7.FavoriteCharacter>>>.value(
+                _FakeEither_0<_i6.AppError, List<_i7.FavoriteCharacter>>(
+              this,
+              Invocation.method(
+                #getFavoriteCharacters,
+                [],
+                {#charactersIds: charactersIds},
+              ),
+            )),
+          ) as _i4
+              .Future<_i2.Either<_i6.AppError, List<_i7.FavoriteCharacter>>>);
   @override
   _i4.Future<_i2.Either<_i6.AppError, _i5.UpdatedFavorite>> update(
           {required String? characterId}) =>

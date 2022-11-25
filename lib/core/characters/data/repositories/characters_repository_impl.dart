@@ -57,4 +57,14 @@ class CharactersRepositoryImpl implements CharactersRepository {
       return const Left(AppError(properties: []));
     }
   }
+
+  @override
+  Future<Either<AppError, List<Character>>> getCharactersList({required List<String> characterIdList}) async {
+    try {
+      final charactersList = await charactersRemoteDataSource.getCharactersList(characterIdList: characterIdList);
+      return Right(charactersList);
+    } on ServerException {
+      return const Left(AppError(properties: []));
+    }
+  }
 }

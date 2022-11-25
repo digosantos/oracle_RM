@@ -46,3 +46,5 @@ class RedirectToCharacterDetailsState extends CharactersListingState {
   @override
   List<Object?> get props => [favoriteCharacter, shouldRebuild];
 }
+
+class RedirectToFavoritesState extends CharactersListingState {}

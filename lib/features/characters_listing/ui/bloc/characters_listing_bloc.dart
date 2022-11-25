@@ -23,6 +23,7 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
     on<GetAllCharactersEvent>(_loadCharacters);
     on<CharacterCardTappedEvent>(_redirectToCharacterDetails);
     on<FavoriteCharacterTappedEvent>(_favoriteCharacter);
+    on<FavoritesTappedEvent>(_redirectToFavorites);
 
     add(SetupStreamEvent());
   }
@@ -82,6 +83,10 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
       favoriteCharacter: event.favoriteCharacter,
       shouldRebuild: !state.shouldRebuild,
     ));
+  }
+
+  void _redirectToFavorites(FavoritesTappedEvent event, Emitter emit) {
+    emit(RedirectToFavoritesState());
   }
 
   void _favoriteCharacter(FavoriteCharacterTappedEvent event, Emitter emit) async {

@@ -4,6 +4,7 @@ import 'package:oracle_rm/features/character_details/domain/usecases/usecases.da
 
 import '../../../features/character_details/ui/pages/pages.dart';
 import '../../../features/characters_listing/ui/pages/pages.dart';
+import '../../../features/favorites_management/ui/pages/pages.dart';
 
 class AppRouter {
   GoRouter buildRouter() {
@@ -23,6 +24,12 @@ class AppRouter {
             return CharacterDetailsPage(
               requestedCharacterParam: state.extra as RequestedCharacterParam,
             );
+          },
+        ),
+        GoRoute(
+          path: Routes.favorites.routeName,
+          builder: (context, state) {
+            return const FavoritesPage();
           },
         ),
       ],

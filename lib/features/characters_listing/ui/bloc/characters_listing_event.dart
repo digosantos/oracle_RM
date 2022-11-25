@@ -30,3 +30,5 @@ class FavoriteCharacterTappedEvent extends CharactersListingEvent {
   @override
   List<Object?> get props => [favoriteCharacter];
 }
+
+class FavoritesTappedEvent extends CharactersListingEvent {}

@@ -1,17 +1,6 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
-import 'package:oracle_rm/core/domain/usecases/usecase.dart';
-import 'package:oracle_rm/core/error/error.dart';
-import 'package:oracle_rm/core/favorites/data/models/models.dart';
 import 'package:oracle_rm/core/favorites/domain/usecases/usecases.dart';
 import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
-import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
-
-import '../../../../utils/faux.dart';
-import 'characters_listing_bloc_test.mocks.dart';
 
 @GenerateMocks([GetAllCharacters, UpdateFavorite, ObserveUpdatedFavorites])
 void main() {

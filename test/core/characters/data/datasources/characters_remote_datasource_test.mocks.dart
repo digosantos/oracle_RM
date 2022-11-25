@@ -72,6 +72,18 @@ class MockCharactersRemoteDataSource extends _i1.Mock
         )),
       ) as _i4.Future<_i2.CharactersResponseModel>);
   @override
+  _i4.Future<List<_i2.CharacterModel>> getCharactersList(
+          {required List<String>? characterIdList}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCharactersList,
+          [],
+          {#characterIdList: characterIdList},
+        ),
+        returnValue:
+            _i4.Future<List<_i2.CharacterModel>>.value(<_i2.CharacterModel>[]),
+      ) as _i4.Future<List<_i2.CharacterModel>>);
+  @override
   _i4.Future<_i2.CharacterDetailsModel> getCharacterDetails({
     required String? id,
     required List<String>? episodesIds,
