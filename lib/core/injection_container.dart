@@ -25,16 +25,21 @@ Future<void> init() async {
   /// ---------------------
 
   /// Bloc:
-  sl.registerLazySingleton(
+  sl.registerFactory(
     () => CharactersListingBloc(
       getAllCharactersUseCase: sl(),
       updateFavoriteUseCase: sl(),
+      observeUpdatedFavoritesUseCase: sl(),
     ),
   );
 
   /// Use Cases:
   sl.registerLazySingleton<UseCase<FavoriteCharactersResponse, int>>(
     () => GetAllCharacters(charactersRepository: sl()),
+  );
+
+  sl.registerLazySingleton<UseCase<Stream<UpdatedFavorite>, NoParams>>(
+    () => ObserveUpdatedFavorites(favoritesRepository: sl()),
   );
 
   /// ---------------------
@@ -95,7 +100,7 @@ Future<void> init() async {
   /// ---------------------
 
   /// Use Cases:
-  sl.registerLazySingleton<UseCase<bool, String>>(
+  sl.registerLazySingleton<UseCase<UpdatedFavorite, String>>(
     () => UpdateFavorite(favoritesRepository: sl()),
   );
 

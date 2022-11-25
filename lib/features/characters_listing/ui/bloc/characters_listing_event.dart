@@ -9,6 +9,8 @@ abstract class CharactersListingEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class SetupStreamEvent extends CharactersListingEvent {}
+
 class GetAllCharactersEvent extends CharactersListingEvent {}
 
 class CharacterCardTappedEvent extends CharactersListingEvent {

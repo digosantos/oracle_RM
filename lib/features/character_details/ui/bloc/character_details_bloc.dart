@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oracle_rm/core/domain/usecases/usecase.dart';
 import 'package:oracle_rm/core/error/error.dart';
+import 'package:oracle_rm/core/favorites/data/repositories/repositories.dart';
 import 'package:oracle_rm/features/character_details/ui/bloc/bloc.dart';
 
 import '../../../../core/characters/domain/entities/entities.dart';
@@ -11,7 +12,7 @@ import '../../../characters_listing/ui/bloc/bloc.dart';
 
 class CharacterDetailsBloc extends Bloc<CharacterDetailsEvent, CharacterDetailsState> {
   final UseCase<CharacterDetails, RequestedCharacterParam> getCharacterDetailsUseCase;
-  final UseCase<bool, String> updateFavoriteUseCase;
+  final UseCase<UpdatedFavorite, String> updateFavoriteUseCase;
 
   late CharacterDetails characterDetails;
 
@@ -47,30 +48,29 @@ class CharacterDetailsBloc extends Bloc<CharacterDetailsEvent, CharacterDetailsS
     final isUpdateSuccessful = await updateFavoriteUseCase(favoriteCharacterId);
 
     emit(isUpdateSuccessful.fold(
-      (failure) => ErrorState(
-        failure: AppError(properties: failure.properties),
-      ),
-      (isSuccess) {
-        if (isSuccess) {
-          final updatedFavoriteCharacter = FavoriteCharacter.update(
-            favoriteCharacter: event.favoriteCharacter,
-          );
+        (failure) => ErrorState(
+              failure: AppError(properties: failure.properties),
+            ), (updatedFavorite) {
+      final updatedFavoriteCharacter = FavoriteCharacter.update(
+        favoriteCharacter: event.favoriteCharacter,
+      );
 
-          sl<CharactersListingBloc>().add(
-            FavoriteCharacterTappedEvent(favoriteCharacter: event.favoriteCharacter),
-          );
+      // sl<CharactersListingBloc>().add(
+      //   FavoriteCharacterTappedEvent(favoriteCharacter: event.favoriteCharacter),
+      // );
 
-          return DetailsLoadedState(
-            characterDetails: characterDetails,
-            favoriteCharacter: updatedFavoriteCharacter,
-          );
-        } else {
-          return DetailsLoadedState(
-            characterDetails: characterDetails,
-            favoriteCharacter: event.favoriteCharacter,
-          );
-        }
-      },
-    ));
+      return DetailsLoadedState(
+        characterDetails: characterDetails,
+        favoriteCharacter: updatedFavoriteCharacter,
+      );
+    }
+        // else {
+        //   return DetailsLoadedState(
+        //     characterDetails: characterDetails,
+        //     favoriteCharacter: event.favoriteCharacter,
+        //   );
+        // }
+        // },
+        ));
   }
 }
