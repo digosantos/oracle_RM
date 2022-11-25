@@ -1,14 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oracle_rm/core/domain/usecases/usecase.dart';
-import 'package:oracle_rm/core/error/error.dart';
-import 'package:oracle_rm/core/favorites/data/repositories/repositories.dart';
-import 'package:oracle_rm/features/character_details/ui/bloc/bloc.dart';
 
 import '../../../../core/characters/domain/entities/entities.dart';
+import '../../../../core/domain/usecases/usecase.dart';
+import '../../../../core/error/error.dart';
+import '../../../../core/favorites/data/models/models.dart';
 import '../../../../core/favorites/domain/entities/entities.dart';
-import '../../../../core/injection_container.dart';
 import '../../../characters_listing/domain/usecases/usecases.dart';
-import '../../../characters_listing/ui/bloc/bloc.dart';
+import './bloc.dart';
 
 class CharacterDetailsBloc extends Bloc<CharacterDetailsEvent, CharacterDetailsState> {
   final UseCase<CharacterDetails, RequestedCharacterParam> getCharacterDetailsUseCase;
@@ -45,32 +43,24 @@ class CharacterDetailsBloc extends Bloc<CharacterDetailsEvent, CharacterDetailsS
 
   void _favoriteCharacter(FavoriteCharacterDetailsTappedEvent event, Emitter emit) async {
     final favoriteCharacterId = event.favoriteCharacter.character.id;
-    final isUpdateSuccessful = await updateFavoriteUseCase(favoriteCharacterId);
+    final updatedFavoriteResult = await updateFavoriteUseCase(favoriteCharacterId);
 
-    emit(isUpdateSuccessful.fold(
+    emit(
+      updatedFavoriteResult.fold(
         (failure) => ErrorState(
-              failure: AppError(properties: failure.properties),
-            ), (updatedFavorite) {
-      final updatedFavoriteCharacter = FavoriteCharacter.update(
-        favoriteCharacter: event.favoriteCharacter,
-      );
+          failure: AppError(properties: failure.properties),
+        ),
+        (updatedFavorite) {
+          final updatedFavoriteCharacter = FavoriteCharacter.update(
+            favoriteCharacter: event.favoriteCharacter,
+          );
 
-      // sl<CharactersListingBloc>().add(
-      //   FavoriteCharacterTappedEvent(favoriteCharacter: event.favoriteCharacter),
-      // );
-
-      return DetailsLoadedState(
-        characterDetails: characterDetails,
-        favoriteCharacter: updatedFavoriteCharacter,
-      );
-    }
-        // else {
-        //   return DetailsLoadedState(
-        //     characterDetails: characterDetails,
-        //     favoriteCharacter: event.favoriteCharacter,
-        //   );
-        // }
-        // },
-        ));
+          return DetailsLoadedState(
+            characterDetails: characterDetails,
+            favoriteCharacter: updatedFavoriteCharacter,
+          );
+        },
+      ),
+    );
   }
 }

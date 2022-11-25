@@ -1,21 +1,22 @@
 import 'package:get_it/get_it.dart';
 import 'package:graphql/client.dart';
-import 'package:oracle_rm/core/characters/data/datasources/datasources.dart';
-import 'package:oracle_rm/core/characters/data/repositories/characters_repository_impl.dart';
-import 'package:oracle_rm/core/characters/domain/repositories/characters_repository.dart';
-import 'package:oracle_rm/core/common/ui/text_styles.dart';
-import 'package:oracle_rm/core/favorites/data/datasources/datasources.dart';
-import 'package:oracle_rm/core/favorites/data/repositories/favorites_repository_impl.dart';
-import 'package:oracle_rm/core/favorites/domain/repositories/favorites_repository.dart';
-import 'package:oracle_rm/core/network/network.dart';
-import 'package:oracle_rm/features/character_details/ui/bloc/bloc.dart';
-import 'package:oracle_rm/features/characters_listing/domain/usecases/usecases.dart';
-import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'characters/domain/entities/entities.dart';
-import 'domain/usecases/usecase.dart';
-import 'favorites/domain/usecases/usecases.dart';
+import '../features/character_details/ui/bloc/bloc.dart';
+import '../features/characters_listing/domain/usecases/usecases.dart';
+import '../features/characters_listing/ui/bloc/bloc.dart';
+import './characters/data/datasources/datasources.dart';
+import './characters/data/repositories/repositories.dart';
+import './characters/domain/entities/entities.dart';
+import './characters/domain/repositories/repositories.dart';
+import './common/ui/text_styles.dart';
+import './domain/usecases/usecase.dart';
+import './favorites/data/models/models.dart';
+import './favorites/domain/usecases/usecases.dart';
+import './favorites/data/repositories/repositories.dart';
+import './favorites/domain/repositories/repositories.dart';
+import './favorites/data/datasources/datasources.dart';
+import './network/network.dart';
 
 final sl = GetIt.instance;
 

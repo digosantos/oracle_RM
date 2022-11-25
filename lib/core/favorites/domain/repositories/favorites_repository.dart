@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../error/error.dart';
-import '../../data/repositories/favorites_repository_impl.dart';
+import '../../data/models/models.dart';
 
 abstract class FavoritesRepository {
   Future<Either<AppError, List<String>>> getAll();

@@ -1,6 +1,7 @@
 import 'package:oracle_rm/core/error/error.dart';
-import 'package:oracle_rm/core/favorites/data/repositories/favorites_repository_impl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/models.dart';
 
 abstract class FavoritesLocalDataSource {
   List<String> getAll();
@@ -36,7 +37,6 @@ class FavoritesLocalDataSourceImpl implements FavoritesLocalDataSource {
       isFavorite = true;
     }
 
-    print(favorites);
     if (await sharedPreferences.setStringList(favoritesKey, favorites)) {
       return UpdatedFavorite(characterId: characterId, isFavorite: isFavorite);
     } else {

@@ -2,16 +2,10 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:oracle_rm/core/error/failures.dart';
+import 'package:oracle_rm/core/favorites/data/models/models.dart';
 import 'package:oracle_rm/core/favorites/domain/repositories/repositories.dart';
 
 import '../datasources/datasources.dart';
-
-class UpdatedFavorite {
-  final String characterId;
-  final bool isFavorite;
-
-  UpdatedFavorite({required this.characterId, required this.isFavorite});
-}
 
 class FavoritesRepositoryImpl implements FavoritesRepository {
   final FavoritesLocalDataSource favoritesLocalDataSource;

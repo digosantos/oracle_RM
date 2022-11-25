@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oracle_rm/core/domain/usecases/usecase.dart';
-import 'package:oracle_rm/core/error/error.dart';
-import 'package:oracle_rm/features/characters_listing/ui/bloc/bloc.dart';
 
-import '../../../../core/favorites/data/repositories/favorites_repository_impl.dart';
+import '../../../../core/domain/usecases/usecase.dart';
+import '../../../../core/error/error.dart';
+import '../../../../core/favorites/data/models/models.dart';
 import '../../../../core/favorites/domain/entities/entities.dart';
+import './bloc.dart';
 
 class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListingState> {
   final UseCase<FavoriteCharactersResponse, int> getAllCharactersUseCase;
@@ -85,28 +85,18 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
   }
 
   void _favoriteCharacter(FavoriteCharacterTappedEvent event, Emitter emit) async {
-    final favoriteCharacterId = event.favoriteCharacter.character.id;
-    final isUpdateSuccessful = await updateFavoriteUseCase(favoriteCharacterId);
+    final updatedFavoriteResult = await updateFavoriteUseCase(event.favoriteCharacter.character.id);
 
-    emit(isUpdateSuccessful.fold(
-      (failure) => CharactersListErrorState(
-        failure: AppError(properties: failure.properties),
+    emit(
+      updatedFavoriteResult.fold(
+        (failure) => CharactersListErrorState(
+          failure: AppError(properties: failure.properties),
+        ),
+        (updatedFavorite) {
+          final listLength = (page != null) ? charactersList.length + 1 : charactersList.length;
+          return CharactersListLoadedState(charactersList: charactersList, listLength: listLength);
+        },
       ),
-      (updatedFavorite) {
-        final indexToUpdate = charactersList.indexWhere((favoriteCharacter) => favoriteCharacter.character.id == favoriteCharacterId);
-
-        final updatedFavoriteCharacter = FavoriteCharacter.update(favoriteCharacter: charactersList[indexToUpdate]);
-
-        /// Creates a deep copy of previous list in order to differ states
-        final updatedList = <FavoriteCharacter>[...charactersList];
-        updatedList.removeAt(indexToUpdate);
-        updatedList.insert(indexToUpdate, updatedFavoriteCharacter);
-
-        charactersList = updatedList;
-
-        final listLength = (page != null) ? charactersList.length + 1 : charactersList.length;
-        return CharactersListLoadedState(charactersList: charactersList, listLength: listLength);
-      },
-    ));
+    );
   }
 }
