@@ -4,8 +4,12 @@ import 'package:oracle_rm/core/error/error.dart';
 import '../../../../core/favorites/domain/entities/entities.dart';
 
 abstract class CharactersListingState extends Equatable {
+  final bool shouldRebuild;
+
+  const CharactersListingState({this.shouldRebuild = false});
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [shouldRebuild];
 }
 
 class CharactersListInitialState extends CharactersListingState {}
@@ -16,7 +20,7 @@ class CharactersListLoadedState extends CharactersListingState {
   final List<FavoriteCharacter> charactersList;
   final int listLength;
 
-  CharactersListLoadedState({required this.charactersList, required this.listLength});
+  const CharactersListLoadedState({required this.charactersList, required this.listLength});
 
   @override
   List<Object?> get props => [charactersList, listLength];
@@ -25,17 +29,20 @@ class CharactersListLoadedState extends CharactersListingState {
 class CharactersListErrorState extends CharactersListingState {
   final Failure failure;
 
-  CharactersListErrorState({required this.failure});
+  const CharactersListErrorState({required this.failure});
 
   @override
   List<Object?> get props => [failure];
 }
 
 class RedirectToCharacterDetailsState extends CharactersListingState {
-  final FavoriteCharacter characterToDiplay;
+  final FavoriteCharacter favoriteCharacter;
 
-  RedirectToCharacterDetailsState({required this.characterToDiplay});
+  const RedirectToCharacterDetailsState({
+    required this.favoriteCharacter,
+    required super.shouldRebuild,
+  });
 
   @override
-  List<Object?> get props => [characterToDiplay];
+  List<Object?> get props => [favoriteCharacter, shouldRebuild];
 }

@@ -34,6 +34,7 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
         page = allCharactersResponse.nextPage;
 
         charactersList = List.of(charactersList)..addAll(allCharactersResponse.charactersList);
+        // charactersList = [...allCharactersResponse.charactersList];
 
         final listLength = (page != null) ? charactersList.length + 1 : charactersList.length;
 
@@ -43,7 +44,10 @@ class CharactersListingBloc extends Bloc<CharactersListingEvent, CharactersListi
   }
 
   void _redirectToCharacterDetails(CharacterCardTappedEvent event, Emitter emit) {
-    emit(RedirectToCharacterDetailsState(characterToDiplay: event.favoriteCharacter));
+    emit(RedirectToCharacterDetailsState(
+      favoriteCharacter: event.favoriteCharacter,
+      shouldRebuild: !state.shouldRebuild,
+    ));
   }
 
   void _favoriteCharacter(FavoriteCharacterTappedEvent event, Emitter emit) async {

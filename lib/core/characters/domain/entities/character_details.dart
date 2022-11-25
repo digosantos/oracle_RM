@@ -2,7 +2,10 @@ import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
 
 import '../../../episodes/domain/entities/entities.dart';
 
-/// NOTE:
+/// NOTE: [episodesIds] wouldn't be needed as we already have
+/// a list of episodes. As CharactersDetails extends Character
+/// the property is required. I've decided to create this field
+/// to optimize the amount of data retrieved by GraphQL
 class CharacterDetails extends Character {
   final String status;
   final String origin;

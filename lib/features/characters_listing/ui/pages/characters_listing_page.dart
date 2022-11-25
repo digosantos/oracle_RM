@@ -59,8 +59,8 @@ class _CharactersListingPageState extends State<CharactersListingPage> with Card
             context.push(
               Routes.characterDetails.routeName,
               extra: RequestedCharacterParam(
-                id: state.characterToDiplay.character.id,
-                episodesIds: state.characterToDiplay.character.episodesIds,
+                favoriteCharacter: state.favoriteCharacter,
+                episodesIds: state.favoriteCharacter.character.episodesIds,
               ),
             );
           }

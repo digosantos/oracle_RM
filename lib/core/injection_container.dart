@@ -25,7 +25,7 @@ Future<void> init() async {
   /// ---------------------
 
   /// Bloc:
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => CharactersListingBloc(
       getAllCharactersUseCase: sl(),
       updateFavoriteUseCase: sl(),
@@ -43,7 +43,10 @@ Future<void> init() async {
 
   /// Bloc:
   sl.registerFactory(
-    () => CharacterDetailsBloc(getCharacterDetailsUseCase: sl()),
+    () => CharacterDetailsBloc(
+      getCharacterDetailsUseCase: sl(),
+      updateFavoriteUseCase: sl(),
+    ),
   );
 
   /// Use Cases:

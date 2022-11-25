@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oracle_rm/core/characters/ui/widgets/card.dart';
+import 'package:oracle_rm/core/characters/ui/widgets/favorite_button.dart';
+import 'package:oracle_rm/core/favorites/domain/entities/favorite_character.dart';
 import 'package:oracle_rm/features/character_details/domain/usecases/get_character_details.dart';
 import 'package:oracle_rm/features/character_details/ui/bloc/bloc.dart';
 
 import '../../../../core/common/ui/text_styles.dart';
 import '../../../../core/injection_container.dart';
 
-class CharacterDetailsPage extends StatelessWidget {
-  final RequestedCharacterParam requestedCharacter;
+class CharacterDetailsPage extends StatelessWidget with FavoriteButtonDelegate {
+  final RequestedCharacterParam requestedCharacterParam;
 
   final characterDetailsBloc = sl<CharacterDetailsBloc>();
   TextStyle get subtitle18 => sl<TextStyles>().subtitle18;
 
-  CharacterDetailsPage({Key? key, required this.requestedCharacter})
-      : super(key: key) {
-    characterDetailsBloc
-        .add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacter));
+  CharacterDetailsPage({Key? key, required this.requestedCharacterParam}) : super(key: key) {
+    characterDetailsBloc.add(GetCharacterDetailsEvent(requestedCharacter: requestedCharacterParam));
   }
 
   @override
@@ -26,7 +27,8 @@ class CharacterDetailsPage extends StatelessWidget {
         title: const Text('R&M Oracle'),
         backgroundColor: Colors.purple,
       ),
-      body: BlocBuilder<CharacterDetailsBloc, CharacterDetailsState>(
+      body: BlocConsumer<CharacterDetailsBloc, CharacterDetailsState>(
+        listener: (_, __) {},
         bloc: characterDetailsBloc,
         builder: (context, state) {
           if (state is DetailsLoadedState) {
@@ -99,26 +101,9 @@ class CharacterDetailsPage extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 42),
-                  ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.favorite, color: Colors.red),
-                    label: const Text(
-                      'Favoritar',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.white),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          side: BorderSide(color: Colors.black),
-                        ),
-                      ),
-                    ),
+                  FavoriteButton(
+                    favoriteCharacter: state.favoriteCharacter,
+                    favoriteButtonDelegate: this,
                   ),
                   const SizedBox(height: 24),
                 ],
@@ -129,5 +114,10 @@ class CharacterDetailsPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  @override
+  void onFavoritePressed({required FavoriteCharacter favoriteCharacter}) {
+    characterDetailsBloc.add(FavoriteCharacterDetailsTappedEvent(favoriteCharacter: favoriteCharacter));
   }
 }

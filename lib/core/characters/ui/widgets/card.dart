@@ -30,7 +30,9 @@ class CharacterCard extends StatelessWidget with FavoriteButtonDelegate {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => cardDelegate.onPressed(favoriteCharacter: favoriteCharacter),
+      onTap: () {
+        cardDelegate.onPressed(favoriteCharacter: favoriteCharacter);
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Container(
