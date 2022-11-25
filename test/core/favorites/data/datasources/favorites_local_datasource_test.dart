@@ -16,7 +16,6 @@ void main() {
   /// Due to the issue [https://github.com/flutter/flutter/issues/28837]
   /// below tests had to be setup individually instead of using setUpAll
   /// method. setMockInitialValues doesn't let us set new values.
-
   group('FavoritesLocalDataSourceImpl getAll method', () {
     test('should get list of favorite characterIds', () async {
       const List<String> favoriteIdsList = ['999', '2'];
@@ -42,26 +41,30 @@ void main() {
     });
   });
 
-  group('FavoritesLocalDataSourceImpl', () {
+  group('FavoritesLocalDataSourceImpl update', () {
     test('should save characterId', () async {
+      const updatedFavorite = Faux.updatedFavorite;
       await setupPreferences(Faux.favoritesKey, []);
       sharedPreferences = await SharedPreferences.getInstance();
       favoritesLocalDataSourceImpl = FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
 
       final sut = await favoritesLocalDataSourceImpl.update(characterId: characterId);
 
-      expect(sut, true);
+      expect(sut.isFavorite, updatedFavorite.isFavorite);
+      expect(sut.characterId, updatedFavorite.characterId);
       expect(sharedPreferences.getStringList(Faux.favoritesKey), [Faux.character.id]);
     });
 
     test('should remove characterId', () async {
-      await setupPreferences(Faux.favoritesKey, ['999', '2']);
+      const updatedNotFavorite = Faux.updatedNotFavorite;
+      await setupPreferences(Faux.favoritesKey, ['1', '2']);
       sharedPreferences = await SharedPreferences.getInstance();
       favoritesLocalDataSourceImpl = FavoritesLocalDataSourceImpl(sharedPreferences: sharedPreferences);
 
       final sut = await favoritesLocalDataSourceImpl.update(characterId: characterId);
 
-      expect(sut, true);
+      expect(sut.isFavorite, updatedNotFavorite.isFavorite);
+      expect(sut.characterId, updatedNotFavorite.characterId);
       expect(sharedPreferences.getStringList(Faux.favoritesKey), ['2']);
     });
   });

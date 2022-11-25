@@ -7,7 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:oracle_rm/core/error/error.dart' as _i5;
+import 'package:oracle_rm/core/error/error.dart' as _i6;
+import 'package:oracle_rm/core/favorites/data/models/models.dart' as _i5;
 import 'package:oracle_rm/core/favorites/domain/repositories/favorites_repository.dart'
     as _i3;
 
@@ -42,23 +43,28 @@ class MockFavoritesRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.AppError, List<String>>> getAll() =>
+  _i4.Stream<_i5.UpdatedFavorite> get updatedFavorites => (super.noSuchMethod(
+        Invocation.getter(#updatedFavorites),
+        returnValue: _i4.Stream<_i5.UpdatedFavorite>.empty(),
+      ) as _i4.Stream<_i5.UpdatedFavorite>);
+  @override
+  _i4.Future<_i2.Either<_i6.AppError, List<String>>> getAll() =>
       (super.noSuchMethod(
         Invocation.method(
           #getAll,
           [],
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.AppError, List<String>>>.value(
-            _FakeEither_0<_i5.AppError, List<String>>(
+        returnValue: _i4.Future<_i2.Either<_i6.AppError, List<String>>>.value(
+            _FakeEither_0<_i6.AppError, List<String>>(
           this,
           Invocation.method(
             #getAll,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.AppError, List<String>>>);
+      ) as _i4.Future<_i2.Either<_i6.AppError, List<String>>>);
   @override
-  _i4.Future<_i2.Either<_i5.AppError, bool>> update(
+  _i4.Future<_i2.Either<_i6.AppError, _i5.UpdatedFavorite>> update(
           {required String? characterId}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -66,8 +72,9 @@ class MockFavoritesRepository extends _i1.Mock
           [],
           {#characterId: characterId},
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.AppError, bool>>.value(
-            _FakeEither_0<_i5.AppError, bool>(
+        returnValue:
+            _i4.Future<_i2.Either<_i6.AppError, _i5.UpdatedFavorite>>.value(
+                _FakeEither_0<_i6.AppError, _i5.UpdatedFavorite>(
           this,
           Invocation.method(
             #update,
@@ -75,5 +82,5 @@ class MockFavoritesRepository extends _i1.Mock
             {#characterId: characterId},
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.AppError, bool>>);
+      ) as _i4.Future<_i2.Either<_i6.AppError, _i5.UpdatedFavorite>>);
 }

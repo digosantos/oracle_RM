@@ -11,7 +11,7 @@ class ObserveUpdatedFavorites extends UseCase<Stream<UpdatedFavorite>, NoParams>
   ObserveUpdatedFavorites({required this.favoritesRepository});
 
   @override
-  Either<AppError, Stream<UpdatedFavorite>> call(NoParams params) {
+  Either<AppError, Stream<UpdatedFavorite>> call(params) {
     return Right(favoritesRepository.updatedFavorites);
   }
 }

@@ -42,13 +42,14 @@ void main() {
 
   group('FavoriteRepositoryImpl update method', () {
     final characterId = Faux.character.id;
+    const updatedFavorite = Faux.updatedFavorite;
 
     test('should return true when characterId is successfully persisted locally', () async {
-      when(mockFavoritesLocalDataSource.update(characterId: characterId)).thenAnswer((_) async => true);
+      when(mockFavoritesLocalDataSource.update(characterId: characterId)).thenAnswer((_) async => updatedFavorite);
 
       final sut = await favoritesRepositoryImpl.update(characterId: characterId);
 
-      expect(sut, const Right(true));
+      expect(sut, const Right(updatedFavorite));
       verify(mockFavoritesLocalDataSource.update(characterId: characterId));
       verifyNoMoreInteractions(mockFavoritesLocalDataSource);
     });

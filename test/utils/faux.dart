@@ -2,18 +2,11 @@ import 'package:oracle_rm/core/characters/data/models/models.dart';
 import 'package:oracle_rm/core/characters/domain/entities/entities.dart';
 import 'package:oracle_rm/core/episodes/data/data.dart';
 import 'package:oracle_rm/core/episodes/domain/entities/entities.dart';
+import 'package:oracle_rm/core/favorites/data/models/models.dart';
 import 'package:oracle_rm/core/favorites/domain/entities/entities.dart';
 
 class Faux {
   static const character = Character(
-    id: '999',
-    name: 'Digo',
-    imageUrl: 'imageUrl',
-    species: 'Human',
-    episodesIds: ['1'],
-  );
-
-  static const rickCharacter = Character(
     id: '1',
     name: 'Rick Sanchez',
     imageUrl: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
@@ -21,9 +14,27 @@ class Faux {
     episodesIds: ['1', '2', '3'],
   );
 
+  // static const rickCharacter = Character(
+  //   id: '1',
+  //   name: 'Rick Sanchez',
+  //   imageUrl: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+  //   species: 'Human',
+  //   episodesIds: ['1', '2', '3'],
+  // );
+
   static const favoriteCharacter = FavoriteCharacter(
     character: Faux.characterModel,
     isFavorite: true,
+  );
+
+  static const updatedFavorite = UpdatedFavorite(
+    characterId: '1',
+    isFavorite: true,
+  );
+
+  static const updatedNotFavorite = UpdatedFavorite(
+    characterId: '1',
+    isFavorite: false,
   );
 
   static const charactersResponse = CharactersResponse(
@@ -51,25 +62,25 @@ class Faux {
     characterModelList: [Faux.characterModel],
   );
 
-  static const episode = Episode(name: 'Pilot', airDate: 'December 2, 2013');
-  static const episodes = [
-    episode,
-    Episode(name: 'Lawnmower Dog', airDate: 'December 9, 2013'),
-    Episode(name: 'Anatomy Park', airDate: 'December 16, 2013'),
-  ];
-
   static const characterDetails = CharacterDetails(
-    id: '999',
-    name: 'Digo',
-    imageUrl: 'imageUrl',
+    id: '1',
+    name: 'Rick Sanchez',
+    imageUrl: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
     species: 'Human',
-    episodesIds: ['1'],
+    episodesIds: ['1', '2', '3'],
     status: 'Alive',
     origin: 'Earth (C-137)',
     location: 'Citadel of Ricks',
     createdAt: '2017-11-04T18:48:46.250Z',
     episodes: episodes,
   );
+
+  static const episode = Episode(name: 'Pilot', airDate: 'December 2, 2013');
+  static const episodes = [
+    episode,
+    Episode(name: 'Lawnmower Dog', airDate: 'December 9, 2013'),
+    Episode(name: 'Anatomy Park', airDate: 'December 16, 2013'),
+  ];
 
   static const episodeModel = EpisodeModel(name: 'Pilot', airDate: 'December 2, 2013');
 

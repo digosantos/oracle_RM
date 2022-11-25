@@ -3,11 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:oracle_rm/core/favorites/data/datasources/favorites_local_datasource.dart'
-    as _i2;
+    as _i3;
+import 'package:oracle_rm/core/favorites/data/models/models.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -20,11 +21,22 @@ import 'package:oracle_rm/core/favorites/data/datasources/favorites_local_dataso
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeUpdatedFavorite_0 extends _i1.SmartFake
+    implements _i2.UpdatedFavorite {
+  _FakeUpdatedFavorite_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [FavoritesLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFavoritesLocalDataSource extends _i1.Mock
-    implements _i2.FavoritesLocalDataSource {
+    implements _i3.FavoritesLocalDataSource {
   MockFavoritesLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
@@ -38,13 +50,21 @@ class MockFavoritesLocalDataSource extends _i1.Mock
         returnValue: <String>[],
       ) as List<String>);
   @override
-  _i3.Future<bool> update({required String? characterId}) =>
+  _i4.Future<_i2.UpdatedFavorite> update({required String? characterId}) =>
       (super.noSuchMethod(
         Invocation.method(
           #update,
           [],
           {#characterId: characterId},
         ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue:
+            _i4.Future<_i2.UpdatedFavorite>.value(_FakeUpdatedFavorite_0(
+          this,
+          Invocation.method(
+            #update,
+            [],
+            {#characterId: characterId},
+          ),
+        )),
+      ) as _i4.Future<_i2.UpdatedFavorite>);
 }

@@ -10,9 +10,13 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:oracle_rm/core/characters/domain/entities/entities.dart' as _i8;
 import 'package:oracle_rm/core/characters/domain/repositories/repositories.dart'
     as _i2;
+import 'package:oracle_rm/core/domain/usecases/usecase.dart' as _i12;
 import 'package:oracle_rm/core/error/error.dart' as _i7;
+import 'package:oracle_rm/core/favorites/data/models/models.dart' as _i10;
 import 'package:oracle_rm/core/favorites/domain/repositories/repositories.dart'
     as _i4;
+import 'package:oracle_rm/core/favorites/domain/usecases/observe_updated_favorites.dart'
+    as _i11;
 import 'package:oracle_rm/core/favorites/domain/usecases/update_favorite.dart'
     as _i9;
 import 'package:oracle_rm/features/characters_listing/domain/usecases/get_all_characters.dart'
@@ -115,19 +119,57 @@ class MockUpdateFavorite extends _i1.Mock implements _i9.UpdateFavorite {
         ),
       ) as _i4.FavoritesRepository);
   @override
-  _i6.Future<_i3.Either<_i7.AppError, bool>> call(String? params) =>
+  _i6.Future<_i3.Either<_i7.AppError, _i10.UpdatedFavorite>> call(
+          String? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [params],
         ),
-        returnValue: _i6.Future<_i3.Either<_i7.AppError, bool>>.value(
-            _FakeEither_1<_i7.AppError, bool>(
+        returnValue:
+            _i6.Future<_i3.Either<_i7.AppError, _i10.UpdatedFavorite>>.value(
+                _FakeEither_1<_i7.AppError, _i10.UpdatedFavorite>(
           this,
           Invocation.method(
             #call,
             [params],
           ),
         )),
-      ) as _i6.Future<_i3.Either<_i7.AppError, bool>>);
+      ) as _i6.Future<_i3.Either<_i7.AppError, _i10.UpdatedFavorite>>);
+}
+
+/// A class which mocks [ObserveUpdatedFavorites].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockObserveUpdatedFavorites extends _i1.Mock
+    implements _i11.ObserveUpdatedFavorites {
+  MockObserveUpdatedFavorites() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.FavoritesRepository get favoritesRepository => (super.noSuchMethod(
+        Invocation.getter(#favoritesRepository),
+        returnValue: _FakeFavoritesRepository_2(
+          this,
+          Invocation.getter(#favoritesRepository),
+        ),
+      ) as _i4.FavoritesRepository);
+  @override
+  _i3.Either<_i7.AppError, _i6.Stream<_i10.UpdatedFavorite>> call(
+          _i12.NoParams? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [params],
+        ),
+        returnValue:
+            _FakeEither_1<_i7.AppError, _i6.Stream<_i10.UpdatedFavorite>>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        ),
+      ) as _i3.Either<_i7.AppError, _i6.Stream<_i10.UpdatedFavorite>>);
 }
