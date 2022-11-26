@@ -47,44 +47,32 @@ equatable
 Utilizada para comparação de objetos. Com essa biblioteca, não se faz necessário escrever
 manualmente a comparação entre hashcode dos atributos de uma classe.
 ***
-
-***
 dartz
 Programação funcional. Utilizado para encapsular resultados bem sucedidos ou falhas
 após execução de métodos sem a necessidade de gerenciar estados.
 ***
-
-***
 build_runner
 Auxilia na geração de arquivos de teste que funcionarão como stubs nos testes.
 ***
-
-***
 graphql
 Utilizado como linguagem de consulta de https://rickandmortyapi.com/graphql
-***
-
+De acordo com os requisitos solicitados e estudo de API, escolhi graphQL pela facilidade
+em trazer informações dentro da mesma requisição (e.g. dados do personagem e dados específicos
+dos episódios), além de enxugar a maioria dos payloads executados buscando somente as informações
+necessárias para montar a tela (semelhante à um BFF).
 ***
 shared_preferences
 Armazenamento interno dos favoritos
 ***
-
-***
 flutter_bloc
 Gerenciamento de estado de tela
-***
-
 ***
 get_it
 Localizador de serviços. Auxilia na utilização de recursos em qualquer lugar do app de maneira
 otimizada e evita que a camada de UI tenha dependências de outras camadas.
 ***
-
-***
 go_router
 Utilizado para navegação entre páginas do app. 
-***
-
 ***
 mockito
 Facilita a criação de mocks para serem utilizados nos testes. 
