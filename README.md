@@ -10,6 +10,7 @@ $ flutter clean
 $ flutter pub get
 $ flutter run
 ```
+Instalação do Flutter (se necessário): https://docs.flutter.dev/get-started/install
 
 ## Passos para executar os testes:
 ```shell
@@ -32,6 +33,13 @@ os principais recursos para o correto gerenciamento de estado das telas.
 
 Por fim, foram criadas as telas e componentes que compõem a interface junto com ações necessárias
 para entregar a parte de UX.
+
+Foram abstraídos recursos relacionados as entidades Characters e Favorites, pensando na possível
+reutilização das funcionalidades implementadas.
+
+### Organização e Esboço
+https://excalidraw.com/#json=iJjuWn3TRgJymUYQXhOLf,MbOHCs32pOsf4evnQOX9cQ
+
 
 ## Bibliotecas Externas
 ***
@@ -95,4 +103,5 @@ Deixo listado abaixo, alguns pontos de melhoria:
 - Refinamento de busca 
   (Espécie - Faltou a parte visual para trocar entre Nome e Espécie. O datasource está pronto)
 - Redesign do app
-- 
+- Tratamento de cenários de erro e telas sem informação
+
