@@ -17,6 +17,12 @@ Instalação do Flutter (se necessário): https://docs.flutter.dev/get-started/i
 $ flutter test
 ```
 
+## CI flow:
+```shell
+$ Tests autommatically run through GH actions
+$ You can check it here: https://github.com/digocse/oracle_RM/actions 
+```
+
 ## Arquitetura do Projeto
 - Clean Architecture
 O padrão de arquitetura utilizado incentiva a separação de responsabilidades de cada módulo 
