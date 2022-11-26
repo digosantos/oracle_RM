@@ -39,6 +39,8 @@ reutilização das funcionalidades implementadas.
 
 ### Organização e Esboço
 https://excalidraw.com/#json=iJjuWn3TRgJymUYQXhOLf,MbOHCs32pOsf4evnQOX9cQ
+<img width="438" alt="Screen Shot 2022-11-25 at 19 43 24" src="https://user-images.githubusercontent.com/22969298/204065756-f95ed256-3dc1-4883-ad08-ddf0a5f8b601.png">
+![Screen Shot 2022-11-25 at 19 44 16](https://user-images.githubusercontent.com/22969298/204065760-4bef997d-8883-4970-befc-28b716b9ee6d.png)
 
 
 ## Bibliotecas Externas
