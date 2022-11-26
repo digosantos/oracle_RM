@@ -92,4 +92,4 @@ Deixo listado abaixo, alguns pontos de melhoria:
   (Espécie - Faltou a parte visual para trocar entre Nome e Espécie. O datasource está pronto)
 - Redesign do app
 - Tratamento de cenários de erro e telas sem informação
-
+- Logo do app
