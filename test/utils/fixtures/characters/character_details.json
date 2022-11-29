@@ -1,0 +1,44 @@
+{
+  "character": {
+    "id": "1",
+    "name": "Rick Sanchez",
+    "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+    "species": "Human",
+    "episode": [
+      {
+        "id": "1"
+      },
+      {
+        "id": "2"
+      },
+      {
+        "id": "3"
+      }
+    ],
+    "status": "Alive",
+    "origin": {
+      "name": "Earth (C-137)"
+    },
+    "location": {
+      "name": "Citadel of Ricks"
+    },
+    "created": "2017-11-04T18:48:46.250Z"
+  },
+  "episodesByIds": [
+    {
+      "id": "1",
+      "name": "Pilot",
+      "air_date": "December 2, 2013"
+    },
+    {
+      "id": "2",
+      "name": "Lawnmower Dog",
+      "air_date": "December 9, 2013"
+    },
+    {
+      "id": "3",
+      "name": "Anatomy Park",
+      "air_date": "December 16, 2013"
+    }
+  ]
+}
