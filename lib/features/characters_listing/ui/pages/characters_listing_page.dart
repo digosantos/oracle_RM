@@ -37,6 +37,43 @@ class _CharactersListingPageState extends State<CharactersListingPage>
     });
   }
 
+  final List<bool> _toggleStates = [true, false];
+
+  Widget _buildSearchToggle() {
+    return ToggleButtons(
+      selectedColor: Colors.white,
+      selectedBorderColor: Colors.white,
+      borderRadius: BorderRadius.circular(10),
+      borderColor: Colors.purple,
+      color: Colors.black,
+      disabledColor: Colors.black,
+      fillColor: Colors.purple,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: Text(
+            'Nome',
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('Espécie'),
+        ),
+      ],
+      isSelected: _toggleStates,
+      onPressed: (index) => _updateToggles(index: index),
+    );
+  }
+
+  void _updateToggles({required int index}) {
+    setState(() {
+      /// Verify if any toggle is enabled already
+      final trueIndex = _toggleStates.indexWhere((element) => element == true);
+      if (trueIndex != -1) _toggleStates[trueIndex] = false;
+      _toggleStates[index] = !_toggleStates[index];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,30 +117,47 @@ class _CharactersListingPageState extends State<CharactersListingPage>
                 const SizedBox(height: 24),
                 Padding(
                   padding: const EdgeInsets.all(16),
-                  child: TextField(
-                    controller: _searchTextController,
-                    onChanged: (value) {
-                      charactersListBloc.add(GetAllCharactersEvent(
-                        filter: Filter(
-                          filterType: FilterType.name,
-                          searchText: value,
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: _searchTextController,
+                        onChanged: (value) {
+                          Filter? filter;
+
+                          if (value.isEmpty) {
+                            filter = null;
+                          } else {
+                            final selectedIndex = _toggleStates
+                                .indexWhere((element) => element == true);
+                            filter = Filter(
+                              filterType: (selectedIndex == 0)
+                                  ? FilterType.name
+                                  : FilterType.species,
+                              searchText: value,
+                            );
+                          }
+
+                          charactersListBloc
+                              .add(GetAllCharactersEvent(filter: filter));
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.search),
+                          hintText: 'Procure por nome ou espécie',
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(
+                                color: Colors.purple, width: 2),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(
+                                color: Colors.purple, width: 2),
+                          ),
                         ),
-                      ));
-                    },
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search),
-                      hintText: 'Procure por nome ou espécie',
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            const BorderSide(color: Colors.purple, width: 2),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            const BorderSide(color: Colors.purple, width: 2),
-                      ),
-                    ),
+                      const SizedBox(height: 4),
+                      _buildSearchToggle(),
+                    ],
                   ),
                 ),
                 Expanded(
