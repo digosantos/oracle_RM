@@ -48,20 +48,20 @@ class _CharactersListingPageState extends State<CharactersListingPage>
       color: Colors.black,
       disabledColor: Colors.black,
       fillColor: Colors.purple,
-      children: [
+      isSelected: _toggleStates,
+      onPressed: (index) => _updateToggles(index: index),
+      children: const [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: Text(
             'Nome',
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0),
           child: Text('Espécie'),
         ),
       ],
-      isSelected: _toggleStates,
-      onPressed: (index) => _updateToggles(index: index),
     );
   }
 
